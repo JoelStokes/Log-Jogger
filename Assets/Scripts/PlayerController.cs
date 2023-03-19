@@ -51,8 +51,12 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        if (moving){
+            transform.position = new Vector3(transform.position.x + (moveSpeed * Time.deltaTime), transform.position.y, transform.position.z);
+        }
+
         if (transform.position.y < deathHeight){
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            SceneManager.LoadScene("GameOver");
         }
     }
 
@@ -83,10 +87,6 @@ public class PlayerController : MonoBehaviour
                 moving = false;
                 rigi.velocity = new Vector2(rigi.velocity.x, slamSpeed);
             } else {
-                if (moving){
-                    transform.position = new Vector3(transform.position.x + (moveSpeed * Time.deltaTime), transform.position.y, transform.position.z);
-                }
-
                 if (rigi.velocity.y < maxVelocity){
                     rigi.velocity = new Vector2(rigi.velocity.x, maxVelocity);
                 }
