@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class PlayerController : MonoBehaviour
 {
@@ -32,6 +33,11 @@ public class PlayerController : MonoBehaviour
     private float groundedHeight = .1f;
     private LayerMask groundLayerMask;
 
+    //Scoring
+    public TextMeshProUGUI ScoreText;
+    private int score = 0;
+    private float scoreCounter = 0;
+
     //Components
     private Rigidbody2D rigi;
     private BoxCollider2D boxCollider;
@@ -42,7 +48,7 @@ public class PlayerController : MonoBehaviour
         rigi = GetComponent<Rigidbody2D>();
         boxCollider = GetComponent<BoxCollider2D>();
         groundLayerMask = LayerMask.GetMask("Ground");
-        terrainController = GameObject.Find("Terrain Controller").GetComponent<TerrainController>();
+        //terrainController = GameObject.Find("Terrain Controller").GetComponent<TerrainController>();
 
         RightCheckBoxCollider = new Vector3(boxCollider.bounds.size.x - boxColliderSubtract, 
             boxCollider.bounds.size.y - boxColliderSubtract, 
@@ -53,6 +59,13 @@ public class PlayerController : MonoBehaviour
     {
         if (moving){
             transform.position = new Vector3(transform.position.x + (moveSpeed * Time.deltaTime), transform.position.y, transform.position.z);
+
+            scoreCounter += Time.deltaTime;
+            if (scoreCounter > 1){
+                score++;
+                ScoreText.text = "Score: " + score.ToString("D4");
+                scoreCounter = 0;
+            }
         }
 
         if (transform.position.y < deathHeight){
@@ -117,7 +130,12 @@ public class PlayerController : MonoBehaviour
         if (rigi.velocity.y <= 0.1f && rigi.velocity.y > -.1f){  //Prevent rising grounded state through semi-solid platforms
             RaycastHit2D raycastHit = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, 0f, Vector2.down, groundedHeight, groundLayerMask);
             
-            return raycastHit.collider != null;
+            if (isSlamming && raycastHit.transform.tag == "Breakable"){
+                Destroy(raycastHit.transform.gameObject);
+                return false;
+            } else {
+                return raycastHit.collider != null;
+            }
         } else {
             return false;
         }
