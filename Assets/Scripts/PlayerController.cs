@@ -37,6 +37,8 @@ public class PlayerController : MonoBehaviour
     public TextMeshProUGUI ScoreText;
     private int score = 0;
     private float scoreCounter = 0;
+    private int wormValue = 5;
+    private int machineValue = 25;
 
     //Components
     private Rigidbody2D rigi;
@@ -63,13 +65,15 @@ public class PlayerController : MonoBehaviour
             scoreCounter += Time.deltaTime;
             if (scoreCounter > 1){
                 score++;
-                ScoreText.text = "Score: " + score.ToString("D4");
+
+                UpdateScore(0);
+
                 scoreCounter = 0;
             }
         }
 
         if (transform.position.y < deathHeight){
-            SceneManager.LoadScene("GameOver");
+            Die();
         }
     }
 
@@ -107,6 +111,18 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void Die(){
+        SceneManager.LoadScene("GameOver");
+    }
+
+    private void UpdateScore(int valuePopup){
+        if (valuePopup > 0){
+            //Have popup showing new value added for visual flair & clarity
+        }
+
+        ScoreText.text = "Score: " + score.ToString("D4");
+    }
+
     private void TouchStart(){
         touching = true;
         if (isGrounded){
@@ -129,12 +145,20 @@ public class PlayerController : MonoBehaviour
     private bool CheckGrounded(){
         if (rigi.velocity.y <= 0.1f && rigi.velocity.y > -.1f){  //Prevent rising grounded state through semi-solid platforms
             RaycastHit2D raycastHit = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, 0f, Vector2.down, groundedHeight, groundLayerMask);
+
+            if (raycastHit.collider != null && raycastHit.transform.tag == "Switch"){
+                raycastHit.transform.parent.gameObject.GetComponent<SwitchController>().Pressed();
+            }
             
-            if (isSlamming && raycastHit.transform.tag == "Breakable"){
+            if (raycastHit.collider != null && isSlamming && (raycastHit.transform.tag == "Breakable" || raycastHit.transform.tag == "Machine")){
                 Destroy(raycastHit.transform.gameObject);
-                return false;
+                if (raycastHit.transform.tag == "Machine"){
+                    score += machineValue;
+                    UpdateScore(machineValue);
+                }
+                return false;   //Don't Ground player after breaking through breakables
             } else {
-                return raycastHit.collider != null;
+                return true;
             }
         } else {
             return false;
@@ -144,7 +168,7 @@ public class PlayerController : MonoBehaviour
     private bool CheckWall(){
         RaycastHit2D rightRaycastHit = Physics2D.BoxCast(boxCollider.bounds.center, RightCheckBoxCollider, 0f, Vector2.right, groundedHeight, groundLayerMask);
 
-        if (rightRaycastHit.collider != null){
+        if (rightRaycastHit.collider != null && rightRaycastHit.transform.tag != "One-Way"){
             return true;
         } else {
             return false;
@@ -152,8 +176,7 @@ public class PlayerController : MonoBehaviour
     }
 
     public void Touch(InputAction.CallbackContext context){
-        Debug.Log("Touch Detected: " + context.phase);
-
+        //Debug.Log("Touch Detected: " + context.phase);
         if (context.ReadValue<UnityEngine.InputSystem.TouchPhase>() == UnityEngine.InputSystem.TouchPhase.Began){
             if (touching == false){
                 TouchStart();
@@ -164,7 +187,7 @@ public class PlayerController : MonoBehaviour
     }
 
     public void TouchBackup(InputAction.CallbackContext context){   //Keyboard & Gamepad alternatives to Touchscreen
-        Debug.Log("Backup Touch Detected: " + context.phase);
+        //Debug.Log("Backup Touch Detected: " + context.phase);
         if (context.phase == InputActionPhase.Started){
             if (touching == false){
                 TouchStart();
@@ -175,6 +198,12 @@ public class PlayerController : MonoBehaviour
     }
 
     void OnTriggerEnter2D(Collider2D other) {
-        //Apply Hurt & Item pickup
+        if (other.tag == "Worm"){
+            score += wormValue;
+            UpdateScore(wormValue);
+            Destroy(other.gameObject);
+        } else if (other.tag == "Hurt"){
+            Die();
+        }
     }
 }

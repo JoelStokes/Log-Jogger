@@ -5,6 +5,11 @@ TagManager:
   serializedVersion: 2
   tags:
   - Breakable
+  - Worm
+  - Machine
+  - Switch
+  - Hurt
+  - One-Way
   layers:
   - Default
   - TransparentFX
