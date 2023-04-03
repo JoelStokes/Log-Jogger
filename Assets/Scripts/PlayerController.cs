@@ -44,11 +44,13 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rigi;
     private BoxCollider2D boxCollider;
     private TerrainController terrainController;
+    private Animator anim;
 
     void Start()
     {
         rigi = GetComponent<Rigidbody2D>();
         boxCollider = GetComponent<BoxCollider2D>();
+        anim = GetComponent<Animator>();
         groundLayerMask = LayerMask.GetMask("Ground");
         //terrainController = GameObject.Find("Terrain Controller").GetComponent<TerrainController>();
 
@@ -82,9 +84,16 @@ public class PlayerController : MonoBehaviour
             if (CheckGrounded()){
                 isGrounded = true;
                 isSlamming = false;
-
+                anim.SetBool("Airborne", false);
+                anim.SetBool("Rising", false);
                 jumpHoldCounter = 0;
             } else {
+                anim.SetBool("Airborne", true);
+                if (rigi.velocity.y > 0){
+                    anim.SetBool("Rising", true);
+                } else {
+                    anim.SetBool("Rising", false);
+                }
                 isGrounded = false;
             }
 
@@ -169,8 +178,14 @@ public class PlayerController : MonoBehaviour
         RaycastHit2D rightRaycastHit = Physics2D.BoxCast(boxCollider.bounds.center, RightCheckBoxCollider, 0f, Vector2.right, groundedHeight, groundLayerMask);
 
         if (rightRaycastHit.collider != null && rightRaycastHit.transform.tag != "One-Way"){
+            if (isGrounded){
+                anim.SetBool("Pushing", true);
+            } else {
+                anim.SetBool("Pushing", false);
+            }
             return true;
         } else {
+            anim.SetBool("Pushing", false);
             return false;
         }   
     }
