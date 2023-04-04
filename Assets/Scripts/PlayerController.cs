@@ -86,6 +86,7 @@ public class PlayerController : MonoBehaviour
                 isSlamming = false;
                 anim.SetBool("Airborne", false);
                 anim.SetBool("Rising", false);
+                anim.SetBool("Dashing", false);
                 jumpHoldCounter = 0;
             } else {
                 anim.SetBool("Airborne", true);
@@ -138,6 +139,7 @@ public class PlayerController : MonoBehaviour
             ApplyJump(jumpForce);
         } else {
             isSlamming = true;
+            anim.SetBool("Dashing", true);
         }
     }
 
