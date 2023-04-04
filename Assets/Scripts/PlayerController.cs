@@ -40,6 +40,10 @@ public class PlayerController : MonoBehaviour
     private int wormValue = 5;
     private int machineValue = 25;
 
+    //Destruction Effects
+    public GameObject rockBurstPrefab;
+    public GameObject machineBurstPrefab;
+
     //Components
     private Rigidbody2D rigi;
     private BoxCollider2D boxCollider;
@@ -166,6 +170,9 @@ public class PlayerController : MonoBehaviour
                 if (raycastHit.transform.tag == "Machine"){
                     score += machineValue;
                     UpdateScore(machineValue);
+                    //Add Machine Destruction Effect
+                } else {
+                    Instantiate(rockBurstPrefab, transform.position, Quaternion.identity);
                 }
                 return false;   //Don't Ground player after breaking through breakables
             } else {
