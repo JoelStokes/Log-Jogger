@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class SwitchController : MonoBehaviour
 {
-    public GameObject[] SwitchBlocks;
-
+    public GameObject[] SwitchBlocksGrow;   //Grow start dotted & become filled, Shrink start filled & become dotted
+    public GameObject[] SwitchBlocksShrink;
+    private bool pressed = false;
     private Animator anim;
 
     void Start(){
@@ -13,10 +14,20 @@ public class SwitchController : MonoBehaviour
     }
 
     public void Pressed(){
-        anim.SetTrigger("Pressed");
+        if (!pressed){
+            anim.SetTrigger("Pressed");
 
-        for (int i=0; i<SwitchBlocks.Length; i++){
-            SwitchBlocks[i].transform.GetChild(0).gameObject.SetActive(true);
+            for (int i=0; i<SwitchBlocksGrow.Length; i++){
+                SwitchBlocksGrow[i].transform.GetChild(0).gameObject.SetActive(true);
+                SwitchBlocksGrow[i].GetComponent<Animator>().SetTrigger("Grow");
+            }
+
+            for (int i=0; i<SwitchBlocksShrink.Length; i++){
+                SwitchBlocksShrink[i].GetComponent<Animator>().SetTrigger("Shrink");
+                Destroy(SwitchBlocksShrink[i].transform.GetChild(0).gameObject.GetComponent<BoxCollider2D>());
+            }
+
+            pressed = true;
         }
     }
 }
