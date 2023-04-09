@@ -10,6 +10,7 @@ TagManager:
   - Switch
   - Hurt
   - One-Way
+  - Spring
   layers:
   - Default
   - TransparentFX

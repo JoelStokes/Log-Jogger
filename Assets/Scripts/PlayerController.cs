@@ -228,6 +228,19 @@ public class PlayerController : MonoBehaviour
             Destroy(other.gameObject);
         } else if (other.tag == "Hurt"){
             Die();
+        } else if (other.tag == "Spring"){
+            Vector2 Forces = other.GetComponent<Spring>().LaunchSpring();
+
+            isSlamming = false;
+            anim.SetBool("Dashing", false);
+
+            ApplyJump(Forces.y);
+
+            if (Forces.x != 0){
+                //Apply diagonal spring forward movement
+            }
+
+            //Should add Anti-Slam prevention after very start of spring launch? Small counter to prevent launch momemtum accidently being stopped?
         }
     }
 }
