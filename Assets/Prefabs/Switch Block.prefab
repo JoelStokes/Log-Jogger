@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 297509971183690281}
   - component: {fileID: 297509971183690282}
   - component: {fileID: 8675452450197368775}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Switch Block Active
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 297509971183690280}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 0807cd92a3b58774ebf8eb98c25030cc, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0

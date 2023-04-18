@@ -11,6 +11,7 @@ TagManager:
   - Hurt
   - One-Way
   - Spring
+  - End
   layers:
   - Default
   - TransparentFX
@@ -47,6 +48,9 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Sprite
+    uniqueID: 746568157
     locked: 0
   - name: Player
     uniqueID: 3187516587

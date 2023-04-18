@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
     private float jumpForce = 13f;   //Applied once at jump start
     private float jumpHoldModifier = .75f;   //Constantly applied as held
     private int jumpHoldCounter = 0;
+    private int jumpHoldHeadHit = 75;
     private float jumpHoldDiminish = .01f;
     private bool isSlamming = false;
     private float slamSpeed = -23f;
@@ -24,6 +25,7 @@ public class PlayerController : MonoBehaviour
 
     //Move Management
     private float moveSpeed = 5.5f;
+    private float moveSpring = 0;
     private bool moving = true;
     private float boxColliderSubtract = .05f;
     private Vector3 RightCheckBoxCollider;  //Prevent stutter when landing on ground from height by using slightly smaller box collider for wall check
@@ -43,6 +45,9 @@ public class PlayerController : MonoBehaviour
     //Destruction Effects
     public GameObject rockBurstPrefab;
     public GameObject machineBurstPrefab;
+
+    //Transition
+    public GameObject transitionPrefab;
 
     //Components
     private Rigidbody2D rigi;
@@ -66,7 +71,11 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         if (moving){
-            transform.position = new Vector3(transform.position.x + (moveSpeed * Time.deltaTime), transform.position.y, transform.position.z);
+            if (moveSpring != 0){
+                transform.position = new Vector3(transform.position.x + (moveSpring * Time.deltaTime), transform.position.y, transform.position.z);
+            } else {
+                transform.position = new Vector3(transform.position.x + (moveSpeed * Time.deltaTime), transform.position.y, transform.position.z);               
+            }
 
             scoreCounter += Time.deltaTime;
             if (scoreCounter > 1){
@@ -85,6 +94,10 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate() {
         if (!dead){
+            /*if (moving){
+                rigi.velocity = new Vector2(moveSpeed, rigi.velocity.y);
+            }*/
+
             if (CheckGrounded()){
                 isGrounded = true;
                 isSlamming = false;
@@ -92,6 +105,7 @@ public class PlayerController : MonoBehaviour
                 anim.SetBool("Rising", false);
                 anim.SetBool("Dashing", false);
                 jumpHoldCounter = 0;
+                moveSpring = 0;
             } else {
                 anim.SetBool("Airborne", true);
                 if (rigi.velocity.y > 0){
@@ -116,10 +130,10 @@ public class PlayerController : MonoBehaviour
 
             if (isSlamming){
                 moving = false;
-                rigi.velocity = new Vector2(rigi.velocity.x, slamSpeed);
+                rigi.velocity = new Vector2(0, slamSpeed);
             } else {
                 if (rigi.velocity.y < maxVelocity){
-                    rigi.velocity = new Vector2(rigi.velocity.x, maxVelocity);
+                    rigi.velocity = new Vector2(0, maxVelocity);
                 }
             }
         }
@@ -148,24 +162,30 @@ public class PlayerController : MonoBehaviour
     }
 
     private void ApplyJump(float launchForce){
-        rigi.velocity = new Vector2(rigi.velocity.x, launchForce);
+        rigi.velocity = new Vector2(0, launchForce);
     }
 
     private void TouchHeld(){
-        rigi.velocity = new Vector2(rigi.velocity.x, rigi.velocity.y + (jumpHoldModifier - (jumpHoldCounter * jumpHoldDiminish)));
+        if (CheckHead()){
+            jumpHoldCounter = jumpHoldHeadHit;
+        }
+
+        rigi.velocity = new Vector2(0, rigi.velocity.y + (jumpHoldModifier - (jumpHoldCounter * jumpHoldDiminish)));
 
         jumpHoldCounter++;
     }
 
     private bool CheckGrounded(){
-        if (rigi.velocity.y <= 0.1f && rigi.velocity.y > -.1f){  //Prevent rising grounded state through semi-solid platforms
-            RaycastHit2D raycastHit = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, 0f, Vector2.down, groundedHeight, groundLayerMask);
+        RaycastHit2D raycastHit = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, 0f, Vector2.down, groundedHeight, groundLayerMask);
 
-            if (raycastHit.collider != null && raycastHit.transform.tag == "Switch"){
+        if (raycastHit.collider != null){
+            if (raycastHit.transform.tag == "Switch"){
                 raycastHit.transform.parent.gameObject.GetComponent<SwitchController>().Pressed();
-            }
-            
-            if (raycastHit.collider != null && isSlamming && (raycastHit.transform.tag == "Breakable" || raycastHit.transform.tag == "Machine")){
+            } else if (raycastHit.transform.tag == "One-Way"){
+                if (rigi.velocity.y >= 0.1f){
+                    return false;
+                }
+            } else if (isSlamming && (raycastHit.transform.tag == "Breakable" || raycastHit.transform.tag == "Machine")){
                 Destroy(raycastHit.transform.gameObject);
                 if (raycastHit.transform.tag == "Machine"){
                     score += machineValue;
@@ -175,12 +195,21 @@ public class PlayerController : MonoBehaviour
                     Instantiate(rockBurstPrefab, transform.position, Quaternion.identity);
                 }
                 return false;   //Don't Ground player after breaking through breakables
-            } else {
-                return true;
             }
+
+            return true;
         } else {
             return false;
         }
+    }
+
+    private bool CheckHead(){   //See if headbonk happens to stop additional height gain
+        RaycastHit2D raycastHit = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, 0f, Vector2.up, groundedHeight, groundLayerMask);
+
+        if (raycastHit.collider != null){
+            return true;
+        }
+        return false;
     }
 
     private bool CheckWall(){
@@ -237,10 +266,13 @@ public class PlayerController : MonoBehaviour
             ApplyJump(Forces.y);
 
             if (Forces.x != 0){
-                //Apply diagonal spring forward movement
+                moveSpring = Forces.x;
             }
 
             //Should add Anti-Slam prevention after very start of spring launch? Small counter to prevent launch momemtum accidently being stopped?
+        } else if (other.tag == "End"){
+            GameObject TransitionObj = Instantiate(transitionPrefab, new Vector3(transform.position.x + 10, transform.position.y, transform.position.z), Quaternion.identity);
+            TransitionObj.GetComponent<Transition>().SetValues("Title", transform.position.x - 3f);
         }
     }
 }
