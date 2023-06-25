@@ -201,6 +201,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 215036894}
+  - component: {fileID: 215036895}
   m_Layer: 0
   m_Name: Connector
   m_TagString: Untagged
@@ -223,6 +224,27 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &215036895
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 215036893}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a04f217add0cb44d96f7e251fa611d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  EasyPrefabs:
+  - {fileID: 8473998126227240501, guid: f2c162469e3b19145be86d34049d80a6, type: 3}
+  - {fileID: 8856821372045672660, guid: d62b11dad82b64b458e37a64b0df5ea6, type: 3}
+  - {fileID: 1485549000687160550, guid: cac4e3622e7d35a41a7dcfa48576ae95, type: 3}
+  - {fileID: 2523787985806571497, guid: 8b8773e30008e3e4c8ec7f946da4fc49, type: 3}
+  MediumPrefabs: []
+  HardPrefabs: []
+  easyTotal: 4
+  mediumTotal: 0
 --- !u!1 &313963393
 GameObject:
   m_ObjectHideFlags: 0
