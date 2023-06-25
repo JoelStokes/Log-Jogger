@@ -41,8 +41,7 @@ public class TerrainController : MonoBehaviour
 
                 GameObject newObj = GameObject.Instantiate(LevelPrefabs[random], new Vector3(lastGenX, transform.position.y, 0.5f), Quaternion.identity);          
                 
-                Debug.Log(newObj.name + "/Connector");
-                lastGenX = transform.Find(newObj.name + "/Connector").transform.position.x;
+                lastGenX = newObj.transform.Find("Connector").position.x;
                 usedPrefabs.Add(random);
             }
         }
