@@ -25,7 +25,7 @@ public class TerrainController : MonoBehaviour
         lastGenX = transform.position.x;
         
         GenerateChunks(EasyPrefabs, easyTotal);
-        //GenerateChunks(MediumPrefabs, mediumTotal);
+        GenerateChunks(MediumPrefabs, mediumTotal);
         //GenerateChunks(HardPrefabs, HardPrefabs.Length);
     }
 
