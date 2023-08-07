@@ -41,6 +41,7 @@ public class PlayerController : MonoBehaviour
     private float scoreCounter = 0;
     private int wormValue = 5;
     private int machineValue = 25;
+    private float speedMult = .001f;
 
     //Destruction Effects
     public GameObject rockBurstPrefab;
@@ -84,6 +85,7 @@ public class PlayerController : MonoBehaviour
                 UpdateScore(0);
 
                 scoreCounter = 0;
+                Time.timeScale = 1 + (speedMult * score);
             }
         }
 
@@ -140,6 +142,7 @@ public class PlayerController : MonoBehaviour
     }
 
     private void Die(){
+        Time.timeScale = 1;
         SceneManager.LoadScene("GameOver");
     }
 

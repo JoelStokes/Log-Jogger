@@ -10,7 +10,7 @@ public class TitleController : MonoBehaviour
     private float transitionXEnd = -9;
 
     public void Play(){
-        CreateTransition("SampleScene");
+        CreateTransition("Level");
     }
 
     public void Tutorial(){

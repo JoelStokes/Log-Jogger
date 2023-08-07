@@ -10,40 +10,103 @@ public class TerrainController : MonoBehaviour
 
     public int easyTotal;
     public int mediumTotal;
+    public int hardTotal;
+    private int currentDifficulty = 0;
+    private int difficultyCount = 0;
 
-    private List<GameObject> TerrainChunks = new List<GameObject>();
+    //Prevent repeats until all from group are used
+    List<int> usedChunks = new List<int>();
 
     private float lastGenX;
 
-    //1. Spawn in prefabs from scene load & place them in order
-    //2. Deactivate Chunk when offscreen for memory
-    //3. Rework collectibles to be regenerated for level chunk pooling
-            //3a. Because of set amount of Easy & Medium Prefabs, only Hard have to be pooled?
+    void OnEnable(){
+        ChunkExit.OnChunkExited += PickAndSpawnChunk;
+    }
 
-    void Start()
-    {
+    private void OnDisable(){
+        ChunkExit.OnChunkExited -= PickAndSpawnChunk;
+    }
+
+    private void Start(){
         lastGenX = transform.position.x;
-        
-        GenerateChunks(EasyPrefabs, easyTotal);
-        GenerateChunks(MediumPrefabs, mediumTotal);
-        //GenerateChunks(HardPrefabs, HardPrefabs.Length);
     }
 
-    private void GenerateChunks(GameObject[] LevelPrefabs, int total){
-        List<int> usedPrefabs = new List<int>();
-        int random;
-
-        for (int i=0; i<total; i++){
-            if (usedPrefabs.Count != LevelPrefabs.Length){  //Prevent infinite loop
-                do {
-                    random = Random.Range(0, LevelPrefabs.Length);
-                } while (usedPrefabs.Contains(random));
-
-                GameObject newObj = GameObject.Instantiate(LevelPrefabs[random], new Vector3(lastGenX, transform.position.y, 0.5f), Quaternion.identity);          
-                
-                lastGenX = newObj.transform.Find("Connector").position.x;
-                usedPrefabs.Add(random);
-            }
+    private void IncreaseDifficulty(){
+        difficultyCount = 0;
+        if (currentDifficulty < 2){
+            currentDifficulty++;
         }
+        usedChunks.Clear();
     }
+
+    void PickAndSpawnChunk(){
+        int random = -1;    //Set to -1 to ensure random value gets properly set
+        int counter = 0;
+
+        if ((currentDifficulty == 0 && difficultyCount >= easyTotal) || 
+            (currentDifficulty == 1 && difficultyCount >= mediumTotal) || 
+            (currentDifficulty == 2 && difficultyCount >= hardTotal)){
+            IncreaseDifficulty();
+        } else {
+            difficultyCount++;
+        }
+
+        do {
+            counter++;
+            if (counter > 100){
+                Debug.Log("ERROR! Infinite loop, no free chunk found!");
+                Debug.Log(usedChunks);
+                break;
+            }
+
+            switch(currentDifficulty){
+                case 0:
+                    random = Random.Range(0, EasyPrefabs.Length);
+                    break;
+                case 1:
+                    random = Random.Range(0, MediumPrefabs.Length);
+                    break;
+                case 2:
+                    random = Random.Range(0, HardPrefabs.Length);
+                    break;
+                default:
+                    Debug.Log("ERROR! invalid difficulty number in PickAndSpawnChunk!");
+                    random = 0;
+                    usedChunks.Clear();
+                    break;
+            }
+        } while (usedChunks.Contains(random));
+
+        //Creation to be done in Coroutine?
+        InstantiateChunk(random);
+    }
+
+    void InstantiateChunk(int value){
+        GameObject newObj;
+
+        switch(currentDifficulty){
+            case 0:
+                newObj = GameObject.Instantiate(EasyPrefabs[value], new Vector3(lastGenX, transform.position.y, 0.5f), Quaternion.identity);
+                break;
+            case 1:
+                newObj = GameObject.Instantiate(MediumPrefabs[value], new Vector3(lastGenX, transform.position.y, 0.5f), Quaternion.identity);
+                break;
+            case 2:
+                newObj = GameObject.Instantiate(HardPrefabs[value], new Vector3(lastGenX, transform.position.y, 0.5f), Quaternion.identity);
+                break;
+            default:
+                Debug.Log("ERROR! invalid difficulty number in InstantiateChunk!");
+                newObj = GameObject.Instantiate(EasyPrefabs[0], new Vector3(lastGenX, transform.position.y, 0.5f), Quaternion.identity);
+                break;
+        }
+        
+        usedChunks.Add(value);
+        lastGenX = newObj.transform.Find("Connector").position.x;
+    }
+
+    //1. Generate new chunk when close enough
+    //2. Disable previous chunk 10 seconds after passing / once offscreen?
+    //3. Creation needs to be done with some sort of coroutine setup?
+
+    //4:00 Level Layout OnEnable subscribes to OnChunkExited event
 }

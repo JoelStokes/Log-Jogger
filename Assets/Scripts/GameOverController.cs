@@ -18,7 +18,7 @@ public class GameOverController : MonoBehaviour
     }
 
     public void Retry(){
-        SceneManager.LoadScene("SampleScene");
+        SceneManager.LoadScene("Level");
 
     }
 
