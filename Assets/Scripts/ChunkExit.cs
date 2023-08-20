@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ChunkExit : MonoBehaviour
 {
-    public float delay = 5f;
+    public float delay = 8f;
 
     public delegate void ExitAction();
     public static event ExitAction OnChunkExited;
@@ -24,6 +24,6 @@ public class ChunkExit : MonoBehaviour
     IEnumerator WaitAndDeactivate(){
         yield return new WaitForSeconds(delay);
 
-        transform.root.gameObject.SetActive(false);
+        transform.parent.gameObject.SetActive(false);
     }
 }

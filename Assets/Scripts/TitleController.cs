@@ -9,6 +9,10 @@ public class TitleController : MonoBehaviour
     private float transitionX = 12;
     private float transitionXEnd = -9;
 
+    void Start(){
+        Application.targetFrameRate = 60;   //Override Unity settings to allow 60fps on Android
+    }
+
     public void Play(){
         CreateTransition("Level");
     }

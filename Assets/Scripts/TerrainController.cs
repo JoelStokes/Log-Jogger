@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class TerrainController : MonoBehaviour
 {
-    public GameObject[] EasyPrefabs;
-    public GameObject[] MediumPrefabs;
-    public GameObject[] HardPrefabs;
+    public GameObject[] EasyChunks;
+    public GameObject[] MediumChunks;
+    public GameObject[] HardChunks;
 
     public int easyTotal;
     public int mediumTotal;
@@ -61,13 +61,13 @@ public class TerrainController : MonoBehaviour
 
             switch(currentDifficulty){
                 case 0:
-                    random = Random.Range(0, EasyPrefabs.Length);
+                    random = Random.Range(0, EasyChunks.Length);
                     break;
                 case 1:
-                    random = Random.Range(0, MediumPrefabs.Length);
+                    random = Random.Range(0, MediumChunks.Length);
                     break;
                 case 2:
-                    random = Random.Range(0, HardPrefabs.Length);
+                    random = Random.Range(0, HardChunks.Length);
                     break;
                 default:
                     Debug.Log("ERROR! invalid difficulty number in PickAndSpawnChunk!");
@@ -82,31 +82,27 @@ public class TerrainController : MonoBehaviour
     }
 
     void InstantiateChunk(int value){
-        GameObject newObj;
-
         switch(currentDifficulty){
             case 0:
-                newObj = GameObject.Instantiate(EasyPrefabs[value], new Vector3(lastGenX, transform.position.y, 0.5f), Quaternion.identity);
+                EasyChunks[value].transform.position = new Vector3(lastGenX, transform.position.y, 0.5f);
+                EasyChunks[value].SetActive(true);
+                lastGenX = EasyChunks[value].transform.Find("Connector").position.x;
                 break;
             case 1:
-                newObj = GameObject.Instantiate(MediumPrefabs[value], new Vector3(lastGenX, transform.position.y, 0.5f), Quaternion.identity);
+                MediumChunks[value].transform.position = new Vector3(lastGenX, transform.position.y, 0.5f);
+                MediumChunks[value].SetActive(true);
+                lastGenX = MediumChunks[value].transform.Find("Connector").position.x;
                 break;
             case 2:
-                newObj = GameObject.Instantiate(HardPrefabs[value], new Vector3(lastGenX, transform.position.y, 0.5f), Quaternion.identity);
+                //newObj = GameObject.Instantiate(HardChunks[value], new Vector3(lastGenX, transform.position.y, 0.5f), Quaternion.identity);
+                //NEED TO PROPERLY FIGURE OUT HOW HARD WORKS!
                 break;
             default:
                 Debug.Log("ERROR! invalid difficulty number in InstantiateChunk!");
-                newObj = GameObject.Instantiate(EasyPrefabs[0], new Vector3(lastGenX, transform.position.y, 0.5f), Quaternion.identity);
+                //newObj = GameObject.Instantiate(EasyChunks[0], new Vector3(lastGenX, transform.position.y, 0.5f), Quaternion.identity);
                 break;
         }
         
         usedChunks.Add(value);
-        lastGenX = newObj.transform.Find("Connector").position.x;
     }
-
-    //1. Generate new chunk when close enough
-    //2. Disable previous chunk 10 seconds after passing / once offscreen?
-    //3. Creation needs to be done with some sort of coroutine setup?
-
-    //4:00 Level Layout OnEnable subscribes to OnChunkExited event
 }

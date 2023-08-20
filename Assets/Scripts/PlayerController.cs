@@ -189,7 +189,7 @@ public class PlayerController : MonoBehaviour
                     return false;
                 }
             } else if (isSlamming && (raycastHit.transform.tag == "Breakable" || raycastHit.transform.tag == "Machine")){
-                Destroy(raycastHit.transform.gameObject);
+                raycastHit.transform.gameObject.SetActive(false);
                 if (raycastHit.transform.tag == "Machine"){
                     score += machineValue;
                     UpdateScore(machineValue);
@@ -257,7 +257,7 @@ public class PlayerController : MonoBehaviour
         if (other.tag == "Worm"){
             score += wormValue;
             UpdateScore(wormValue);
-            Destroy(other.gameObject);
+            other.gameObject.SetActive(false);
         } else if (other.tag == "Hurt"){
             Die();
         } else if (other.tag == "Spring"){
