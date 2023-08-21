@@ -72,12 +72,6 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         if (moving){
-            if (moveSpring != 0){
-                transform.position = new Vector3(transform.position.x + (moveSpring * Time.deltaTime), transform.position.y, transform.position.z);
-            } else {
-                transform.position = new Vector3(transform.position.x + (moveSpeed * Time.deltaTime), transform.position.y, transform.position.z);               
-            }
-
             scoreCounter += Time.deltaTime;
             if (scoreCounter > 1){
                 score++;
@@ -96,10 +90,6 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate() {
         if (!dead){
-            /*if (moving){
-                rigi.velocity = new Vector2(moveSpeed, rigi.velocity.y);
-            }*/
-
             if (CheckGrounded()){
                 isGrounded = true;
                 isSlamming = false;
@@ -132,11 +122,21 @@ public class PlayerController : MonoBehaviour
 
             if (isSlamming){
                 moving = false;
-                rigi.velocity = new Vector2(0, slamSpeed);
+                rigi.velocity = new Vector2(rigi.velocity.x, slamSpeed);
             } else {
-                if (rigi.velocity.y < maxVelocity){
-                    rigi.velocity = new Vector2(0, maxVelocity);
+                if (rigi.velocity.y < maxVelocity){  //??? Don't understand this
+                    rigi.velocity = new Vector2(rigi.velocity.x, maxVelocity);
                 }
+            }
+
+            if (moving){
+                if (moveSpring != 0){
+                    rigi.velocity = new Vector2(moveSpeed + moveSpring, rigi.velocity.y);
+                } else {
+                    rigi.velocity = new Vector2(moveSpeed, rigi.velocity.y);
+                }
+            } else {
+                rigi.velocity = new Vector2(0, rigi.velocity.y);
             }
         }
     }
@@ -165,7 +165,7 @@ public class PlayerController : MonoBehaviour
     }
 
     private void ApplyJump(float launchForce){
-        rigi.velocity = new Vector2(0, launchForce);
+        rigi.velocity = new Vector2(rigi.velocity.x, launchForce);
     }
 
     private void TouchHeld(){
@@ -173,7 +173,7 @@ public class PlayerController : MonoBehaviour
             jumpHoldCounter = jumpHoldHeadHit;
         }
 
-        rigi.velocity = new Vector2(0, rigi.velocity.y + (jumpHoldModifier - (jumpHoldCounter * jumpHoldDiminish)));
+        rigi.velocity = new Vector2(rigi.velocity.x, rigi.velocity.y + (jumpHoldModifier - (jumpHoldCounter * jumpHoldDiminish)));
 
         jumpHoldCounter++;
     }

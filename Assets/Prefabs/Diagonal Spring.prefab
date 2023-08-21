@@ -179,7 +179,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   yForce: 27
-  xSpeed: 11
+  xSpeed: 5
 --- !u!1 &7708113640466594373
 GameObject:
   m_ObjectHideFlags: 0

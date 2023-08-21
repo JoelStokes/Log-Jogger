@@ -543,7 +543,7 @@ CompositeCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_GeometryType: 0
+  m_GeometryType: 1
   m_GenerationType: 1
   m_EdgeRadius: 0
   m_ColliderPaths:
@@ -10047,7 +10047,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 913102989208608280, guid: 8a7d07ab7c9f8a54987a807ad1c7c4bc, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.4620724
+      value: 1.9562337
       objectReference: {fileID: 0}
     - target: {fileID: 913102989208608280, guid: 8a7d07ab7c9f8a54987a807ad1c7c4bc, type: 3}
       propertyPath: m_LocalPosition.z
