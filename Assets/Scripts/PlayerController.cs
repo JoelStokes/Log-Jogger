@@ -29,6 +29,8 @@ public class PlayerController : MonoBehaviour
     private bool moving = true;
     private float boxColliderSubtract = .05f;
     private Vector3 RightCheckBoxCollider;  //Prevent stutter when landing on ground from height by using slightly smaller box collider for wall check
+    private bool onConveyor = false;
+    private float conveyorSpeed = 0;
 
     //Grounded Checks
     private bool isGrounded = false;
@@ -132,6 +134,8 @@ public class PlayerController : MonoBehaviour
             if (moving){
                 if (moveSpring != 0){
                     rigi.velocity = new Vector2(moveSpeed + moveSpring, rigi.velocity.y);
+                } else if (onConveyor) {
+                    rigi.velocity = new Vector2(moveSpeed + conveyorSpeed, rigi.velocity.y);
                 } else {
                     rigi.velocity = new Vector2(moveSpeed, rigi.velocity.y);
                 }
@@ -276,6 +280,15 @@ public class PlayerController : MonoBehaviour
         } else if (other.tag == "End"){
             GameObject TransitionObj = Instantiate(transitionPrefab, new Vector3(transform.position.x + 10, transform.position.y, transform.position.z), Quaternion.identity);
             TransitionObj.GetComponent<Transition>().SetValues("Title", transform.position.x - 3f);
+        } else if (other.tag == "Conveyor"){
+            conveyorSpeed = other.GetComponent<Conveyor>().xSpeed;
+            onConveyor = true;
+        }
+    }
+
+    void OnTriggerExit2D(Collider2D other){
+        if (other.tag == "Conveyor"){
+            onConveyor = false;
         }
     }
 }

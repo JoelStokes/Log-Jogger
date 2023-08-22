@@ -12,6 +12,7 @@ TagManager:
   - One-Way
   - Spring
   - End
+  - Conveyor
   layers:
   - Default
   - TransparentFX
