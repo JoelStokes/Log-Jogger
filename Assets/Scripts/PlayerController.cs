@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour
     private float deathHeight = -30;
 
     //Jump Management
-    private float jumpForce = 13f;   //Applied once at jump start
+    private float jumpForce = 12.9f;   //Applied once at jump start
     private float jumpHoldModifier = .75f;   //Constantly applied as held
     private int jumpHoldCounter = 0;
     private int jumpHoldHeadHit = 75;
