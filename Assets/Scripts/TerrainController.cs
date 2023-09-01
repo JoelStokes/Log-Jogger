@@ -32,7 +32,7 @@ public class TerrainController : MonoBehaviour
     }
 
     private void IncreaseDifficulty(){
-        difficultyCount = 0;
+        difficultyCount = 1;
         if (currentDifficulty < 2){
             currentDifficulty++;
         }
@@ -43,12 +43,15 @@ public class TerrainController : MonoBehaviour
         int random = -1;    //Set to -1 to ensure random value gets properly set
         int counter = 0;
 
+        Debug.Log("Before Difficulty: " + currentDifficulty + ", difficultyCount: " + difficultyCount);
         if ((currentDifficulty == 0 && difficultyCount >= easyTotal) || 
             (currentDifficulty == 1 && difficultyCount >= mediumTotal)){
             IncreaseDifficulty();
         } else {
             difficultyCount++;
         }
+
+        Debug.Log("After Difficulty: " + currentDifficulty + ", difficultyCount: " + difficultyCount);
 
         do {
             counter++;
