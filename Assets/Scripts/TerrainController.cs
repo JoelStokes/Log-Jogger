@@ -44,8 +44,7 @@ public class TerrainController : MonoBehaviour
         int counter = 0;
 
         if ((currentDifficulty == 0 && difficultyCount >= easyTotal) || 
-            (currentDifficulty == 1 && difficultyCount >= mediumTotal) || 
-            (currentDifficulty == 2 && difficultyCount >= hardTotal)){
+            (currentDifficulty == 1 && difficultyCount >= mediumTotal)){
             IncreaseDifficulty();
         } else {
             difficultyCount++;
@@ -94,12 +93,15 @@ public class TerrainController : MonoBehaviour
                 lastGenX = MediumChunks[value].transform.Find("Connector").position.x;
                 break;
             case 2:
-                //newObj = GameObject.Instantiate(HardChunks[value], new Vector3(lastGenX, transform.position.y, 0.5f), Quaternion.identity);
-                //NEED TO PROPERLY FIGURE OUT HOW HARD WORKS!
+                HardChunks[value].transform.position = new Vector3(lastGenX, transform.position.y, 0.5f);
+                HardChunks[value].SetActive(true);
+                lastGenX = HardChunks[value].transform.Find("Connector").position.x;
+                if (usedChunks.Count >= hardTotal){     //Ensure recent chunk not called again too early.
+                    usedChunks.RemoveAt(0);
+                }
                 break;
             default:
                 Debug.Log("ERROR! invalid difficulty number in InstantiateChunk!");
-                //newObj = GameObject.Instantiate(EasyChunks[0], new Vector3(lastGenX, transform.position.y, 0.5f), Quaternion.identity);
                 break;
         }
         
