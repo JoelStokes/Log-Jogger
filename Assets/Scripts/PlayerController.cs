@@ -58,8 +58,26 @@ public class PlayerController : MonoBehaviour
     private TerrainController terrainController;
     private Animator anim;
 
+    //SFX
+    private float volume;
+    private AudioSource audioSource;
+    public AudioClip jumpSFX;
+    public AudioClip slamSFX;
+    public AudioClip deathSFX;
+    public AudioClip walkingSFX;    //Add timer for consistent walking sounds while grounded?
+    public AudioClip springSFX;
+    public AudioClip collectSFX;
+    public AudioClip breakableSFX;
+    public AudioClip machineSFX;
+    public AudioClip switchGoodSFX;
+    public AudioClip switchBadSFX;
+
     void Start()
     {
+        //Get SFX Audio Volume from SaveManager setting
+        volume = 1f;
+        audioSource = GetComponent<AudioSource>();
+
         rigi = GetComponent<Rigidbody2D>();
         boxCollider = GetComponent<BoxCollider2D>();
         anim = GetComponent<Animator>();
@@ -147,6 +165,7 @@ public class PlayerController : MonoBehaviour
 
     private void Die(){
         Time.timeScale = 1;
+        PlayAudio(deathSFX);
         SceneManager.LoadScene("GameOver");
     }
 
@@ -161,8 +180,10 @@ public class PlayerController : MonoBehaviour
     private void TouchStart(){
         touching = true;
         if (isGrounded){
+            PlayAudio(jumpSFX);
             ApplyJump(jumpForce);
         } else {
+            PlayAudio(slamSFX);
             isSlamming = true;
             anim.SetBool("Dashing", true);
         }
@@ -197,8 +218,10 @@ public class PlayerController : MonoBehaviour
                 if (raycastHit.transform.tag == "Machine"){
                     score += machineValue;
                     UpdateScore(machineValue);
+                    AudioSource.PlayClipAtPoint(machineSFX, transform.position, volume);
                     //Add Machine Destruction Effect
                 } else {
+                    AudioSource.PlayClipAtPoint(breakableSFX, transform.position, volume);
                     Instantiate(rockBurstPrefab, transform.position, Quaternion.identity);
                 }
                 return false;   //Don't Ground player after breaking through breakables
@@ -257,9 +280,16 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void PlayAudio(AudioClip audioClip){
+        audioSource.volume = volume;
+        audioSource.clip = audioClip;
+        audioSource.Play();
+    }
+
     void OnTriggerEnter2D(Collider2D other) {
         if (other.tag == "Worm"){
             score += wormValue;
+            AudioSource.PlayClipAtPoint(collectSFX, transform.position, volume);
             UpdateScore(wormValue);
             other.gameObject.SetActive(false);
         } else if (other.tag == "Hurt"){
@@ -269,6 +299,7 @@ public class PlayerController : MonoBehaviour
 
             isSlamming = false;
             anim.SetBool("Dashing", false);
+            AudioSource.PlayClipAtPoint(springSFX, transform.position, volume);
 
             ApplyJump(Forces.y);
 
