@@ -75,7 +75,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         //Get SFX Audio Volume from SaveManager setting
-        volume = 1f;
+        volume = .8f;
         audioSource = GetComponent<AudioSource>();
 
         rigi = GetComponent<Rigidbody2D>();

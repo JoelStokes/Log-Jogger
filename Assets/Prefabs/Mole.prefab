@@ -314,15 +314,15 @@ MonoBehaviour:
   machineBurstPrefab: {fileID: 0}
   transitionPrefab: {fileID: 4637075002079152295, guid: 9b53b0d497d2aa547884f59754f01aef, type: 3}
   jumpSFX: {fileID: 8300000, guid: 00d6492995fcb4a43a4e81cb5b585654, type: 3}
-  slamSFX: {fileID: 0}
+  slamSFX: {fileID: 8300000, guid: c06b83fda8cfc9d4cbe09b7542ebc4e9, type: 3}
   deathSFX: {fileID: 0}
   walkingSFX: {fileID: 0}
-  springSFX: {fileID: 0}
-  collectSFX: {fileID: 0}
-  breakableSFX: {fileID: 0}
-  machineSFX: {fileID: 0}
-  switchGoodSFX: {fileID: 0}
-  switchBadSFX: {fileID: 0}
+  springSFX: {fileID: 8300000, guid: 6ce485b9064e70c458805a32162055c4, type: 3}
+  collectSFX: {fileID: 8300000, guid: 4a765a5116903a04e9301c4906705eb6, type: 3}
+  breakableSFX: {fileID: 8300000, guid: 537f33b9b03ad7c459c4e2ecf9f8ecb7, type: 3}
+  machineSFX: {fileID: 8300000, guid: 06a3dda25dc2c8549b1d4f175dfda121, type: 3}
+  switchGoodSFX: {fileID: 8300000, guid: f2894abff60f0e745bfd58d10219a038, type: 3}
+  switchBadSFX: {fileID: 8300000, guid: c43ea839706b1eb41a6afc9bdd0b6bc6, type: 3}
 --- !u!114 &763926477786990760
 MonoBehaviour:
   m_ObjectHideFlags: 0
