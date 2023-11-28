@@ -293,7 +293,7 @@ Rigidbody2D:
   m_AngularDrag: 0.05
   m_GravityScale: 1
   m_Material: {fileID: 0}
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
@@ -312,15 +312,27 @@ MonoBehaviour:
   ScoreText: {fileID: 0}
   rockBurstPrefab: {fileID: 6907459221728334869, guid: cb0c8642b2f9f244a995c778649819a6, type: 3}
   machineBurstPrefab: {fileID: 0}
+  wormBurstPrefab: {fileID: 5214471637313954120, guid: 56d3e4888facc76468431a9aff872e29, type: 3}
   transitionPrefab: {fileID: 4637075002079152295, guid: 9b53b0d497d2aa547884f59754f01aef, type: 3}
-  jumpSFX: {fileID: 8300000, guid: 00d6492995fcb4a43a4e81cb5b585654, type: 3}
-  slamSFX: {fileID: 8300000, guid: c06b83fda8cfc9d4cbe09b7542ebc4e9, type: 3}
-  deathSFX: {fileID: 0}
+  jumpSFX: []
+  slamSFX:
+  - {fileID: 8300000, guid: e50a04d99d1323743a10bfc024baff4c, type: 3}
+  - {fileID: 8300000, guid: 9768b963c362b9f4bae32fe387d7131b, type: 3}
+  - {fileID: 8300000, guid: c8826ad5c42147b42adefe55ba942d9e, type: 3}
+  - {fileID: 8300000, guid: 56ed652102237034c8772e2db961eacc, type: 3}
+  deathSFX: {fileID: 8300000, guid: ca794ac9e07eb9240bd4547403417979, type: 3}
   walkingSFX: {fileID: 0}
-  springSFX: {fileID: 8300000, guid: 6ce485b9064e70c458805a32162055c4, type: 3}
-  collectSFX: {fileID: 8300000, guid: 4a765a5116903a04e9301c4906705eb6, type: 3}
-  breakableSFX: {fileID: 8300000, guid: 537f33b9b03ad7c459c4e2ecf9f8ecb7, type: 3}
-  machineSFX: {fileID: 8300000, guid: 06a3dda25dc2c8549b1d4f175dfda121, type: 3}
+  springSFX: []
+  collectSFX:
+  - {fileID: 8300000, guid: 3b6aef32f865f78418239e3146a55732, type: 3}
+  - {fileID: 8300000, guid: 140b8775f402f534f8d0ee2ef4983c28, type: 3}
+  - {fileID: 8300000, guid: 0ee5b8cbefef06a4680b3d10cb05bae4, type: 3}
+  breakableSFX:
+  - {fileID: 8300000, guid: 19511af427a16424eb705d74c9103e3b, type: 3}
+  - {fileID: 8300000, guid: 0e12e81d86027a942bd48782d964809a, type: 3}
+  machineSFX:
+  - {fileID: 8300000, guid: 19511af427a16424eb705d74c9103e3b, type: 3}
+  - {fileID: 8300000, guid: 0e12e81d86027a942bd48782d964809a, type: 3}
   switchGoodSFX: {fileID: 8300000, guid: f2894abff60f0e745bfd58d10219a038, type: 3}
   switchBadSFX: {fileID: 8300000, guid: c43ea839706b1eb41a6afc9bdd0b6bc6, type: 3}
 --- !u!114 &763926477786990760
@@ -752,8 +764,8 @@ TrailRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 763926478414292566}
   m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
   m_MotionVectors: 0

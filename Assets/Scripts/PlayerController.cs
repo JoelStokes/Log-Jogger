@@ -48,6 +48,7 @@ public class PlayerController : MonoBehaviour
     //Destruction Effects
     public GameObject rockBurstPrefab;
     public GameObject machineBurstPrefab;
+    public GameObject wormBurstPrefab;
 
     //Transition
     public GameObject transitionPrefab;
@@ -61,21 +62,21 @@ public class PlayerController : MonoBehaviour
     //SFX
     private float volume;
     private AudioSource audioSource;
-    public AudioClip jumpSFX;
-    public AudioClip slamSFX;
+    public AudioClip[] jumpSFX;
+    public AudioClip[] slamSFX;
     public AudioClip deathSFX;
     public AudioClip walkingSFX;    //Add timer for consistent walking sounds while grounded?
-    public AudioClip springSFX;
-    public AudioClip collectSFX;
-    public AudioClip breakableSFX;
-    public AudioClip machineSFX;
+    public AudioClip[] springSFX;
+    public AudioClip[] collectSFX;
+    public AudioClip[] breakableSFX;
+    public AudioClip[] machineSFX;
     public AudioClip switchGoodSFX;
     public AudioClip switchBadSFX;
 
     void Start()
     {
         //Get SFX Audio Volume from SaveManager setting
-        volume = .8f;
+        volume = .5f;
         audioSource = GetComponent<AudioSource>();
 
         rigi = GetComponent<Rigidbody2D>();
@@ -165,7 +166,7 @@ public class PlayerController : MonoBehaviour
 
     private void Die(){
         Time.timeScale = 1;
-        PlayAudio(deathSFX);
+        PlayAudio(deathSFX, false, 0);
         SceneManager.LoadScene("GameOver");
     }
 
@@ -180,10 +181,10 @@ public class PlayerController : MonoBehaviour
     private void TouchStart(){
         touching = true;
         if (isGrounded){
-            PlayAudio(jumpSFX);
+            PlayAudio(jumpSFX, false, 0);
             ApplyJump(jumpForce);
         } else {
-            PlayAudio(slamSFX);
+            PlayAudio(slamSFX, false, -.2f);
             isSlamming = true;
             anim.SetBool("Dashing", true);
         }
@@ -218,10 +219,10 @@ public class PlayerController : MonoBehaviour
                 if (raycastHit.transform.tag == "Machine"){
                     score += machineValue;
                     UpdateScore(machineValue);
-                    AudioSource.PlayClipAtPoint(machineSFX, transform.position, volume);
+                    PlayAudio(machineSFX, true, .1f);
                     //Add Machine Destruction Effect
                 } else {
-                    AudioSource.PlayClipAtPoint(breakableSFX, transform.position, volume);
+                    PlayAudio(breakableSFX, true, .1f);
                     Instantiate(rockBurstPrefab, transform.position, Quaternion.identity);
                 }
                 return false;   //Don't Ground player after breaking through breakables
@@ -280,17 +281,38 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void PlayAudio(AudioClip audioClip){
-        audioSource.volume = volume;
-        audioSource.clip = audioClip;
-        audioSource.Play();
+    public void PlayAudio(AudioClip audioClip, bool clipAtPoint, float volumeModifier){
+        if (audioClip != null){
+            if (clipAtPoint){
+                AudioSource.PlayClipAtPoint(audioClip, transform.position, volume + volumeModifier);
+            } else {
+                audioSource.volume = volume + volumeModifier;
+                audioSource.clip = audioClip;
+                audioSource.Play();
+            }
+        }
+    }
+
+    public void PlayAudio(AudioClip[] audioClips, bool clipAtPoint, float volumeModifier){    //Overload function for choosing random sound effect from array to play
+        if (audioClips.Length != 0){
+            int rand = Random.Range(0, audioClips.Length-1);
+
+            if (clipAtPoint){
+                AudioSource.PlayClipAtPoint(audioClips[rand], transform.position, volume + volumeModifier);
+            } else {
+                audioSource.volume = volume + volumeModifier;
+                audioSource.clip = audioClips[rand];
+                audioSource.Play();
+            }
+        }
     }
 
     void OnTriggerEnter2D(Collider2D other) {
         if (other.tag == "Worm"){
             score += wormValue;
-            AudioSource.PlayClipAtPoint(collectSFX, transform.position, volume);
+            PlayAudio(collectSFX, true, 5f);
             UpdateScore(wormValue);
+            Instantiate(wormBurstPrefab, other.transform.position, wormBurstPrefab.transform.rotation);
             other.gameObject.SetActive(false);
         } else if (other.tag == "Hurt"){
             Die();
@@ -299,7 +321,7 @@ public class PlayerController : MonoBehaviour
 
             isSlamming = false;
             anim.SetBool("Dashing", false);
-            AudioSource.PlayClipAtPoint(springSFX, transform.position, volume);
+            PlayAudio(springSFX, true, 0);
 
             ApplyJump(Forces.y);
 
