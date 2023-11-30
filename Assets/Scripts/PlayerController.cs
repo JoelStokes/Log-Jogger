@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.SceneManagement;
 using TMPro;
 
 public class PlayerController : MonoBehaviour
@@ -10,8 +9,17 @@ public class PlayerController : MonoBehaviour
     private bool touching = false;
 
     //Death Management
+    public GameObject AngelPrefab;
     private bool dead = false;
     private float deathHeight = -30;
+    private float deathTimer;
+    private float deathLim = 0.75f;
+    private bool angelSpawned = false;
+
+    //Start Management
+    private float startTimer;
+    private float startLim = 1;
+    private bool started = false;
 
     //Jump Management
     private float jumpForce = 12.9f;   //Applied once at jump start
@@ -58,6 +66,7 @@ public class PlayerController : MonoBehaviour
     private BoxCollider2D boxCollider;
     private TerrainController terrainController;
     private Animator anim;
+    private CameraController cameraController;
 
     //SFX
     private float volume;
@@ -78,6 +87,7 @@ public class PlayerController : MonoBehaviour
         //Get SFX Audio Volume from SaveManager setting
         volume = .5f;
         audioSource = GetComponent<AudioSource>();
+        cameraController = Camera.main.gameObject.GetComponent<CameraController>();
 
         rigi = GetComponent<Rigidbody2D>();
         boxCollider = GetComponent<BoxCollider2D>();
@@ -92,7 +102,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if (moving){
+        if (moving && !dead){
             scoreCounter += Time.deltaTime;
             if (scoreCounter > 1){
                 score++;
@@ -110,7 +120,7 @@ public class PlayerController : MonoBehaviour
     }
 
     private void FixedUpdate() {
-        if (!dead){
+        if (!dead && started){
             if (CheckGrounded()){
                 isGrounded = true;
                 isSlamming = false;
@@ -161,13 +171,33 @@ public class PlayerController : MonoBehaviour
             } else {
                 rigi.velocity = new Vector2(0, rigi.velocity.y);
             }
+        } else if (!started){
+            startTimer += Time.deltaTime;
+            if (startTimer >= startLim){
+                started = true;
+                anim.SetTrigger("Start");
+            }
+        } else if (dead && !angelSpawned) {
+            deathTimer += Time.deltaTime;
+            if (deathTimer >= deathLim){
+                Instantiate(AngelPrefab, transform.position, AngelPrefab.transform.rotation);
+                GetComponent<SpriteRenderer>().color = new Vector4(1,1,1,0);
+                angelSpawned = true;
+            }
         }
     }
 
     private void Die(){
-        Time.timeScale = 1;
-        PlayAudio(deathSFX, false, 0);
-        SceneManager.LoadScene("GameOver");
+        if (!dead){
+            Time.timeScale = 1;
+            PlayAudio(deathSFX, false, 0);
+            dead = true;
+            anim.SetTrigger("Die");
+
+            rigi.isKinematic = true;
+            rigi.velocity = Vector2.zero;
+            cameraController.PlayerDied();
+        }
     }
 
     private void UpdateScore(int valuePopup){
@@ -260,24 +290,26 @@ public class PlayerController : MonoBehaviour
     }
 
     public void Touch(InputAction.CallbackContext context){
-        //Debug.Log("Touch Detected: " + context.phase);
-        if (context.ReadValue<UnityEngine.InputSystem.TouchPhase>() == UnityEngine.InputSystem.TouchPhase.Began){
-            if (touching == false){
-                TouchStart();
-            }
-        } else if (context.ReadValue<UnityEngine.InputSystem.TouchPhase>() == UnityEngine.InputSystem.TouchPhase.Ended){
-            touching = false;
+        if (!dead && started){
+            if (context.ReadValue<UnityEngine.InputSystem.TouchPhase>() == UnityEngine.InputSystem.TouchPhase.Began){
+                if (touching == false){
+                    TouchStart();
+                }
+            } else if (context.ReadValue<UnityEngine.InputSystem.TouchPhase>() == UnityEngine.InputSystem.TouchPhase.Ended){
+                touching = false;
+            }            
         }
     }
 
     public void TouchBackup(InputAction.CallbackContext context){   //Keyboard & Gamepad alternatives to Touchscreen
-        //Debug.Log("Backup Touch Detected: " + context.phase);
-        if (context.phase == InputActionPhase.Started){
-            if (touching == false){
-                TouchStart();
+        if (!dead && started){
+            if (context.phase == InputActionPhase.Started){
+                if (touching == false){
+                    TouchStart();
+                }
+            } else if (context.phase == InputActionPhase.Canceled){
+                touching = false;
             }
-        } else if (context.phase == InputActionPhase.Canceled){
-            touching = false;
         }
     }
 
@@ -308,34 +340,36 @@ public class PlayerController : MonoBehaviour
     }
 
     void OnTriggerEnter2D(Collider2D other) {
-        if (other.tag == "Worm"){
-            score += wormValue;
-            PlayAudio(collectSFX, true, 5f);
-            UpdateScore(wormValue);
-            Instantiate(wormBurstPrefab, other.transform.position, wormBurstPrefab.transform.rotation);
-            other.gameObject.SetActive(false);
-        } else if (other.tag == "Hurt"){
-            Die();
-        } else if (other.tag == "Spring"){
-            Vector2 Forces = other.GetComponent<Spring>().LaunchSpring();
+        if (!dead){
+            if (other.tag == "Worm"){
+                score += wormValue;
+                PlayAudio(collectSFX, true, 5f);
+                UpdateScore(wormValue);
+                Instantiate(wormBurstPrefab, other.transform.position, wormBurstPrefab.transform.rotation);
+                other.gameObject.SetActive(false);
+            } else if (other.tag == "Hurt"){
+                Die();
+            } else if (other.tag == "Spring"){
+                Vector2 Forces = other.GetComponent<Spring>().LaunchSpring();
 
-            isSlamming = false;
-            anim.SetBool("Dashing", false);
-            PlayAudio(springSFX, true, 0);
+                isSlamming = false;
+                anim.SetBool("Dashing", false);
+                PlayAudio(springSFX, true, 0);
 
-            ApplyJump(Forces.y);
+                ApplyJump(Forces.y);
 
-            if (Forces.x != 0){
-                moveSpring = Forces.x;
+                if (Forces.x != 0){
+                    moveSpring = Forces.x;
+                }
+
+                //Should add Anti-Slam prevention after very start of spring launch? Small counter to prevent launch momemtum accidently being stopped?
+            } else if (other.tag == "End"){
+                GameObject TransitionObj = Instantiate(transitionPrefab, new Vector3(transform.position.x + 10, transform.position.y, transform.position.z), Quaternion.identity);
+                TransitionObj.GetComponent<Transition>().SetValues("Title", transform.position.x - 3f);
+            } else if (other.tag == "Conveyor"){
+                conveyorSpeed = other.GetComponent<Conveyor>().xSpeed;
+                onConveyor = true;
             }
-
-            //Should add Anti-Slam prevention after very start of spring launch? Small counter to prevent launch momemtum accidently being stopped?
-        } else if (other.tag == "End"){
-            GameObject TransitionObj = Instantiate(transitionPrefab, new Vector3(transform.position.x + 10, transform.position.y, transform.position.z), Quaternion.identity);
-            TransitionObj.GetComponent<Transition>().SetValues("Title", transform.position.x - 3f);
-        } else if (other.tag == "Conveyor"){
-            conveyorSpeed = other.GetComponent<Conveyor>().xSpeed;
-            onConveyor = true;
         }
     }
 
