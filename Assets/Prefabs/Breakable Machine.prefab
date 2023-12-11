@@ -350,7 +350,7 @@ GameObject:
   - component: {fileID: 460812041129088105}
   m_Layer: 6
   m_Name: Breakable Machine
-  m_TagString: Breakable
+  m_TagString: Machine
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

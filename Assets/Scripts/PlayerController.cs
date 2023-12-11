@@ -250,7 +250,7 @@ public class PlayerController : MonoBehaviour
                     score += machineValue;
                     UpdateScore(machineValue);
                     PlayAudio(machineSFX, true, .1f);
-                    //Add Machine Destruction Effect
+                    Instantiate(machineBurstPrefab, transform.position, Quaternion.identity);
                 } else {
                     PlayAudio(breakableSFX, true, .1f);
                     Instantiate(rockBurstPrefab, transform.position, Quaternion.identity);
