@@ -267,7 +267,7 @@ public class PlayerController : MonoBehaviour
     private bool CheckHead(){   //See if headbonk happens to stop additional height gain
         RaycastHit2D raycastHit = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, 0f, Vector2.up, groundedHeight, groundLayerMask);
 
-        if (raycastHit.collider != null){
+        if (raycastHit.collider != null && raycastHit.transform.gameObject.tag != "One-Way"){
             return true;
         }
         return false;

@@ -309,8 +309,8 @@ MonoBehaviour:
   - {fileID: 763926478008946219}
   - {fileID: 763926479651875820}
   m_Bounds:
-    m_Center: {x: -0.06618065, y: 0.12778872, z: 0}
-    m_Extent: {x: 0.3319602, y: 0.7321347, z: 0}
+    m_Center: {x: -0.066180825, y: 0.12778872, z: 0}
+    m_Extent: {x: 0.33196002, y: 0.7321347, z: 0}
   m_UseBatching: 1
   m_AlwaysUpdate: 1
   m_AutoRebind: 0
@@ -396,7 +396,7 @@ MonoBehaviour:
   AngelPrefab: {fileID: 553639333136083777, guid: 26cdb2142fc351c4781aefc5e0131ec8, type: 3}
   ScoreText: {fileID: 0}
   rockBurstPrefab: {fileID: 6907459221728334869, guid: cb0c8642b2f9f244a995c778649819a6, type: 3}
-  machineBurstPrefab: {fileID: 0}
+  machineBurstPrefab: {fileID: 3036443492406917886, guid: f6da8341abdc5f445bf5a5282f12873c, type: 3}
   wormBurstPrefab: {fileID: 5214471637313954120, guid: 56d3e4888facc76468431a9aff872e29, type: 3}
   transitionPrefab: {fileID: 4637075002079152295, guid: 9b53b0d497d2aa547884f59754f01aef, type: 3}
   jumpSFX: []
