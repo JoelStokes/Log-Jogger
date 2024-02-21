@@ -196,6 +196,7 @@ public class PlayerController : MonoBehaviour
 
             rigi.isKinematic = true;
             rigi.velocity = Vector2.zero;
+            GetComponent<BoxCollider2D>().isTrigger = true;
             cameraController.PlayerDied();
         }
     }
