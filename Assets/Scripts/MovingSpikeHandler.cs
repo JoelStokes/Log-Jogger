@@ -7,6 +7,7 @@ public class MovingSpikeHandler : MonoBehaviour
 {
     public GameObject SpikePrefab;
     public float spawnRate;
+    public GameObject[] ExistingSpikes;
 
     private float spawnTimer = 0;
     private List<GameObject> Spikes = new List<GameObject>();
@@ -14,11 +15,16 @@ public class MovingSpikeHandler : MonoBehaviour
     //Create & run first spike
     void Start()
     {
+        //Take any pre-placed spikes and add them to spike pool
+        for (int i=0; i<ExistingSpikes.Length; i++){
+            Debug.Log("Spike " + i + " added");
+            Spikes.Add(ExistingSpikes[i]);
+        }
+        
         CreateSpike();
-        PrepareSpike(0);
+        PrepareSpike(Spikes.Count-1);
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (spawnTimer >= spawnRate){
