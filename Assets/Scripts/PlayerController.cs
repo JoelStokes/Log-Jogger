@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour
     //Death Management
     public GameObject AngelPrefab;
     private bool dead = false;
-    private float deathHeight = -30;
+    private float deathHeight = -25;
     private float deathTimer;
     private float deathLim = 0.75f;
     private bool angelSpawned = false;
@@ -196,6 +196,7 @@ public class PlayerController : MonoBehaviour
 
             rigi.isKinematic = true;
             rigi.velocity = Vector2.zero;
+            GetComponent<BoxCollider2D>().isTrigger = true;
             cameraController.PlayerDied();
         }
     }
