@@ -67,6 +67,7 @@ public class PlayerController : MonoBehaviour
     private TerrainController terrainController;
     private Animator anim;
     private CameraController cameraController;
+    private ChunkExit lastChunk;
 
     //SFX
     private float volume;
@@ -198,6 +199,10 @@ public class PlayerController : MonoBehaviour
             rigi.velocity = Vector2.zero;
             GetComponent<BoxCollider2D>().isTrigger = true;
             cameraController.PlayerDied();
+
+            if (lastChunk){
+                lastChunk.SetPlayerDead();
+            }
         }
     }
 
@@ -338,6 +343,11 @@ public class PlayerController : MonoBehaviour
                 audioSource.Play();
             }
         }
+    }
+
+    //Used to call chunk on death to prevent despawning
+    public void SetLastChunk(ChunkExit chunk){
+        lastChunk = chunk;
     }
 
     void OnTriggerEnter2D(Collider2D other) {

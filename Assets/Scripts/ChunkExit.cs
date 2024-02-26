@@ -10,20 +10,30 @@ public class ChunkExit : MonoBehaviour
     public static event ExitAction OnChunkExited;
 
     private bool exited = false;
+    private bool playerDead = false;
     
     private void OnTriggerExit2D(Collider2D other) {
         if (other.tag == "Player"){
             if (!exited){
                 exited = true;
+                other.gameObject.GetComponent<PlayerController>().SetLastChunk(this);
+
                 OnChunkExited();
                 StartCoroutine(WaitAndDeactivate());
             }
         }
     }
 
+    public void SetPlayerDead(){
+        playerDead = true;
+    }
+
     IEnumerator WaitAndDeactivate(){
         yield return new WaitForSeconds(delay);
 
-        transform.parent.gameObject.SetActive(false);
+        //Make sure player has not died since coroutine started to prevent despawning blocks near the dead player
+        if (!playerDead){
+            transform.parent.gameObject.SetActive(false);
+        }
     }
 }

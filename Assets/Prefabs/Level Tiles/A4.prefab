@@ -18817,6 +18817,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Spike Shredder (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 6060029895478760710, guid: d60c761af1142374eaefb9081673bdf2, type: 3}
+      propertyPath: m_Offset.x
+      value: -0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d60c761af1142374eaefb9081673bdf2, type: 3}
 --- !u!4 &7023617864564104907 stripped

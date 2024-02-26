@@ -138,7 +138,6 @@ GameObject:
   m_Component:
   - component: {fileID: 766747858091963265}
   - component: {fileID: 766747858091963270}
-  - component: {fileID: 766747858091963271}
   - component: {fileID: 766747858091963268}
   m_Layer: 0
   m_Name: Spike
@@ -214,42 +213,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!60 &766747858091963271
-PolygonCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 766747858091963264}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: 0.4972766, y: -0.49546468}
-      - {x: 0.49556923, y: -0.29682794}
-      - {x: 0.25931743, y: -0.2970536}
-      - {x: 0.22931743, y: -0.04364059}
-      - {x: 0.054149628, y: 0.26304388}
-      - {x: -0.092279434, y: 0.37339374}
-      - {x: -0.06206131, y: 0.052761465}
-      - {x: -0.14832687, y: -0.15789366}
-      - {x: -0.28667927, y: -0.2743497}
-      - {x: -0.4793949, y: -0.2924148}
-      - {x: -0.48864955, y: -0.48638648}
 --- !u!95 &766747858091963268
 Animator:
   serializedVersion: 4
@@ -280,7 +243,6 @@ GameObject:
   m_Component:
   - component: {fileID: 766747858477228051}
   - component: {fileID: 766747858477228052}
-  - component: {fileID: 766747858477228053}
   - component: {fileID: 766747858477228054}
   m_Layer: 0
   m_Name: Spike
@@ -356,42 +318,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!60 &766747858477228053
-PolygonCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 766747858477228050}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: 0.4972766, y: -0.49546468}
-      - {x: 0.49556923, y: -0.29682794}
-      - {x: 0.25931743, y: -0.2970536}
-      - {x: 0.22931743, y: -0.04364059}
-      - {x: 0.054149628, y: 0.26304388}
-      - {x: -0.092279434, y: 0.37339374}
-      - {x: -0.06206131, y: 0.052761465}
-      - {x: -0.14832687, y: -0.15789366}
-      - {x: -0.28667927, y: -0.2743497}
-      - {x: -0.4793949, y: -0.2924148}
-      - {x: -0.48864955, y: -0.48638648}
 --- !u!95 &766747858477228054
 Animator:
   serializedVersion: 4
@@ -422,7 +348,6 @@ GameObject:
   m_Component:
   - component: {fileID: 766747858548640912}
   - component: {fileID: 766747858548640919}
-  - component: {fileID: 766747858548640918}
   - component: {fileID: 766747858548640917}
   m_Layer: 0
   m_Name: Spike
@@ -498,42 +423,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!60 &766747858548640918
-PolygonCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 766747858548640913}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: 0.4972766, y: -0.49546468}
-      - {x: 0.49556923, y: -0.29682794}
-      - {x: 0.25931743, y: -0.2970536}
-      - {x: 0.22931743, y: -0.04364059}
-      - {x: 0.054149628, y: 0.26304388}
-      - {x: -0.092279434, y: 0.37339374}
-      - {x: -0.06206131, y: 0.052761465}
-      - {x: -0.14832687, y: -0.15789366}
-      - {x: -0.28667927, y: -0.2743497}
-      - {x: -0.4793949, y: -0.2924148}
-      - {x: -0.48864955, y: -0.48638648}
 --- !u!95 &766747858548640917
 Animator:
   serializedVersion: 4
@@ -564,7 +453,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2372607334110260396}
   - component: {fileID: 2372607334110260395}
-  - component: {fileID: 2372607334110260394}
   - component: {fileID: 2372607334110260393}
   m_Layer: 0
   m_Name: Spike
@@ -640,42 +528,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!60 &2372607334110260394
-PolygonCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2372607334110260397}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: 0.4972766, y: -0.49546468}
-      - {x: 0.49556923, y: -0.29682794}
-      - {x: 0.25931743, y: -0.2970536}
-      - {x: 0.22931743, y: -0.04364059}
-      - {x: 0.054149628, y: 0.26304388}
-      - {x: -0.092279434, y: 0.37339374}
-      - {x: -0.06206131, y: 0.052761465}
-      - {x: -0.14832687, y: -0.15789366}
-      - {x: -0.28667927, y: -0.2743497}
-      - {x: -0.4793949, y: -0.2924148}
-      - {x: -0.48864955, y: -0.48638648}
 --- !u!95 &2372607334110260393
 Animator:
   serializedVersion: 4
@@ -705,9 +557,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2372607334574815046}
+  - component: {fileID: 6060029895478760710}
   m_Layer: 0
   m_Name: Spike Shredder
-  m_TagString: Untagged
+  m_TagString: Hurt
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -731,3 +584,29 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &6060029895478760710
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2372607334574815047}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.5, y: -0.12}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 3.4, y: 0.7}
+  m_EdgeRadius: 0

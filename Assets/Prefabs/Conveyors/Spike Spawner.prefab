@@ -45,4 +45,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SpikePrefab: {fileID: 6388809708650090230, guid: b291178aeb61a7443ba4fd42d6b27d4e, type: 3}
-  spawnRate: 3
+  spawnRate: 3.55
+  ExistingSpikes: []
