@@ -17,7 +17,6 @@ public class MovingSpikeHandler : MonoBehaviour
     {
         //Take any pre-placed spikes and add them to spike pool
         for (int i=0; i<ExistingSpikes.Length; i++){
-            Debug.Log("Spike " + i + " added");
             Spikes.Add(ExistingSpikes[i]);
         }
         
@@ -50,7 +49,6 @@ public class MovingSpikeHandler : MonoBehaviour
     private void CreateSpike(){
         GameObject NewSpike = GameObject.Instantiate(SpikePrefab, transform.position, Quaternion.identity);
         Spikes.Add(NewSpike);
-        Debug.Log("Added new spike");
     }
 
     //Prepare spike for use
