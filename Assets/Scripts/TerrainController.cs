@@ -39,20 +39,25 @@ public class TerrainController : MonoBehaviour
         usedChunks.Clear();
     }
 
+    //Called after Floating Origin update
+    public void AdjustLastGenX(){
+        if (currentDifficulty == 1){
+            lastGenX = MediumChunks[usedChunks[usedChunks.Count-1]].transform.Find("Connector").position.x;
+        } else {
+            lastGenX = HardChunks[usedChunks[usedChunks.Count-1]].transform.Find("Connector").position.x;
+        }
+    }
+
     void PickAndSpawnChunk(){
         int random = -1;    //Set to -1 to ensure random value gets properly set
         int counter = 0;
 
-        Debug.Log("Before Difficulty: " + currentDifficulty + ", difficultyCount: " + difficultyCount + "| Used Chunks: " + usedChunks.Count);
         if ((currentDifficulty == 0 && difficultyCount >= easyTotal) || 
-            (currentDifficulty == 1 && difficultyCount >= mediumTotal) ||
-            (currentDifficulty == 2 && difficultyCount >= hardTotal)){
+            (currentDifficulty == 1 && difficultyCount >= mediumTotal)){
             IncreaseDifficulty();
         } else {
             difficultyCount++;
         }
-
-        Debug.Log("After Difficulty: " + currentDifficulty + ", difficultyCount: " + difficultyCount + "| Used Chunks: " + usedChunks.Count);
 
         do {
             counter++;
@@ -85,6 +90,8 @@ public class TerrainController : MonoBehaviour
     }
 
     void InstantiateChunk(int value){
+        //Debug.Log("Difficulty: " + currentDifficulty + ", Spawning Chunk " + value + ", lastGenX: " + lastGenX);
+
         switch(currentDifficulty){
             case 0:
                 EasyChunks[value].transform.position = new Vector3(lastGenX, transform.position.y, 0.5f);

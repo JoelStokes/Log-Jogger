@@ -9,6 +9,7 @@ public class BGController : MonoBehaviour
     };
 
     public BGLayer bgLayer;
+    public float bgMoveX;
 
     private float bottomMult = .55f;
     private float cloudsMult = .65f;
@@ -19,36 +20,46 @@ public class BGController : MonoBehaviour
     private float startY;
     private float startX;
 
-    private GameObject CameraObj;
+    private float loopX = -15f;
+
+    private Transform cameraTransform;
+    private Vector3 lastCameraPosition;
 
     void Start()
     {
         startX = transform.position.x;
         startY = transform.position.y;
 
-        CameraObj = Camera.main.gameObject;
+        cameraTransform = Camera.main.transform;
+        lastCameraPosition = cameraTransform.position;
     }
 
-    void Update()
+    void LateUpdate()
     {
-        float scale;
+        Vector3 deltaMovement = cameraTransform.position - lastCameraPosition;
+
+        //Move element when offscreen farther into the level
+        if (transform.position.x - cameraTransform.position.x < loopX){
+            transform.position = new Vector3(cameraTransform.position.x + bgMoveX, transform.position.y, transform.position.z);
+            Debug.Log("Layer: " + GetLayerValue() + " just adjusted to " + transform.position.x);
+        }
+
+        transform.position += deltaMovement * GetLayerValue();
+        lastCameraPosition = cameraTransform.position;
+    }
+
+    private float GetLayerValue(){
         switch (bgLayer){
             case BGLayer.Bottom:
-                scale = bottomMult;
-                break;
+                return bottomMult;
             case BGLayer.Mountains:
-                scale = mountainsMult;
-                break;
+                return mountainsMult;
             case BGLayer.Clouds:
-                scale = cloudsMult;
-                break;
+                return cloudsMult;
             case BGLayer.FarClouds:
-                scale = farCloudsMult;
-                break;
+                return farCloudsMult;
             default:
-                scale = sky;
-                break;
+                return sky;
         }
-        transform.position = new Vector3((CameraObj.transform.position.x + startX) * scale, (CameraObj.transform.position.y + startY) * scale, transform.position.z);
     }
 }

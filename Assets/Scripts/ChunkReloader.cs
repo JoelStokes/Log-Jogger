@@ -8,9 +8,12 @@ public class ChunkReloader : MonoBehaviour
     public GameObject[] Worms;
     public GameObject[] Rocks;
     public GameObject[] Machines;
+    public CompositeCollider2D GridCollider;
 
     void OnEnable()
     {
+        GridCollider.GenerateGeometry();
+
         for (int i=0; i<Worms.Length; i++){
             Worms[i].SetActive(true);
         }

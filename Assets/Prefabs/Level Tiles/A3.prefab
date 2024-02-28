@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   delay: 5
+  terrainController: {fileID: 0}
 --- !u!61 &9067465255783071976
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -112,6 +113,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1485549000687160549}
+  - component: {fileID: 1971554306}
   m_Layer: 0
   m_Name: A3
   m_TagString: Untagged
@@ -139,6 +141,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1971554306
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1485549000687160550}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5daa466243c850e46ad934ec9b20640a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Worms: []
+  Rocks: []
+  Machines: []
+  GridCollider: {fileID: 1485549001496366860}
 --- !u!1 &1485549000961358695
 GameObject:
   m_ObjectHideFlags: 0
@@ -1193,15 +1211,12 @@ CompositeCollider2D:
       - {x: 79.5, y: -0.95618373}
       - {x: 79.5, y: -2.9561837}
       - {x: 77.5, y: -2.9561837}
-      - {x: 77.5, y: -1.9561936}
-      - {x: 72.49999, y: -1.9561936}
-      - {x: 72.499985, y: -1.9561876}
-      - {x: 72.499985, y: -2.9561877}
-      - {x: 72.49999, y: -2.9561937}
-      - {x: 73.499985, y: -2.9561937}
-      - {x: 73.499985, y: -3.9561877}
-      - {x: 73.49999, y: -3.9561937}
-      - {x: 75.5, y: -3.9561937}
+      - {x: 77.5, y: -1.9561837}
+      - {x: 72.5, y: -1.9561837}
+      - {x: 72.5, y: -2.9561837}
+      - {x: 73.5, y: -2.9561837}
+      - {x: 73.5, y: -3.9561837}
+      - {x: 75.5, y: -3.9561837}
       - {x: 75.5, y: -4.9561834}
       - {x: 77.5, y: -4.9561834}
       - {x: 77.5, y: -5.9561834}

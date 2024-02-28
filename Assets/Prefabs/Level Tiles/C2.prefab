@@ -4085,6 +4085,7 @@ MonoBehaviour:
   - {fileID: 6970781894597021914}
   - {fileID: 6970781895363320413}
   Machines: []
+  GridCollider: {fileID: 8458908546680580554}
 --- !u!1 &8458908548453845863
 GameObject:
   m_ObjectHideFlags: 0

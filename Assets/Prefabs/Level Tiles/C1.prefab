@@ -62,6 +62,7 @@ MonoBehaviour:
   Rocks: []
   Machines:
   - {fileID: 7267856681373838402}
+  GridCollider: {fileID: 42733222188995165}
 --- !u!1 &42733222188995155
 GameObject:
   m_ObjectHideFlags: 0
