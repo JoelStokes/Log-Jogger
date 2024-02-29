@@ -2273,7 +2273,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2557759733757362232}
   m_LocalRotation: {x: 0, y: 0, z: 0.38268343, w: 0.92387956}
-  m_LocalPosition: {x: 30.5, y: -0.5, z: 1.2644368}
+  m_LocalPosition: {x: 30.5, y: 0, z: 1.2644368}
   m_LocalScale: {x: 0.9, y: 1.25, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3885,7 +3885,7 @@ MonoBehaviour:
   - {fileID: 8611715193605590154}
   - {fileID: 169153057166986148}
   m_Bounds:
-    m_Center: {x: -0.007805109, y: -0.038574576, z: 0}
+    m_Center: {x: -0.007805109, y: -0.03857553, z: 0}
     m_Extent: {x: 0.4883752, y: 0.45857525, z: 0}
   m_UseBatching: 1
   m_AlwaysUpdate: 1
@@ -4862,7 +4862,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   delay: 5
-  terrainController: {fileID: 0}
 --- !u!1 &4003917755090928160
 GameObject:
   m_ObjectHideFlags: 0

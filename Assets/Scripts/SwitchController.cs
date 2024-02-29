@@ -14,7 +14,6 @@ public class SwitchController : MonoBehaviour
     }
 
     void OnDisable(){   //Reset to default position for later use
-        Debug.Log("Switch Disabled Called!");
         anim.SetBool("Pressed", false);
         pressed = false;
 

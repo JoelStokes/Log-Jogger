@@ -309,8 +309,8 @@ MonoBehaviour:
   - {fileID: 763926478008946219}
   - {fileID: 763926479651875820}
   m_Bounds:
-    m_Center: {x: -0.066180825, y: 0.12778872, z: 0}
-    m_Extent: {x: 0.33196002, y: 0.7321347, z: 0}
+    m_Center: {x: -0.06618065, y: 0.12778866, z: 0}
+    m_Extent: {x: 0.3319602, y: 0.73213464, z: 0}
   m_UseBatching: 1
   m_AlwaysUpdate: 1
   m_AutoRebind: 0
@@ -881,7 +881,7 @@ TrailRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 5
   m_Time: 0.3
   m_Parameters:
     serializedVersion: 3
@@ -1553,6 +1553,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   threshold: 500
+  terrainController: {fileID: 0}
 --- !u!114 &1859406260
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -40,8 +40,10 @@ public class BGController : MonoBehaviour
 
         //Move element when offscreen farther into the level
         if (transform.position.x - cameraTransform.position.x < loopX){
-            transform.position = new Vector3(cameraTransform.position.x + bgMoveX, transform.position.y, transform.position.z);
-            Debug.Log("Layer: " + GetLayerValue() + " just adjusted to " + transform.position.x);
+            //Make sure BG doesn't shift on Floating Origin reset
+            if (deltaMovement.x < 100 && deltaMovement.x > -100){
+                transform.position = new Vector3(cameraTransform.position.x + bgMoveX, transform.position.y, transform.position.z);
+            }
         }
 
         transform.position += deltaMovement * GetLayerValue();
