@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
 
     //Death Management
     public GameObject AngelPrefab;
+    public RespawnMenu respawnMenu;
     private bool dead = false;
     private float deathHeight = -25;
     private float deathTimer;
@@ -183,6 +184,9 @@ public class PlayerController : MonoBehaviour
             if (deathTimer >= deathLim){
                 Instantiate(AngelPrefab, transform.position, AngelPrefab.transform.rotation);
                 GetComponent<SpriteRenderer>().color = new Vector4(1,1,1,0);
+
+                respawnMenu.PlayerDied();
+
                 angelSpawned = true;
             }
         }
@@ -244,7 +248,7 @@ public class PlayerController : MonoBehaviour
         RaycastHit2D raycastHit = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, 0f, Vector2.down, groundedHeight, groundLayerMask);
 
         if (raycastHit.collider != null){
-            if (raycastHit.transform.tag == "Switch"){
+            if (raycastHit.transform.tag == "Switch" && rigi.velocity.y <= 0f){
                 raycastHit.transform.parent.gameObject.GetComponent<SwitchController>().Pressed();
             } else if (raycastHit.transform.tag == "One-Way"){
                 if (rigi.velocity.y >= 0.1f){
