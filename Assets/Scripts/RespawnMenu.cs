@@ -26,7 +26,6 @@ public class RespawnMenu : MonoBehaviour
         CreateTransition("Title");
     }
 
-    //Should scaling be applied to the transition based on camera sizing for consistency?
     private void CreateTransition (string scene){
         GameObject TransitionObj = Instantiate(transitionPrefab, new Vector3(transform.position.x + transitionX, transform.position.y, 0), Quaternion.identity);
         TransitionObj.GetComponent<Transition>().SetValues(scene, transform.position.x + transitionXEnd);        
