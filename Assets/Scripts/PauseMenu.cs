@@ -6,6 +6,8 @@ public class PauseMenu : MonoBehaviour
 {
     public GameObject pausedText;
     public SpriteRenderer coverSprite;
+    public PlayerController playerController;
+
     private bool paused = false;
     private float previousTimeScale;
 
@@ -17,10 +19,12 @@ public class PauseMenu : MonoBehaviour
             Time.timeScale = 0;
             pausedText.SetActive(true);
             coverSprite.color = new Vector4(0,0,0,.25f);
+            playerController.TogglePause(true);
         } else {
             pausedText.SetActive(false);
             coverSprite.color = new Vector4(0,0,0,0);
             Time.timeScale = previousTimeScale;
+            playerController.TogglePause(false);
         }
     }
 }

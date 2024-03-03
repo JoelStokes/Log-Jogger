@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -40,6 +41,7 @@ public class PlayerController : MonoBehaviour
     private Vector3 RightCheckBoxCollider;  //Prevent stutter when landing on ground from height by using slightly smaller box collider for wall check
     private bool onConveyor = false;
     private float conveyorSpeed = 0;
+    private bool paused = false;
 
     //Grounded Checks
     private bool isGrounded = false;
@@ -53,6 +55,7 @@ public class PlayerController : MonoBehaviour
     private int wormValue = 5;
     private int machineValue = 25;
     private float speedMult = .001f;
+    private string sceneName;
 
     //Destruction Effects
     public GameObject rockBurstPrefab;
@@ -100,6 +103,9 @@ public class PlayerController : MonoBehaviour
         RightCheckBoxCollider = new Vector3(boxCollider.bounds.size.x - boxColliderSubtract, 
             boxCollider.bounds.size.y - boxColliderSubtract, 
             boxCollider.bounds.size.z - boxColliderSubtract);
+
+        //Used to stop speed from increasing on tutorial level
+        sceneName = SceneManager.GetActiveScene().name;
     }
 
     void Update()
@@ -112,7 +118,9 @@ public class PlayerController : MonoBehaviour
                 UpdateScore(0);
 
                 scoreCounter = 0;
-                Time.timeScale = 1 + (speedMult * score);
+                if (sceneName != "Tutorial"){
+                    Time.timeScale = 1 + (speedMult * score);
+                }
             }
         }
 
@@ -300,7 +308,7 @@ public class PlayerController : MonoBehaviour
     }
 
     public void Touch(InputAction.CallbackContext context){
-        if (!dead && started){
+        if (!dead && started && !paused){
             if (context.ReadValue<UnityEngine.InputSystem.TouchPhase>() == UnityEngine.InputSystem.TouchPhase.Began){
                 if (touching == false){
                     TouchStart();
@@ -311,8 +319,13 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    //Called from Pause Menu, used to prevent extra player inputs while paused
+    public void TogglePause(bool value){
+        paused = value;
+    }
+
     public void TouchBackup(InputAction.CallbackContext context){   //Keyboard & Gamepad alternatives to Touchscreen
-        if (!dead && started){
+        if (!dead && started && !paused){
             if (context.phase == InputActionPhase.Started){
                 if (touching == false){
                     TouchStart();
