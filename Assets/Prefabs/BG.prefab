@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3169932}
   - component: {fileID: 3169933}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: LowHill1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   m_Component:
   - component: {fileID: 13711327}
   - component: {fileID: 13711328}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cloud1 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -178,7 +178,7 @@ GameObject:
   m_Component:
   - component: {fileID: 250221735}
   - component: {fileID: 250221736}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cloud1 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -262,7 +262,7 @@ GameObject:
   m_Component:
   - component: {fileID: 407299349}
   - component: {fileID: 407299350}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cloud1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -346,7 +346,7 @@ GameObject:
   m_Component:
   - component: {fileID: 554656540}
   - component: {fileID: 554656541}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cloud3 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -430,7 +430,7 @@ GameObject:
   m_Component:
   - component: {fileID: 629052847}
   - component: {fileID: 629052848}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Hill1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -514,7 +514,7 @@ GameObject:
   m_Component:
   - component: {fileID: 644542399}
   - component: {fileID: 644542400}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: LowHill1 (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -598,7 +598,7 @@ GameObject:
   m_Component:
   - component: {fileID: 683507394}
   - component: {fileID: 683507395}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Bottom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -682,7 +682,7 @@ GameObject:
   m_Component:
   - component: {fileID: 898315920}
   - component: {fileID: 898315921}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Hill1 (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -766,7 +766,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1010410016}
   - component: {fileID: 1010410017}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Hill1 (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -850,7 +850,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1041955497}
   - component: {fileID: 1041955498}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cloud3 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -934,7 +934,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1056095859}
   - component: {fileID: 1056095860}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cloud1 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1018,7 +1018,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1087466549}
   - component: {fileID: 1087466550}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: LowHill1 (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1102,7 +1102,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1127775068}
   - component: {fileID: 1127775069}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: LowHill1 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1186,7 +1186,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1155716775}
   - component: {fileID: 1155716776}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cloud1 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1270,7 +1270,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1209414225}
   - component: {fileID: 1209414226}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cloud2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1354,7 +1354,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1236139355}
   - component: {fileID: 1236139356}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Hill1 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1438,7 +1438,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1254315869}
   - component: {fileID: 1254315870}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Close Clouds 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1453,7 +1453,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1254315868}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 44, y: 0, z: 0}
+  m_LocalPosition: {x: 44, y: 0, z: 12}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1490,7 +1490,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1263219318}
   - component: {fileID: 1263219319}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Bottom 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1505,7 +1505,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1263219317}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 72, y: 0, z: 0}
+  m_LocalPosition: {x: 72, y: 0, z: 10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1541,7 +1541,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1328578083}
   - component: {fileID: 1328578084}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cloud1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1625,7 +1625,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1336627874}
   - component: {fileID: 1336627875}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cloud3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1709,7 +1709,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1474417249}
   - component: {fileID: 1474417250}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cloud2 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1793,7 +1793,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1499488204}
   - component: {fileID: 1499488205}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Hill1 (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1877,7 +1877,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1687836825}
   - component: {fileID: 1687836826}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Far Clouds 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1892,7 +1892,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1687836824}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 54, y: 0.5, z: 0}
+  m_LocalPosition: {x: 54, y: 0.5, z: 20}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1927,7 +1927,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1881121410}
   - component: {fileID: 1881121411}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cloud2 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2011,7 +2011,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1902153259}
   - component: {fileID: 1902153260}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cloud2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2095,7 +2095,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2087071886}
   - component: {fileID: 2087071887}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cloud3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2179,7 +2179,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2117798094}
   - component: {fileID: 2117798095}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Mountains 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2194,7 +2194,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2117798093}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 77, y: 0, z: 0}
+  m_LocalPosition: {x: 77, y: 0, z: 15}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2230,7 +2230,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8165936621096730554}
   - component: {fileID: 8165936621096730553}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Hill1 (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2314,7 +2314,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8165936621288449386}
   - component: {fileID: 8165936621288449385}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Hill1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2398,7 +2398,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8165936621313728235}
   - component: {fileID: 8165936621313728234}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: LowHill1 (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2482,7 +2482,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8165936621337407219}
   - component: {fileID: 8165936621337407218}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cloud1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2566,7 +2566,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8165936621423783720}
   - component: {fileID: 8165936621423783727}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Far Clouds
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2581,7 +2581,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8165936621423783721}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.6666698, y: 0.5, z: 0}
+  m_LocalPosition: {x: 18, y: 0.5, z: 20}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2616,7 +2616,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8165936621500142318}
   - component: {fileID: 8165936621500142317}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: LowHill1 (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2700,7 +2700,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8165936621602554090}
   - component: {fileID: 8165936621602554089}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Bottom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2784,7 +2784,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8165936621728370924}
   - component: {fileID: 8165936621728370915}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cloud2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2868,7 +2868,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8165936621760924727}
   - component: {fileID: 8165936621760924726}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Bottom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2883,7 +2883,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8165936621760924720}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 16.111115, y: 0, z: 0}
+  m_LocalPosition: {x: 18, y: 0, z: 10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2919,7 +2919,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8165936621887406878}
   - component: {fileID: 8165936621887406877}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: LowHill1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3003,7 +3003,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8165936621891949216}
   - component: {fileID: 8165936621891949223}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Hill1 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3087,7 +3087,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8165936621964830744}
   - component: {fileID: 8165936621964830751}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Hill1 (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3171,7 +3171,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8165936622096328806}
   - component: {fileID: 8165936622096328805}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: LowHill1 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3255,7 +3255,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8165936622170002426}
   - component: {fileID: 8165936622170002425}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cloud1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3339,7 +3339,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8165936622266896912}
   - component: {fileID: 8165936622266896919}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cloud3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3422,7 +3422,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8165936622381399308}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: BG
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3463,7 +3463,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8165936622467008660}
   - component: {fileID: 8165936622467008747}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cloud2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3548,13 +3548,13 @@ GameObject:
   - component: {fileID: 8165936622542004289}
   - component: {fileID: 8165936622542004290}
   - component: {fileID: 2018603539}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Sky
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8165936622542004289
 Transform:
   m_ObjectHideFlags: 0
@@ -3563,7 +3563,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8165936622542004291}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -43.5, y: 2, z: -2.3737864}
+  m_LocalPosition: {x: -43.5, y: 2, z: 20}
   m_LocalScale: {x: 100, y: 100, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3646,7 +3646,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8165936622584727098}
   - component: {fileID: 8165936622584727097}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Close Clouds
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3661,7 +3661,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8165936622584727099}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.4444427, y: 0, z: 0}
+  m_LocalPosition: {x: -2.7777777, y: 0, z: 12}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3698,7 +3698,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8165936622686138015}
   - component: {fileID: 8165936622686138014}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cloud3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3782,7 +3782,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8165936622944672916}
   - component: {fileID: 8165936622944673003}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Mountains
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3797,7 +3797,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8165936622944672917}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 17, y: 0, z: 0}
+  m_LocalPosition: {x: 17, y: 0, z: 15}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3833,7 +3833,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8165936622978156180}
   - component: {fileID: 8165936622978156267}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Hill1 (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
