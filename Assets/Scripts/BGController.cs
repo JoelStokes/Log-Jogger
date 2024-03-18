@@ -17,8 +17,8 @@ public class BGController : MonoBehaviour
     private float farCloudsMult = .85f;
     private float sky = 1;
 
-    private float cloudSpeed = -.007f;
-    private float farCloudSpeed = -.003f;
+    private float cloudSpeed = -.3f;
+    private float farCloudSpeed = -.08f;
 
     private float startY;
     private float startX;
@@ -53,9 +53,9 @@ public class BGController : MonoBehaviour
         lastCameraPosition = cameraTransform.position;
 
         if (bgLayer == BGLayer.Clouds){
-            transform.position = new Vector3(transform.position.x + cloudSpeed, transform.position.y, transform.position.z);
+            transform.position = new Vector3(transform.position.x + (cloudSpeed * Time.deltaTime), transform.position.y, transform.position.z);
         } else if (bgLayer == BGLayer.FarClouds){
-            transform.position = new Vector3(transform.position.x + farCloudSpeed, transform.position.y, transform.position.z);
+            transform.position = new Vector3(transform.position.x + (farCloudSpeed * Time.deltaTime), transform.position.y, transform.position.z);
         }
     }
 
