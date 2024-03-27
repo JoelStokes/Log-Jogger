@@ -4884,9 +4884,29 @@ PrefabInstance:
       propertyPath: respawnMenu
       value: 
       objectReference: {fileID: 850303837}
+    - target: {fileID: 763926477786990768, guid: 11ec8cf8240efd147a7cc16ed2e50b55, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 90cb2ecf88b05b8498ba45fb94b89962, type: 3}
     - target: {fileID: 763926477786990770, guid: 11ec8cf8240efd147a7cc16ed2e50b55, type: 3}
       propertyPath: m_Name
       value: Mole
+      objectReference: {fileID: 0}
+    - target: {fileID: 763926477786990774, guid: 11ec8cf8240efd147a7cc16ed2e50b55, type: 3}
+      propertyPath: m_AutoRebind
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 763926477786990774, guid: 11ec8cf8240efd147a7cc16ed2e50b55, type: 3}
+      propertyPath: m_AlwaysUpdate
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 763926477786990774, guid: 11ec8cf8240efd147a7cc16ed2e50b55, type: 3}
+      propertyPath: m_Bounds.m_Center.x
+      value: -0.066180825
+      objectReference: {fileID: 0}
+    - target: {fileID: 763926477786990774, guid: 11ec8cf8240efd147a7cc16ed2e50b55, type: 3}
+      propertyPath: m_Bounds.m_Extent.x
+      value: 0.33196002
       objectReference: {fileID: 0}
     - target: {fileID: 763926477786990775, guid: 11ec8cf8240efd147a7cc16ed2e50b55, type: 3}
       propertyPath: m_RootOrder
@@ -4931,6 +4951,14 @@ PrefabInstance:
     - target: {fileID: 763926477786990775, guid: 11ec8cf8240efd147a7cc16ed2e50b55, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 763926478174550895, guid: 11ec8cf8240efd147a7cc16ed2e50b55, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 763926478690702292, guid: 11ec8cf8240efd147a7cc16ed2e50b55, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 763926479782873965, guid: 11ec8cf8240efd147a7cc16ed2e50b55, type: 3}
       propertyPath: terrainController
