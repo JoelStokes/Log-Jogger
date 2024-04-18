@@ -10,6 +10,7 @@ public class SplashscreenController : MonoBehaviour
 
     void Start()
     {
+        Application.targetFrameRate = 60;   //Override Unity settings to allow 60fps on Android
         textAnim = GetComponent<Animator>();
     }
 

@@ -13420,6 +13420,7 @@ GameObject:
   - component: {fileID: 1414343859}
   - component: {fileID: 1414343858}
   - component: {fileID: 1414343857}
+  - component: {fileID: 1414343864}
   m_Layer: 3
   m_Name: Shop Mole
   m_TagString: Player
@@ -13622,6 +13623,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1414343864
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1414343856}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc8cc51c2ad3b9d4b8263ca369f20a08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1417828468
 GameObject:
   m_ObjectHideFlags: 0
@@ -15736,6 +15749,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   transitionPrefab: {fileID: 4637075002079152295, guid: 9b53b0d497d2aa547884f59754f01aef, type: 3}
+  anim: {fileID: 0}
+  moleSprite: {fileID: 0}
 --- !u!81 &1975744067
 AudioListener:
   m_ObjectHideFlags: 0

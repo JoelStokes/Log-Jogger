@@ -1398,6 +1398,7 @@ GameObject:
   - component: {fileID: 763926478753122223}
   - component: {fileID: 763926478753122224}
   - component: {fileID: 763926478753122225}
+  - component: {fileID: 763926478753122226}
   m_Layer: 3
   m_Name: Mole
   m_TagString: Player
@@ -1599,7 +1600,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca69b44b6d5c08a49aa721209b32d6c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shop: 0
   splashscreenController: {fileID: 1507741854}
+--- !u!114 &763926478753122226
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 763926478753122217}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc8cc51c2ad3b9d4b8263ca369f20a08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &763926479072854319
 GameObject:
   m_ObjectHideFlags: 0
