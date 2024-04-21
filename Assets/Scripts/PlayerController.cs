@@ -215,12 +215,26 @@ public class PlayerController : MonoBehaviour
             if (lastChunk){
                 lastChunk.SetPlayerDead();
             }
+
+            //Check if new high score, if so, save
+            SaveManager saveManager = GameObject.Find("SaveManager").GetComponent<SaveManager>();
+            if (saveManager.state.highScore < score){
+                saveManager.state.highScore = score;
+            }
+
+            //Add last score to previous 10 list & delete last entry if over 10
+            saveManager.state.lastScores.Insert(0, score);
+            if (saveManager.state.lastscores.Count > 10){
+                saveManager.state.lastscores.RemoveAt(rows.Count - 1);
+            }
+
+            saveManager.Save();
         }
     }
 
     private void UpdateScore(int valuePopup){
         if (valuePopup > 0){
-            //Have popup showing new value added for visual flair & clarity
+            //Have popup showing new value added for visual flair & clarity?
         }
 
         ScoreText.text = "Score: " + score.ToString("D4");
