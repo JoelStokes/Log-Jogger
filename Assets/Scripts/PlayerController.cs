@@ -224,8 +224,8 @@ public class PlayerController : MonoBehaviour
 
             //Add last score to previous 10 list & delete last entry if over 10
             saveManager.state.lastScores.Insert(0, score);
-            if (saveManager.state.lastscores.Count > 10){
-                saveManager.state.lastscores.RemoveAt(rows.Count - 1);
+            if (saveManager.state.lastScores.Count > 10){
+                saveManager.state.lastScores.RemoveAt(saveManager.state.lastScores.Count - 1);
             }
 
             saveManager.Save();
