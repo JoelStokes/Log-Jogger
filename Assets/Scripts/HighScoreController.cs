@@ -1,13 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class HighScoreController : MonoBehaviour
 {
     public GameObject transitionPrefab;
 
+    public TextMeshProUGUI highScoreUI;
+
     private float transitionX = 12;
     private float transitionXEnd = -9;
+
+    void Start(){
+        SaveManager saveManager = GameObject.Find("SaveManager").GetComponent<SaveManager>();
+
+        highScoreUI.text = saveManager.state.highScore.ToString("0000");
+    }
 
     public void MainMenu(){
         CreateTransition("Title");
