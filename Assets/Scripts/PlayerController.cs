@@ -72,6 +72,7 @@ public class PlayerController : MonoBehaviour
     private Animator anim;
     private CameraController cameraController;
     private ChunkExit lastChunk;
+    private SaveManager saveManager;
 
     //SFX
     private float volume;
@@ -93,6 +94,7 @@ public class PlayerController : MonoBehaviour
         volume = .5f;
         audioSource = GetComponent<AudioSource>();
         cameraController = Camera.main.gameObject.GetComponent<CameraController>();
+        saveManager = GameObject.Find("SaveManager").GetComponent<SaveManager>();
 
         rigi = GetComponent<Rigidbody2D>();
         boxCollider = GetComponent<BoxCollider2D>();
@@ -217,7 +219,6 @@ public class PlayerController : MonoBehaviour
             }
 
             //Check if new high score, if so, save
-            SaveManager saveManager = GameObject.Find("SaveManager").GetComponent<SaveManager>();
             if (saveManager.state.highScore < score){
                 saveManager.state.highScore = score;
             }
@@ -389,6 +390,7 @@ public class PlayerController : MonoBehaviour
                 UpdateScore(wormValue);
                 Instantiate(wormBurstPrefab, other.transform.position, wormBurstPrefab.transform.rotation);
                 other.gameObject.SetActive(false);
+                saveManager.state.wormCount += 1;
             } else if (other.tag == "Hurt"){
                 Die();
             } else if (other.tag == "Spring"){
@@ -406,6 +408,7 @@ public class PlayerController : MonoBehaviour
 
                 //Should add Anti-Slam prevention after very start of spring launch? Small counter to prevent launch momemtum accidently being stopped?
             } else if (other.tag == "End"){
+                saveManager.Save(); //Ensures tutorial worms saved
                 GameObject TransitionObj = Instantiate(transitionPrefab, new Vector3(transform.position.x + 10, transform.position.y, transform.position.z), Quaternion.identity);
                 TransitionObj.GetComponent<Transition>().SetValues("Title", transform.position.x - 3f);
             } else if (other.tag == "Conveyor"){

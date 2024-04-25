@@ -72,6 +72,11 @@ public class TitleController : MonoBehaviour
         }
     }
 
+    public void Home(){
+        //Used in Shop menu to return back to Title
+        CreateTransition("Title");
+    }
+
     private void CreateTransition (string scene){
         GameObject TransitionObj = Instantiate(transitionPrefab, new Vector3(transitionX, 0, 0), Quaternion.identity);
         TransitionObj.GetComponent<Transition>().SetValues(scene, transitionXEnd);        
