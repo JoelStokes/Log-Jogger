@@ -9,11 +9,13 @@ public class SettingsUpdate : MonoBehaviour
 
     private SaveManager saveManager;
     private Slider slider;
+    private VolumeController volumeController;
 
     void Start()
     {
         saveManager = GameObject.Find("SaveManager").GetComponent<SaveManager>();
         slider = GetComponent<Slider>();
+        volumeController = GameObject.Find("MusicManager").GetComponent<VolumeController>();
 
         if (isMusic){
             slider.value = saveManager.state.musicVolume;
@@ -30,5 +32,6 @@ public class SettingsUpdate : MonoBehaviour
         }
 
         saveManager.Save();
+        volumeController.ManualChange();
     }
 }
