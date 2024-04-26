@@ -5073,7 +5073,7 @@ PrefabInstance:
     - target: {fileID: 763926477786990768, guid: 11ec8cf8240efd147a7cc16ed2e50b55, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 90cb2ecf88b05b8498ba45fb94b89962, type: 3}
+      objectReference: {fileID: 21300000, guid: 0ee9354169a7ca04cb4ecba823ececd2, type: 3}
     - target: {fileID: 763926477786990770, guid: 11ec8cf8240efd147a7cc16ed2e50b55, type: 3}
       propertyPath: m_Name
       value: Mole
