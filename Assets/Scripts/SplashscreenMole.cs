@@ -8,7 +8,8 @@ public class SplashscreenMole : MonoBehaviour
     public SplashscreenController splashscreenController;
     private Rigidbody2D rigi;
     private Animator anim;
-    private float moveSpeed = 5.5f;
+    
+    public float moveSpeed = 5.5f;
 
 
     void Start()

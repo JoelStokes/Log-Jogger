@@ -33,4 +33,14 @@ public class SaveManager : MonoBehaviour
             Debug.Log("No save file found, creating a new one!");
         }
     }
+
+    //Check if the bit is set, if so skin is owned
+    public bool IsSkinOwned(int index){
+        return (state.skinOwned & (1 << index)) != 0;
+    }
+
+    //Unlock a skin in the "skinOwned" int
+    public void UnlockSkin(int index){
+        state.skinOwned |= 1 << index;
+    }
 }

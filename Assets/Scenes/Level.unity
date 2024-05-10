@@ -842,7 +842,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 763926477786990761, guid: 11ec8cf8240efd147a7cc16ed2e50b55, type: 3}
   m_PrefabInstance: {fileID: 1859406255}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1859406257}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2abdd3c9781d1824bad734cf72e14ec4, type: 3}
@@ -5070,29 +5070,9 @@ PrefabInstance:
       propertyPath: respawnMenu
       value: 
       objectReference: {fileID: 850303837}
-    - target: {fileID: 763926477786990768, guid: 11ec8cf8240efd147a7cc16ed2e50b55, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 0ee9354169a7ca04cb4ecba823ececd2, type: 3}
     - target: {fileID: 763926477786990770, guid: 11ec8cf8240efd147a7cc16ed2e50b55, type: 3}
       propertyPath: m_Name
       value: Mole
-      objectReference: {fileID: 0}
-    - target: {fileID: 763926477786990774, guid: 11ec8cf8240efd147a7cc16ed2e50b55, type: 3}
-      propertyPath: m_AutoRebind
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 763926477786990774, guid: 11ec8cf8240efd147a7cc16ed2e50b55, type: 3}
-      propertyPath: m_AlwaysUpdate
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 763926477786990774, guid: 11ec8cf8240efd147a7cc16ed2e50b55, type: 3}
-      propertyPath: m_Bounds.m_Center.x
-      value: -0.066180825
-      objectReference: {fileID: 0}
-    - target: {fileID: 763926477786990774, guid: 11ec8cf8240efd147a7cc16ed2e50b55, type: 3}
-      propertyPath: m_Bounds.m_Extent.x
-      value: 0.33196002
       objectReference: {fileID: 0}
     - target: {fileID: 763926477786990775, guid: 11ec8cf8240efd147a7cc16ed2e50b55, type: 3}
       propertyPath: m_RootOrder
@@ -5138,14 +5118,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 763926478174550895, guid: 11ec8cf8240efd147a7cc16ed2e50b55, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 763926478690702292, guid: 11ec8cf8240efd147a7cc16ed2e50b55, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 763926479782873965, guid: 11ec8cf8240efd147a7cc16ed2e50b55, type: 3}
       propertyPath: terrainController
       value: 
@@ -5157,23 +5129,6 @@ Camera:
   m_CorrespondingSourceObject: {fileID: 763926479782873955, guid: 11ec8cf8240efd147a7cc16ed2e50b55, type: 3}
   m_PrefabInstance: {fileID: 1859406255}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1859406257 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 763926477786990770, guid: 11ec8cf8240efd147a7cc16ed2e50b55, type: 3}
-  m_PrefabInstance: {fileID: 1859406255}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1859406258
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1859406257}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cc8cc51c2ad3b9d4b8263ca369f20a08, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1909279168 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4574189890153088380, guid: 958f440868dbe3548bae8f181555a09b, type: 3}

@@ -5,13 +5,33 @@ using UnityEngine;
 //When scene is starting, call PlayerPrefs to see which skin to apply
 public class SkinLoader : MonoBehaviour
 {
-    private SpriteRenderer spriteRenderer;
+    public Sprite[] Skins;
+    public SpriteRenderer spriteRenderer;
+
+    private SaveManager saveManager;
+
+    /*
+    0 Default
+    1 Blue
+    2 Green
+    3 Pink
+    4 Purple
+    5 Orange
+    6 Flannel
+    7 Robot / Suit
+    8 Space
+    9 Naked
+    10 Silver
+    11 Gold
+    */
 
     void Start()
     {
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        saveManager = GameObject.Find("SaveManager").GetComponent<SaveManager>();
+        UpdateSkin();
+    }
 
-        //Load PlayerPref
-        //Apply proper skin
+    public void UpdateSkin(){
+        spriteRenderer.sprite = Skins[saveManager.state.currentSkin];
     }
 }
