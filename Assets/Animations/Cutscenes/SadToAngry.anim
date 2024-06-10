@@ -137,7 +137,16 @@ AnimationClip:
     path: Close-Up/Black Bar Bottom
   m_ScaleCurves: []
   m_FloatCurves: []
-  m_PPtrCurves: []
+  m_PPtrCurves:
+  - curve:
+    - time: 0
+      value: {fileID: 21300000, guid: 4bd0fb31e535212418c461de5684d21b, type: 3}
+    - time: 0.41666666
+      value: {fileID: 21300000, guid: 7184c6709a6dc5047b9bdb29cadddeb9, type: 3}
+    attribute: m_Sprite
+    path: Close-Up/Angry Mole
+    classID: 212
+    script: {fileID: 0}
   m_SampleRate: 60
   m_WrapMode: 0
   m_Bounds:
@@ -160,13 +169,22 @@ AnimationClip:
       customType: 0
       isPPtrCurve: 0
     - serializedVersion: 2
+      path: 3582487660
+      attribute: 0
+      script: {fileID: 0}
+      typeID: 212
+      customType: 23
+      isPPtrCurve: 1
+    - serializedVersion: 2
       path: 1058044976
       attribute: 1
       script: {fileID: 0}
       typeID: 4
       customType: 0
       isPPtrCurve: 0
-    pptrCurveMapping: []
+    pptrCurveMapping:
+    - {fileID: 21300000, guid: 4bd0fb31e535212418c461de5684d21b, type: 3}
+    - {fileID: 21300000, guid: 7184c6709a6dc5047b9bdb29cadddeb9, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
