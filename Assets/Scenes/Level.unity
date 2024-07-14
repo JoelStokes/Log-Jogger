@@ -2889,6 +2889,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isMusic: 1
+  loopTime: 1.15
 --- !u!82 &492770057
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2899,11 +2900,11 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 3074126520d704945bfc0e50dc8bc8c6, type: 3}
+  m_audioClip: {fileID: 8300000, guid: a5c4dd784381fc0458b6261edadbf25a, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 1
+  Loop: 0
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
