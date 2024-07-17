@@ -73,6 +73,7 @@ public class PlayerController : MonoBehaviour
     private CameraController cameraController;
     private ChunkExit lastChunk;
     private SaveManager saveManager;
+    private VolumeController volumeController;
 
     //SFX
     private float volume;
@@ -108,6 +109,9 @@ public class PlayerController : MonoBehaviour
 
         //Used to stop speed from increasing on tutorial level
         sceneName = SceneManager.GetActiveScene().name;
+
+        //Used for music slowdown & stop on death
+        volumeController = GameObject.Find("MusicManager").GetComponent<VolumeController>();
     }
 
     void Update()
@@ -213,6 +217,7 @@ public class PlayerController : MonoBehaviour
             rigi.velocity = Vector2.zero;
             GetComponent<BoxCollider2D>().isTrigger = true;
             cameraController.PlayerDied();
+            volumeController.PlayerDied();
 
             if (lastChunk){
                 lastChunk.SetPlayerDead();

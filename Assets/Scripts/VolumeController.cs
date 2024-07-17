@@ -6,6 +6,15 @@ public class VolumeController : MonoBehaviour
 {
     public bool isMusic = false;
     public float loopTime = 0;
+    public float soundModifier = 1;
+
+    private float pausePitch = .85f;
+    private bool isDead = false;
+    private float deathLim = .75f;
+    private float deathTimer = 0;
+    private float volumeDecrease = .3f;
+    private float pitchDecrease = .3f;
+
     private AudioSource audioSource;
     private SaveManager saveManager;
 
@@ -23,6 +32,15 @@ public class VolumeController : MonoBehaviour
                 audioSource.Play();
             }
         }
+
+        if (isDead){
+            if (audioSource.volume > 0 && audioSource.pitch > 0){
+                audioSource.volume -= (volumeDecrease * Time.deltaTime);
+                audioSource.pitch -= (pitchDecrease * Time.deltaTime);
+            } else {
+                audioSource.volume = 0;
+            }
+        }
     }
 
     public void ManualChange(){ //Called from Title Screen where changes can happen mid-scene
@@ -31,9 +49,21 @@ public class VolumeController : MonoBehaviour
 
     private void SetVolume(){
         if (isMusic){
-            audioSource.volume = saveManager.state.musicVolume;
+            audioSource.volume = saveManager.state.musicVolume * soundModifier;
         } else {
-            audioSource.volume = saveManager.state.sfxVolume;
+            audioSource.volume = saveManager.state.sfxVolume * soundModifier;
         }
+    }
+
+    public void Pause(){
+        audioSource.pitch = pausePitch;
+    }
+
+    public void Resume(){
+        audioSource.pitch = 1;
+    }
+
+    public void PlayerDied(){
+        isDead = true;
     }
 }
