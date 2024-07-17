@@ -226,6 +226,7 @@ public class PlayerController : MonoBehaviour
             //Check if new high score, if so, save
             if (saveManager.state.highScore < score){
                 saveManager.state.highScore = score;
+                respawnMenu.NewHighScore(transform.position);
             }
 
             //Add last score to previous 10 list & delete last entry if over 10

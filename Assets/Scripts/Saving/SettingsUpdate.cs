@@ -27,6 +27,9 @@ public class SettingsUpdate : MonoBehaviour
     public void VolumeChanged(){
         if (isMusic){
             saveManager.state.musicVolume = slider.value;
+
+            //IN FOR TESTING! MUST BE REMOVED BEFORE RELEASE!
+            saveManager.state.highScore = 0;
         } else {
             saveManager.state.sfxVolume = slider.value;
         }
