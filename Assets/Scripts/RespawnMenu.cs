@@ -8,6 +8,7 @@ public class RespawnMenu : MonoBehaviour
     public Animator deathAnimator;
     public GameObject burstPrefab;
     public Animator flagAnimator;
+    public AudioClip highScoreMusic;
 
     private float burstCounter = 0;
     private float burstLim = 1.75f;
@@ -17,14 +18,19 @@ public class RespawnMenu : MonoBehaviour
     private float transitionXEnd = -9;
     private bool isHighScore = false;
     private Vector3 angelPos;
+    private VolumeController volumeController;
+
+    void Start(){
+        volumeController = GameObject.Find("MusicManager").GetComponent<VolumeController>();
+    }
 
     void Update(){
         if (isHighScore && !burstFinished){
-            Debug.Log(burstCounter);
             if (burstCounter >= burstLim){
                 GameObject Burst = GameObject.Instantiate(burstPrefab, new Vector3(angelPos.x, angelPos.y, angelPos.z), Quaternion.identity);
                 Burst.transform.localScale = new Vector3(1.5f,1.5f,1.5f);
                 burstFinished = true;
+                volumeController.ChangeMusic(highScoreMusic);
             } else {
                 burstCounter += Time.deltaTime;
             }

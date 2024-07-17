@@ -26,11 +26,9 @@ public class VolumeController : MonoBehaviour
     }
 
     void Update(){
-        if (!audioSource.isPlaying){
-            if (isMusic && loopTime != 0){
-                audioSource.time = loopTime;
-                audioSource.Play();
-            }
+        if (!audioSource.isPlaying && isMusic && loopTime != 0){
+            audioSource.time = loopTime;
+            audioSource.Play();
         }
 
         if (isDead){
@@ -65,5 +63,18 @@ public class VolumeController : MonoBehaviour
 
     public void PlayerDied(){
         isDead = true;
+    }
+
+    //Used to play High Score jingle after run ends
+    public void ChangeMusic(AudioClip newAudio){
+        audioSource.clip = newAudio;
+        audioSource.volume = saveManager.state.musicVolume * soundModifier;
+        audioSource.pitch = 1;
+        audioSource.time = 0;
+        audioSource.Play();
+
+        //Prevent looping & pitch changes
+        isMusic = false;
+        isDead = false;
     }
 }

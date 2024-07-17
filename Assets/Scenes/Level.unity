@@ -9242,6 +9242,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1957356827}
     - target: {fileID: 5803119683608937639, guid: eca9352a77cec5943a5357cd26fab483, type: 3}
+      propertyPath: highScoreMusic
+      value: 
+      objectReference: {fileID: 8300000, guid: 597c43d6786074946ba810accfd5a427, type: 3}
+    - target: {fileID: 5803119683608937639, guid: eca9352a77cec5943a5357cd26fab483, type: 3}
       propertyPath: wormBurstPrefab
       value: 
       objectReference: {fileID: 5214471637313954120, guid: 7fb345ef80b9d8a45a26e1a19913036e, type: 3}
