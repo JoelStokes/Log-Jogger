@@ -5236,6 +5236,10 @@ PrefabInstance:
       propertyPath: m_SortingOrder
       value: -3
       objectReference: {fileID: 0}
+    - target: {fileID: 1859406260, guid: 11ec8cf8240efd147a7cc16ed2e50b55, type: 3}
+      propertyPath: startSize
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 763926477786990761, guid: 11ec8cf8240efd147a7cc16ed2e50b55, type: 3}
       propertyPath: ScoreText
       value: 
