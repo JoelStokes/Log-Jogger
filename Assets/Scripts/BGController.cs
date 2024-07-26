@@ -27,6 +27,7 @@ public class BGController : MonoBehaviour
 
     private Transform cameraTransform;
     private Vector3 lastCameraPosition;
+    private bool stopScroll = false;
 
     void Start()
     {
@@ -42,11 +43,8 @@ public class BGController : MonoBehaviour
         Vector3 deltaMovement = cameraTransform.position - lastCameraPosition;
 
         //Move element when offscreen farther into the level
-        if (transform.position.x - cameraTransform.position.x < loopX){
-            //Make sure BG doesn't shift on Floating Origin reset
-            if (deltaMovement.x < 100 && deltaMovement.x > -100){
-                transform.position = new Vector3(cameraTransform.position.x + bgMoveX, transform.position.y, transform.position.z);
-            }
+        if (transform.position.x - cameraTransform.position.x < loopX && !stopScroll){
+            transform.position = new Vector3(cameraTransform.position.x + bgMoveX, transform.position.y, transform.position.z);
         }
 
         transform.position += deltaMovement * GetLayerValue();
@@ -72,5 +70,13 @@ public class BGController : MonoBehaviour
             default:
                 return sky;
         }
+    }
+
+    //Stop BG camera scroll, used during Floating Origin recentering
+    public void ToggleScroll(){
+        stopScroll = !stopScroll;
+
+        //Camera value will dramatically change during floating origin recenter, must be reset on toggle
+        lastCameraPosition = cameraTransform.position;
     }
 }
