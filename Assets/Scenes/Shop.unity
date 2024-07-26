@@ -1020,6 +1020,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   threshold: 500
   terrainController: {fileID: 0}
+  bgControllers: []
 --- !u!81 &374101901
 AudioListener:
   m_ObjectHideFlags: 0
@@ -9207,16 +9208,20 @@ PrefabInstance:
     m_TransformParent: {fileID: 1732389959}
     m_Modifications:
     - target: {fileID: 6353821578740201227, guid: 62264ef400c5edb469c368f345379d0b, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: cbd4da3516e00af4496327204e37dd25, type: 3}
+    - target: {fileID: 6353821578740201227, guid: 62264ef400c5edb469c368f345379d0b, type: 3}
       propertyPath: m_Color.b
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6353821578740201227, guid: 62264ef400c5edb469c368f345379d0b, type: 3}
       propertyPath: m_Color.g
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6353821578740201227, guid: 62264ef400c5edb469c368f345379d0b, type: 3}
       propertyPath: m_Color.r
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6631349998875563293, guid: 62264ef400c5edb469c368f345379d0b, type: 3}
       propertyPath: m_Layer
@@ -9447,6 +9452,14 @@ PrefabInstance:
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 6631350000451305626, guid: 62264ef400c5edb469c368f345379d0b, type: 3}
+      propertyPath: m_Type
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6631350000451305626, guid: 62264ef400c5edb469c368f345379d0b, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+    - target: {fileID: 6631350000451305626, guid: 62264ef400c5edb469c368f345379d0b, type: 3}
       propertyPath: m_Color.b
       value: 0.75882363
       objectReference: {fileID: 0}
@@ -9485,6 +9498,10 @@ PrefabInstance:
     - target: {fileID: 6631350000847650446, guid: 62264ef400c5edb469c368f345379d0b, type: 3}
       propertyPath: m_Layer
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8935947784025484293, guid: 62264ef400c5edb469c368f345379d0b, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 120
       objectReference: {fileID: 0}
     - target: {fileID: 8935947784025484293, guid: 62264ef400c5edb469c368f345379d0b, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -17502,6 +17519,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isMusic: 1
+  loopTime: 0
+  soundModifier: 1
 --- !u!82 &1981910492
 AudioSource:
   m_ObjectHideFlags: 0
