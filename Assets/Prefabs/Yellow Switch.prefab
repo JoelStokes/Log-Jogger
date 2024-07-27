@@ -112,7 +112,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 0.25}
+  m_Size: {x: 0.79935455, y: 0.25}
   m_EdgeRadius: 0
 --- !u!95 &4117262199983913066
 Animator:
@@ -146,7 +146,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3499393bf40b4d46ac7e1f3e457931f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SwitchBlocks: []
+  SwitchBlocksGrow: []
+  SwitchBlocksShrink: []
 --- !u!1 &4117262201290919604
 GameObject:
   m_ObjectHideFlags: 0
