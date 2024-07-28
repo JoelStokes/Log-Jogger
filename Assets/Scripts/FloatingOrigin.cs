@@ -16,8 +16,6 @@ public class FloatingOrigin : MonoBehaviour
 
         if (cameraPosition.magnitude > threshold){
             ToggleBGs();
-            Debug.Log("BG Toggled, Reached Pause");
-            Debug.Break();
 
             for (int z=0; z < SceneManager.sceneCount; z++){
                 foreach(GameObject g in SceneManager.GetSceneAt(z).GetRootGameObjects()){
@@ -26,6 +24,9 @@ public class FloatingOrigin : MonoBehaviour
                             Debug.Log("Applying move to children");
                             child.transform.position -= cameraPosition;
                         }
+                    } else if (g.tag == "Player"){
+                        g.transform.position -= cameraPosition;
+                        g.GetComponent<PlayerController>().ShiftTrail(cameraPosition);
                     } else {
                         g.transform.position -= cameraPosition;
                     }
@@ -34,12 +35,9 @@ public class FloatingOrigin : MonoBehaviour
 
             Vector3 originDelta = Vector3.zero - cameraPosition;
             terrainController.AdjustLastGenX();
-            Debug.Log("Recentering, origin delta = " + originDelta);
-
-            Debug.Break();
+            //Debug.Log("Recentering, origin delta = " + originDelta);
             
             ToggleBGs();
-            Debug.Log("Re-enabling BG Scroll");
         }
     }
 

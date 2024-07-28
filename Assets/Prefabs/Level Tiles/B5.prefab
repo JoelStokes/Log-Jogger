@@ -12550,7 +12550,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 191132816213192642, guid: 9b9f19d601c530e4c8c6910e17a196ed, type: 3}
       propertyPath: spawnRate
-      value: 3.75
+      value: 3.8
       objectReference: {fileID: 0}
     - target: {fileID: 191132816213192642, guid: 9b9f19d601c530e4c8c6910e17a196ed, type: 3}
       propertyPath: ExistingSpikes.Array.size

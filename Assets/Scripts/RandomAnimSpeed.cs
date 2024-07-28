@@ -8,7 +8,7 @@ public class RandomAnimSpeed : MonoBehaviour
     public float max;
     public int animStates;
 
-    private int nextAnimState = 0;
+    //private int nextAnimState = 0;
     private Animator anim;
 
     void Start()

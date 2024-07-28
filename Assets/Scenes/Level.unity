@@ -5325,6 +5325,10 @@ PrefabInstance:
       propertyPath: respawnMenu
       value: 
       objectReference: {fileID: 850303837}
+    - target: {fileID: 763926477786990761, guid: 11ec8cf8240efd147a7cc16ed2e50b55, type: 3}
+      propertyPath: lineRenderer
+      value: 
+      objectReference: {fileID: 1859406259}
     - target: {fileID: 763926477786990770, guid: 11ec8cf8240efd147a7cc16ed2e50b55, type: 3}
       propertyPath: m_Name
       value: Mole
@@ -5481,6 +5485,24 @@ LineRenderer:
   m_SortingOrder: 5
   m_Positions:
   - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 1}
+  - {x: 0, y: 0, z: 1}
+  - {x: 0, y: 0, z: 1}
+  - {x: 0, y: 0, z: 1}
+  - {x: 0, y: 0, z: 1}
+  - {x: 0, y: 0, z: 1}
+  - {x: 0, y: 0, z: 1}
+  - {x: 0, y: 0, z: 1}
+  - {x: 0, y: 0, z: 1}
+  - {x: 0, y: 0, z: 1}
+  - {x: 0, y: 0, z: 1}
+  - {x: 0, y: 0, z: 1}
+  - {x: 0, y: 0, z: 1}
+  - {x: 0, y: 0, z: 1}
+  - {x: 0, y: 0, z: 1}
+  - {x: 0, y: 0, z: 1}
+  - {x: 0, y: 0, z: 1}
+  - {x: 0, y: 0, z: 1}
   - {x: 0, y: 0, z: 1}
   m_Parameters:
     serializedVersion: 3

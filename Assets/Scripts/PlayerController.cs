@@ -57,10 +57,16 @@ public class PlayerController : MonoBehaviour
     private float speedMult = .001f;
     private string sceneName;
 
-    //Destruction Effects
+    //Effects
     public GameObject rockBurstPrefab;
     public GameObject machineBurstPrefab;
     public GameObject wormBurstPrefab;
+    public LineRenderer lineRenderer;
+    private List<Vector3> prevPositions = new List<Vector3>();
+    private float trailTimer = 0;
+    private int trailLength = 20;
+    private float trailXAdj = -0.15f;
+    private float trailYAdj = -0.23f;
 
     //Transition
     public GameObject transitionPrefab;
@@ -112,6 +118,12 @@ public class PlayerController : MonoBehaviour
 
         //Used for music slowdown & stop on death
         volumeController = GameObject.Find("MusicManager").GetComponent<VolumeController>();
+
+        //Set all lineRenderer values to current position
+        for (int i=0; i<trailLength; i++){
+            prevPositions.Add(new Vector3(transform.position.x + trailXAdj, transform.position.y + trailYAdj, transform.position.z));
+        }
+        HandleTrail();
     }
 
     void Update()
@@ -132,6 +144,12 @@ public class PlayerController : MonoBehaviour
 
         if (transform.position.y < deathHeight){
             Die();
+        }
+
+        trailTimer += Time.deltaTime;
+        if (trailTimer >= (1/trailLength)){
+            HandleTrail();
+            trailTimer = 0;
         }
     }
 
@@ -386,6 +404,27 @@ public class PlayerController : MonoBehaviour
     //Used to call chunk on death to prevent despawning
     public void SetLastChunk(ChunkExit chunk){
         lastChunk = chunk;
+    }
+
+    //Update points in LineRenderer to give TrailRenderer effect
+    private void HandleTrail(){
+        prevPositions.Insert(0, new Vector3(transform.position.x + trailXAdj, transform.position.y + trailYAdj, transform.position.z));
+        prevPositions.RemoveAt(prevPositions.Count - 1);
+
+        for (int i=0; i<trailLength; i++){
+            lineRenderer.SetPosition(i, prevPositions[i]);
+        }
+    }
+
+    //Shift points in lineRenderer when player is moved for seamless trail
+    public void ShiftTrail(Vector3 shiftValue){
+        for (int i=0; i<trailLength; i++){
+            prevPositions[i] = new Vector3(prevPositions[i].x - shiftValue.x, prevPositions[i].y - shiftValue.y, prevPositions[i].z - shiftValue.z);
+        }
+
+        for (int i=0; i<trailLength; i++){
+            lineRenderer.SetPosition(i, prevPositions[i]);
+        }
     }
 
     void OnTriggerEnter2D(Collider2D other) {

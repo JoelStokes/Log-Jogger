@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class SplashscreenController : MonoBehaviour
 {
-    private float timer = 0;
+    //private float timer = 0;
     private Animator textAnim;
 
     void Start()

@@ -10,8 +10,6 @@ public class VolumeController : MonoBehaviour
 
     private float pausePitch = .85f;
     private bool isDead = false;
-    private float deathLim = .75f;
-    private float deathTimer = 0;
     private float volumeDecrease = .3f;
     private float pitchDecrease = .3f;
 
