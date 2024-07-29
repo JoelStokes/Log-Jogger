@@ -90,7 +90,7 @@ public class TerrainController : MonoBehaviour
     }
 
     void InstantiateChunk(int value){
-        //Debug.Log("Difficulty: " + currentDifficulty + ", Spawning Chunk " + value + ", lastGenX: " + lastGenX);
+        Debug.Log("Difficulty: " + currentDifficulty + ", Spawning Chunk " + value + ", lastGenX: " + lastGenX);
 
         switch(currentDifficulty){
             case 0:

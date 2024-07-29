@@ -63,10 +63,9 @@ public class PlayerController : MonoBehaviour
     public GameObject wormBurstPrefab;
     public LineRenderer lineRenderer;
     private List<Vector3> prevPositions = new List<Vector3>();
-    private float trailTimer = 0;
-    private int trailLength = 20;
-    private float trailXAdj = -0.15f;
-    private float trailYAdj = -0.23f;
+    private int trailLength = 18;
+    private float trailXAdj = -0.12f;
+    private float trailYAdj = -0.32f;
 
     //Transition
     public GameObject transitionPrefab;
@@ -120,6 +119,7 @@ public class PlayerController : MonoBehaviour
         volumeController = GameObject.Find("MusicManager").GetComponent<VolumeController>();
 
         //Set all lineRenderer values to current position
+        lineRenderer.positionCount = trailLength;
         for (int i=0; i<trailLength; i++){
             prevPositions.Add(new Vector3(transform.position.x + trailXAdj, transform.position.y + trailYAdj, transform.position.z));
         }
@@ -144,12 +144,6 @@ public class PlayerController : MonoBehaviour
 
         if (transform.position.y < deathHeight){
             Die();
-        }
-
-        trailTimer += Time.deltaTime;
-        if (trailTimer >= (1/trailLength)){
-            HandleTrail();
-            trailTimer = 0;
         }
     }
 
@@ -222,6 +216,8 @@ public class PlayerController : MonoBehaviour
                 angelSpawned = true;
             }
         }
+
+        HandleTrail();
     }
 
     private void Die(){
