@@ -459,6 +459,9 @@ GameObject:
   - component: {fileID: 763926477786990774}
   - component: {fileID: 763926477786990773}
   - component: {fileID: 763926477786990772}
+  - component: {fileID: 4235697340880754363}
+  - component: {fileID: 1945836465659358529}
+  - component: {fileID: 5621292714336491033}
   - component: {fileID: 763926477786990763}
   - component: {fileID: 763926477786990761}
   - component: {fileID: 763926477786990760}
@@ -580,8 +583,8 @@ MonoBehaviour:
   - {fileID: 763926478008946219}
   - {fileID: 763926479651875820}
   m_Bounds:
-    m_Center: {x: -0.066180825, y: 0.12778872, z: 0}
-    m_Extent: {x: 0.33196002, y: 0.7321347, z: 0}
+    m_Center: {x: -0.06618065, y: 0.12778866, z: 0}
+    m_Extent: {x: 0.3319602, y: 0.73213464, z: 0}
   m_UseBatching: 1
   m_AlwaysUpdate: 1
   m_AutoRebind: 0
@@ -618,7 +621,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.1, y: -0.23}
+  m_Offset: {x: -0.10000001, y: -0.3763}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -629,7 +632,65 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.4, y: 0.5}
+  m_Size: {x: 0.35, y: 0.20725414}
+  m_EdgeRadius: 0
+--- !u!58 &4235697340880754363
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 763926477786990770}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 6200000, guid: 0807cd92a3b58774ebf8eb98c25030cc, type: 2}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.076, y: -0.45429537}
+  serializedVersion: 2
+  m_Radius: 0.024034977
+--- !u!58 &1945836465659358529
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 763926477786990770}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 6200000, guid: 0807cd92a3b58774ebf8eb98c25030cc, type: 2}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.276, y: -0.45429537}
+  serializedVersion: 2
+  m_Radius: 0.024034977
+--- !u!61 &5621292714336491033
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 763926477786990770}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 6200000, guid: 0807cd92a3b58774ebf8eb98c25030cc, type: 2}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.1, y: -0.2162}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 2, y: 2}
+    newSize: {x: 2, y: 2}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.4, y: 0.474}
   m_EdgeRadius: 0
 --- !u!50 &763926477786990763
 Rigidbody2D:
@@ -670,7 +731,12 @@ MonoBehaviour:
   rockBurstPrefab: {fileID: 6907459221728334869, guid: cb0c8642b2f9f244a995c778649819a6, type: 3}
   machineBurstPrefab: {fileID: 3036443492406917886, guid: f6da8341abdc5f445bf5a5282f12873c, type: 3}
   wormBurstPrefab: {fileID: 5214471637313954120, guid: 56d3e4888facc76468431a9aff872e29, type: 3}
+  lineRenderer: {fileID: 0}
   transitionPrefab: {fileID: 4637075002079152295, guid: 9b53b0d497d2aa547884f59754f01aef, type: 3}
+  bottomCollider: {fileID: 763926477786990772}
+  frontCollider: {fileID: 5621292714336491033}
+  frontCircle: {fileID: 4235697340880754363}
+  backCircle: {fileID: 1945836465659358529}
   jumpSFX: []
   slamSFX:
   - {fileID: 8300000, guid: e50a04d99d1323743a10bfc024baff4c, type: 3}
@@ -1828,6 +1894,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   threshold: 500
   terrainController: {fileID: 0}
+  bgControllers: []
 --- !u!114 &1859406260
 MonoBehaviour:
   m_ObjectHideFlags: 0

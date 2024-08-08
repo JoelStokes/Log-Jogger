@@ -72,7 +72,10 @@ public class PlayerController : MonoBehaviour
 
     //Components
     private Rigidbody2D rigi;
-    private BoxCollider2D boxCollider;
+    public BoxCollider2D bottomCollider;
+    public BoxCollider2D frontCollider;
+    public CircleCollider2D frontCircle;
+    public CircleCollider2D backCircle;
     private TerrainController terrainController;
     private Animator anim;
     private CameraController cameraController;
@@ -103,14 +106,13 @@ public class PlayerController : MonoBehaviour
         saveManager = GameObject.Find("SaveManager").GetComponent<SaveManager>();
 
         rigi = GetComponent<Rigidbody2D>();
-        boxCollider = GetComponent<BoxCollider2D>();
         anim = GetComponent<Animator>();
         groundLayerMask = LayerMask.GetMask("Ground");
         //terrainController = GameObject.Find("Terrain Controller").GetComponent<TerrainController>();
 
-        RightCheckBoxCollider = new Vector3(boxCollider.bounds.size.x - boxColliderSubtract, 
-            boxCollider.bounds.size.y - boxColliderSubtract, 
-            boxCollider.bounds.size.z - boxColliderSubtract);
+        RightCheckBoxCollider = new Vector3(frontCollider.bounds.size.x - boxColliderSubtract, 
+            frontCollider.bounds.size.y - boxColliderSubtract, 
+            frontCollider.bounds.size.z - boxColliderSubtract);
 
         //Used to stop speed from increasing on tutorial level
         sceneName = SceneManager.GetActiveScene().name;
@@ -229,7 +231,12 @@ public class PlayerController : MonoBehaviour
 
             rigi.isKinematic = true;
             rigi.velocity = Vector2.zero;
-            GetComponent<BoxCollider2D>().isTrigger = true;
+
+            frontCollider.isTrigger = true;
+            bottomCollider.isTrigger = true;
+            frontCircle.isTrigger = true;
+            backCircle.isTrigger = true;
+
             cameraController.PlayerDied();
             volumeController.PlayerDied();
 
@@ -288,7 +295,7 @@ public class PlayerController : MonoBehaviour
     }
 
     private bool CheckGrounded(){
-        RaycastHit2D raycastHit = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, 0f, Vector2.down, groundedHeight, groundLayerMask);
+        RaycastHit2D raycastHit = Physics2D.BoxCast(bottomCollider.bounds.center, bottomCollider.bounds.size, 0f, Vector2.down, groundedHeight, groundLayerMask);
 
         if (raycastHit.collider != null){
             if (raycastHit.transform.tag == "Switch" && rigi.velocity.y <= 0f){
@@ -318,7 +325,7 @@ public class PlayerController : MonoBehaviour
     }
 
     private bool CheckHead(){   //See if headbonk happens to stop additional height gain
-        RaycastHit2D raycastHit = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, 0f, Vector2.up, groundedHeight, groundLayerMask);
+        RaycastHit2D raycastHit = Physics2D.BoxCast(frontCollider.bounds.center, frontCollider.bounds.size, 0f, Vector2.up, groundedHeight, groundLayerMask);
 
         if (raycastHit.collider != null && raycastHit.transform.gameObject.tag != "One-Way"){
             return true;
@@ -327,7 +334,7 @@ public class PlayerController : MonoBehaviour
     }
 
     private bool CheckWall(){
-        RaycastHit2D rightRaycastHit = Physics2D.BoxCast(boxCollider.bounds.center, RightCheckBoxCollider, 0f, Vector2.right, groundedHeight, groundLayerMask);
+        RaycastHit2D rightRaycastHit = Physics2D.BoxCast(frontCollider.bounds.center, RightCheckBoxCollider, 0f, Vector2.right, groundedHeight, groundLayerMask);
 
         if (rightRaycastHit.collider != null && rightRaycastHit.transform.tag != "One-Way"){
             if (isGrounded){
