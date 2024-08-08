@@ -30,6 +30,8 @@ public class PlayerController : MonoBehaviour
     private int jumpHoldHeadHit = 75;
     private float jumpHoldDiminish = .01f;
     private bool isSlamming = false;
+    private float slamPrevY = 0;
+    private float slamXAdj = .01f;  //Used as preventative measure to stop slam edge cases with frozen player
     private float slamSpeed = -23f;
     private float maxVelocity = -20f;
 
@@ -183,11 +185,17 @@ public class PlayerController : MonoBehaviour
 
             if (isSlamming){
                 moving = false;
+
+                if (slamPrevY == transform.position.y){  //May be stuck, add very small X value to see if it dislodges player
+                    transform.position = new Vector3(transform.position.x + slamXAdj, transform.position.y, transform.position.z);
+                }
+                slamPrevY = transform.position.y;
                 rigi.velocity = new Vector2(rigi.velocity.x, slamSpeed);
             } else {
                 if (rigi.velocity.y < maxVelocity){  //??? Don't understand this
                     rigi.velocity = new Vector2(rigi.velocity.x, maxVelocity);
                 }
+                slamPrevY = -100;   //Large arbitrary value so next slam starts fresh
             }
 
             if (moving){
@@ -407,6 +415,10 @@ public class PlayerController : MonoBehaviour
     //Used to call chunk on death to prevent despawning
     public void SetLastChunk(ChunkExit chunk){
         lastChunk = chunk;
+    }
+
+    public bool GetDead(){
+        return dead;
     }
 
     //Update points in LineRenderer to give TrailRenderer effect

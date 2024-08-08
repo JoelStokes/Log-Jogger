@@ -9,11 +9,16 @@ public class SaveManager : MonoBehaviour
 
     private void Awake()
     {
-        DontDestroyOnLoad(gameObject);
-        Instance = this;
-        Load();
+        if(Instance == null)
+        {
+            DontDestroyOnLoad(gameObject);
+            Instance = this;
+            Load();
 
-        Debug.Log(Serializer.Serialize<SaveState>(state));
+            Debug.Log(Serializer.Serialize<SaveState>(state));
+        } else {
+            Destroy(this.gameObject);
+        }
     }
 
     //Save the whole state of this saveState script to the player pref

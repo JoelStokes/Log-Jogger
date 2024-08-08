@@ -16,10 +16,15 @@ public class VolumeController : MonoBehaviour
     private AudioSource audioSource;
     private SaveManager saveManager;
 
+    //Prevent UI volume call before audioSource initiates
+    private bool started = false;
+
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
         saveManager = GameObject.Find("SaveManager").GetComponent<SaveManager>();
+
+        started = true;
         SetVolume();
     }
 
@@ -40,7 +45,9 @@ public class VolumeController : MonoBehaviour
     }
 
     public void ManualChange(){ //Called from Title Screen where changes can happen mid-scene
-        SetVolume();
+        if (started){
+            SetVolume();
+        }
     }
 
     private void SetVolume(){

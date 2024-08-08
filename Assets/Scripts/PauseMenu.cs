@@ -19,7 +19,7 @@ public class PauseMenu : MonoBehaviour
     public void ToggleMenu(){
         paused = !paused;
 
-        if (paused){
+        if (paused && !playerController.GetDead()){
             previousTimeScale = Time.timeScale;
             Time.timeScale = 0;
             pausedText.SetActive(true);

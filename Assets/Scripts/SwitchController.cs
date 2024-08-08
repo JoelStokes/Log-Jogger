@@ -18,13 +18,17 @@ public class SwitchController : MonoBehaviour
         pressed = false;
 
         for (int i=0; i<SwitchBlocksGrow.Length; i++){
-            SwitchBlocksGrow[i].GetComponent<Animator>().SetTrigger("Shrink");
-            SwitchBlocksGrow[i].transform.GetChild(0).gameObject.SetActive(false);
+            if (SwitchBlocksGrow[i] != null){    //Don't perform on scene change disable
+                SwitchBlocksGrow[i].GetComponent<Animator>().SetTrigger("Shrink");
+                SwitchBlocksGrow[i].transform.GetChild(0).gameObject.SetActive(false);
+            }
         }
 
         for (int i=0; i<SwitchBlocksShrink.Length; i++){
-            SwitchBlocksShrink[i].GetComponent<Animator>().SetTrigger("Grow");
-            SwitchBlocksShrink[i].transform.GetChild(0).gameObject.GetComponent<BoxCollider2D>().enabled = true;
+            if (SwitchBlocksShrink[i] != null){
+                SwitchBlocksShrink[i].GetComponent<Animator>().SetTrigger("Grow");
+                SwitchBlocksShrink[i].transform.GetChild(0).gameObject.GetComponent<BoxCollider2D>().enabled = true;
+            }
         }
     }
 
