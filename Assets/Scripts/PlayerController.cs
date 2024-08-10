@@ -31,7 +31,7 @@ public class PlayerController : MonoBehaviour
     private float jumpHoldDiminish = .01f;
     private bool isSlamming = false;
     private float slamPrevY = 0;
-    private float slamXAdj = .01f;  //Used as preventative measure to stop slam edge cases with frozen player
+    private float slamXAdj = .02f;  //Used as preventative measure to stop slam edge cases with frozen player
     private float slamSpeed = -23f;
     private float maxVelocity = -20f;
 
