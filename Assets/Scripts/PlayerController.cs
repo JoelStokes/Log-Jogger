@@ -31,7 +31,8 @@ public class PlayerController : MonoBehaviour
     private float jumpHoldDiminish = .01f;
     private bool isSlamming = false;
     private float slamPrevY = 0;
-    private float slamXAdj = .02f;  //Used as preventative measure to stop slam edge cases with frozen player
+    private float slamXAdj = .025f;  //Used as preventative measure to stop slam edge cases with frozen player
+    private float slamYAdj = .005f;
     private float slamSpeed = -23f;
     private float maxVelocity = -20f;
 
@@ -44,6 +45,10 @@ public class PlayerController : MonoBehaviour
     private bool onConveyor = false;
     private float conveyorSpeed = 0;
     private bool paused = false;
+    private bool pushingWall = false;
+    private float ghostCollisionAdd = .005f;  //Value to add in rare ghost collision to force player out of stuck state
+    private float ghostPrevX = 0;
+    private float ghostPrevY = 0;
 
     //Grounded Checks
     private bool isGrounded = false;
@@ -56,7 +61,7 @@ public class PlayerController : MonoBehaviour
     private float scoreCounter = 0;
     private int wormValue = 5;
     private int machineValue = 25;
-    private float speedMult = .001f;
+    private float speedMult = .00085f;
     private string sceneName;
 
     //Effects
@@ -65,9 +70,9 @@ public class PlayerController : MonoBehaviour
     public GameObject wormBurstPrefab;
     public LineRenderer lineRenderer;
     private List<Vector3> prevPositions = new List<Vector3>();
-    private int trailLength = 18;
-    private float trailXAdj = -0.12f;
-    private float trailYAdj = -0.32f;
+    private int trailLength = 15;
+    private float trailXAdj = -0.11f;
+    private float trailYAdj = -0.33f;
 
     //Transition
     public GameObject transitionPrefab;
@@ -173,10 +178,12 @@ public class PlayerController : MonoBehaviour
 
             if (CheckWall()){
                 moving = false;
+                pushingWall = true;
             } else {
                 if (!isSlamming){
                     moving = true;
                 }
+                pushingWall = false;
             }
 
             if (touching && !isSlamming){
@@ -187,7 +194,7 @@ public class PlayerController : MonoBehaviour
                 moving = false;
 
                 if (slamPrevY == transform.position.y){  //May be stuck, add very small X value to see if it dislodges player
-                    transform.position = new Vector3(transform.position.x + slamXAdj, transform.position.y, transform.position.z);
+                    transform.position = new Vector3(transform.position.x + slamXAdj, transform.position.y + slamYAdj, transform.position.z);
                 }
                 slamPrevY = transform.position.y;
                 rigi.velocity = new Vector2(rigi.velocity.x, slamSpeed);
@@ -475,6 +482,22 @@ public class PlayerController : MonoBehaviour
                 conveyorSpeed = other.GetComponent<Conveyor>().xSpeed;
                 onConveyor = true;
             }
+        }
+    }
+
+    //Check for rare ghost collision between two equal height boxColliders on mole feet preventing forward movement
+    //Also checks for rare edge stuck bug where all movement halts, forcing player forward very slightly for a different collision check
+    private void OnCollisionEnter2D(Collision2D other) {
+        if ((isGrounded && !isSlamming && !pushingWall && started && rigi.velocity.x == 0) || 
+            (!isGrounded && !isSlamming && started && rigi.velocity.x == 0 && rigi.velocity.y == 0) || 
+            (!isGrounded && !isSlamming && started && transform.position.x == ghostPrevX && transform.position.y == ghostPrevY)){
+            Debug.Log("Rare edge stuck! Moving slightly...");
+            transform.position = new Vector3(transform.position.x + ghostCollisionAdd, transform.position.y + ghostCollisionAdd, transform.position.z);
+            ghostPrevX = transform.position.x;
+            ghostPrevY = transform.position.y;
+        } else if (!isGrounded && !isSlamming && started){
+            ghostPrevX = transform.position.x;
+            ghostPrevY = transform.position.y;
         }
     }
 
