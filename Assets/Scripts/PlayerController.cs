@@ -103,6 +103,7 @@ public class PlayerController : MonoBehaviour
     public AudioClip[] machineSFX;
     public AudioClip switchGoodSFX;
     public AudioClip switchBadSFX;
+    private float fadeSpeed = .75f;
 
     void Start()
     {
@@ -188,6 +189,8 @@ public class PlayerController : MonoBehaviour
 
             if (touching && !isSlamming){
                 TouchHeld();
+            } else if (!touching && !isSlamming && !isGrounded){    //Fade jump sfx
+                FadeAudio();
             }
 
             if (isSlamming){
@@ -286,7 +289,7 @@ public class PlayerController : MonoBehaviour
     private void TouchStart(){
         touching = true;
         if (isGrounded){
-            PlayAudio(jumpSFX, false, 0);
+            PlayAudio(jumpSFX, false, -.25f);
             ApplyJump(jumpForce);
         } else {
             PlayAudio(slamSFX, false, -.2f);
@@ -324,10 +327,10 @@ public class PlayerController : MonoBehaviour
                 if (raycastHit.transform.tag == "Machine"){
                     score += machineValue;
                     UpdateScore(machineValue);
-                    PlayAudio(machineSFX, true, .1f);
+                    PlayAudio(machineSFX, true, .25f);
                     Instantiate(machineBurstPrefab, transform.position, Quaternion.identity);
                 } else {
-                    PlayAudio(breakableSFX, true, .1f);
+                    PlayAudio(breakableSFX, true, .25f);
                     Instantiate(rockBurstPrefab, transform.position, Quaternion.identity);
                 }
                 return false;   //Don't Ground player after breaking through breakables
@@ -419,6 +422,10 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void FadeAudio(){
+        audioSource.volume = audioSource.volume - (fadeSpeed * Time.deltaTime);
+    }
+
     //Used to call chunk on death to prevent despawning
     public void SetLastChunk(ChunkExit chunk){
         lastChunk = chunk;
@@ -453,7 +460,7 @@ public class PlayerController : MonoBehaviour
         if (!dead){
             if (other.tag == "Worm"){
                 score += wormValue;
-                PlayAudio(collectSFX, true, 5f);
+                PlayAudio(collectSFX, true, .25f);
                 UpdateScore(wormValue);
                 Instantiate(wormBurstPrefab, other.transform.position, wormBurstPrefab.transform.rotation);
                 other.gameObject.SetActive(false);
@@ -465,7 +472,7 @@ public class PlayerController : MonoBehaviour
 
                 isSlamming = false;
                 anim.SetBool("Dashing", false);
-                PlayAudio(springSFX, true, 0);
+                PlayAudio(springSFX, true, .15f);
 
                 ApplyJump(Forces.y);
 

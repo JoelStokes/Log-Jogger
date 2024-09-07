@@ -5335,6 +5335,66 @@ PrefabInstance:
       propertyPath: lineRenderer
       value: 
       objectReference: {fileID: 1859406259}
+    - target: {fileID: 763926477786990761, guid: 11ec8cf8240efd147a7cc16ed2e50b55, type: 3}
+      propertyPath: switchBadSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: 6083e671cb5448e48a349d7fd50bb97a, type: 3}
+    - target: {fileID: 763926477786990761, guid: 11ec8cf8240efd147a7cc16ed2e50b55, type: 3}
+      propertyPath: switchGoodSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: dc169d2a4f2c5f244900eecae30a0b94, type: 3}
+    - target: {fileID: 763926477786990761, guid: 11ec8cf8240efd147a7cc16ed2e50b55, type: 3}
+      propertyPath: jumpSFX.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 763926477786990761, guid: 11ec8cf8240efd147a7cc16ed2e50b55, type: 3}
+      propertyPath: slamSFX.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 763926477786990761, guid: 11ec8cf8240efd147a7cc16ed2e50b55, type: 3}
+      propertyPath: springSFX.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 763926477786990761, guid: 11ec8cf8240efd147a7cc16ed2e50b55, type: 3}
+      propertyPath: collectSFX.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 763926477786990761, guid: 11ec8cf8240efd147a7cc16ed2e50b55, type: 3}
+      propertyPath: jumpSFX.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 5c2e8dfde5582e84b8a52148e127940c, type: 3}
+    - target: {fileID: 763926477786990761, guid: 11ec8cf8240efd147a7cc16ed2e50b55, type: 3}
+      propertyPath: machineSFX.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 763926477786990761, guid: 11ec8cf8240efd147a7cc16ed2e50b55, type: 3}
+      propertyPath: slamSFX.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 03de0b5c1183d694bb6e6432c66fec1d, type: 3}
+    - target: {fileID: 763926477786990761, guid: 11ec8cf8240efd147a7cc16ed2e50b55, type: 3}
+      propertyPath: breakableSFX.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 763926477786990761, guid: 11ec8cf8240efd147a7cc16ed2e50b55, type: 3}
+      propertyPath: springSFX.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: d7a3b2a969a39c6498429a96f34f461e, type: 3}
+    - target: {fileID: 763926477786990761, guid: 11ec8cf8240efd147a7cc16ed2e50b55, type: 3}
+      propertyPath: collectSFX.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 1c71ae6477c62794ea937e9ed32a4537, type: 3}
+    - target: {fileID: 763926477786990761, guid: 11ec8cf8240efd147a7cc16ed2e50b55, type: 3}
+      propertyPath: collectSFX.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: 1c71ae6477c62794ea937e9ed32a4537, type: 3}
+    - target: {fileID: 763926477786990761, guid: 11ec8cf8240efd147a7cc16ed2e50b55, type: 3}
+      propertyPath: machineSFX.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 6874e91f86cf5d94ea73c3057b46158e, type: 3}
+    - target: {fileID: 763926477786990761, guid: 11ec8cf8240efd147a7cc16ed2e50b55, type: 3}
+      propertyPath: breakableSFX.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: f795c954596a90f458c451c731aebe80, type: 3}
     - target: {fileID: 763926477786990770, guid: 11ec8cf8240efd147a7cc16ed2e50b55, type: 3}
       propertyPath: m_Name
       value: Mole
@@ -9712,6 +9772,10 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 1859406256}
+    - target: {fileID: 5803119683567840499, guid: eca9352a77cec5943a5357cd26fab483, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -357.19992
+      objectReference: {fileID: 0}
     - target: {fileID: 5803119683608937639, guid: eca9352a77cec5943a5357cd26fab483, type: 3}
       propertyPath: burstPrefab
       value: 
@@ -9728,6 +9792,10 @@ PrefabInstance:
       propertyPath: wormBurstPrefab
       value: 
       objectReference: {fileID: 5214471637313954120, guid: 7fb345ef80b9d8a45a26e1a19913036e, type: 3}
+    - target: {fileID: 5803119685159647232, guid: eca9352a77cec5943a5357cd26fab483, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -357.19992
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eca9352a77cec5943a5357cd26fab483, type: 3}
 --- !u!1 &6975492053791783928 stripped
