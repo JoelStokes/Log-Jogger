@@ -89,6 +89,7 @@ public class PlayerController : MonoBehaviour
     private ChunkExit lastChunk;
     private SaveManager saveManager;
     private VolumeController volumeController;
+    private Rect pauseRegion;
 
     //SFX
     private float volume;
@@ -112,6 +113,7 @@ public class PlayerController : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         cameraController = Camera.main.gameObject.GetComponent<CameraController>();
         saveManager = GameObject.Find("SaveManager").GetComponent<SaveManager>();
+        pauseRegion = RectTransformToScreenSpace(GameObject.Find("Pause").GetComponent<RectTransform>(), Camera.main, false);
 
         rigi = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
@@ -371,7 +373,12 @@ public class PlayerController : MonoBehaviour
         if (!dead && started && !paused){
             if (context.ReadValue<UnityEngine.InputSystem.TouchPhase>() == UnityEngine.InputSystem.TouchPhase.Began){
                 if (touching == false){
-                    TouchStart();
+                    
+                    //Make sure click was not on pause button. If so, ignore touch for player.
+                    Touch touch = Input.GetTouch(0);
+                    if (!pauseRegion.Contains(touch.position)){
+                        TouchStart();
+                    }
                 }
             } else if (context.ReadValue<UnityEngine.InputSystem.TouchPhase>() == UnityEngine.InputSystem.TouchPhase.Ended){
                 touching = false;
@@ -456,6 +463,29 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public static Rect RectTransformToScreenSpace(RectTransform transform, Camera cam, bool cutDecimals = false)
+    {
+        var worldCorners = new Vector3[4];
+        var screenCorners = new Vector3[4];
+
+        transform.GetWorldCorners(worldCorners);
+
+        for (int i = 0; i < 4; i++)
+        {
+            screenCorners[i] = cam.WorldToScreenPoint(worldCorners[i]);
+            if (cutDecimals)
+            {
+                screenCorners[i].x = (int)screenCorners[i].x;
+                screenCorners[i].y = (int)screenCorners[i].y;
+            }
+        }
+
+        return new Rect(screenCorners[0].x,
+                        screenCorners[0].y,
+                        screenCorners[2].x - screenCorners[0].x,
+                        screenCorners[2].y - screenCorners[0].y);
+    }
+
     void OnTriggerEnter2D(Collider2D other) {
         if (!dead){
             if (other.tag == "Worm"){
@@ -484,7 +514,7 @@ public class PlayerController : MonoBehaviour
             } else if (other.tag == "End"){
                 saveManager.Save(); //Ensures tutorial worms saved
                 GameObject TransitionObj = Instantiate(transitionPrefab, new Vector3(transform.position.x + 10, transform.position.y, transform.position.z), Quaternion.identity);
-                TransitionObj.GetComponent<Transition>().SetValues("Title", transform.position.x - 3f);
+                TransitionObj.GetComponent<Transition>().SetValues("Title", transform.position.x - 3f, -40);
             } else if (other.tag == "Conveyor"){
                 conveyorSpeed = other.GetComponent<Conveyor>().xSpeed;
                 onConveyor = true;

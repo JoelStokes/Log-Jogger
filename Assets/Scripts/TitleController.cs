@@ -79,6 +79,6 @@ public class TitleController : MonoBehaviour
 
     private void CreateTransition (string scene){
         GameObject TransitionObj = Instantiate(transitionPrefab, new Vector3(transitionX, 0, 0), Quaternion.identity);
-        TransitionObj.GetComponent<Transition>().SetValues(scene, transitionXEnd);        
+        TransitionObj.GetComponent<Transition>().SetValues(scene, transitionXEnd, -45);        
     }
 }
