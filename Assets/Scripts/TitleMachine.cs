@@ -5,22 +5,26 @@ using UnityEngine;
 public class TitleMachine : MonoBehaviour
 {
     public GameObject machineBurstPrefab;
-    public AudioClip[] machineSFX;
+    public AudioClip machineSFX;
+    public AudioClip machinePointsSFX;
 
     //Have volume be set by game settings
     private float volume = .5f;
+    private float machineSFXMod = .35f;
+    private float pointSFXMod = .9f;
+
+    void Start(){
+        volume = GameObject.Find("SaveManager").GetComponent<SaveManager>().state.sfxVolume;
+    }
 
     void OnMouseDown(){
-        PlayAudio(machineSFX, .1f);
+        PlayAudio();
         Instantiate(machineBurstPrefab, transform.position, Quaternion.identity);
         Destroy(gameObject);
     }
 
-    public void PlayAudio(AudioClip[] audioClips, float volumeModifier){    //Overload function for choosing random sound effect from array to play
-        if (audioClips.Length != 0){
-            int rand = Random.Range(0, audioClips.Length-1);
-
-            AudioSource.PlayClipAtPoint(audioClips[rand], transform.position, volume + volumeModifier);
-        }
+    public void PlayAudio(){
+        AudioSource.PlayClipAtPoint(machineSFX, Camera.main.transform.position, volume * machineSFXMod);
+        AudioSource.PlayClipAtPoint(machinePointsSFX, Camera.main.transform.position, volume * pointSFXMod);
     }
 }

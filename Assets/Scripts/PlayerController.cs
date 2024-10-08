@@ -102,14 +102,25 @@ public class PlayerController : MonoBehaviour
     public AudioClip[] collectSFX;
     public AudioClip[] breakableSFX;
     public AudioClip[] machineSFX;
-    public AudioClip switchGoodSFX;
-    public AudioClip switchBadSFX;
+    public AudioClip machinePointsSFX;
     private float fadeSpeed = .75f;
+
+    //Sound Effect Modifiers
+    private float jumpSFXMod = .55f;
+    private float slamSFXMod = .55f;
+    private float wormSFXMod = .9f;
+    private float springSFXMod = 1.2f;
+    private float breakableSFXMod = .5f;
+    private float machineSFXMod = .5f;
+    private float machinePointsSFXMod = 1.2f;
+    private float deathSFXMod = 1.1f;
+
+    //Trigger Repeat Prevention
+    private bool wormTrigger = false;
+    private bool springTrigger = false;
 
     void Start()
     {
-        //Get SFX Audio Volume from SaveManager setting
-        volume = .5f;
         audioSource = GetComponent<AudioSource>();
         cameraController = Camera.main.gameObject.GetComponent<CameraController>();
         saveManager = GameObject.Find("SaveManager").GetComponent<SaveManager>();
@@ -129,6 +140,7 @@ public class PlayerController : MonoBehaviour
 
         //Used for music slowdown & stop on death
         volumeController = GameObject.Find("MusicManager").GetComponent<VolumeController>();
+        volume = saveManager.state.sfxVolume;
 
         //Set all lineRenderer values to current position
         lineRenderer.positionCount = trailLength;
@@ -140,6 +152,10 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        //Reset Triggers
+        wormTrigger = false;
+        springTrigger = false;
+
         if (moving && !dead){
             scoreCounter += Time.deltaTime;
             if (scoreCounter > 1){
@@ -245,7 +261,7 @@ public class PlayerController : MonoBehaviour
     private void Die(){
         if (!dead){
             Time.timeScale = 1;
-            PlayAudio(deathSFX, false, 0);
+            PlayAudio(deathSFX, false, deathSFXMod);
             dead = true;
             anim.SetTrigger("Die");
 
@@ -291,10 +307,10 @@ public class PlayerController : MonoBehaviour
     private void TouchStart(){
         touching = true;
         if (isGrounded){
-            PlayAudio(jumpSFX, false, -.25f);
+            PlayAudio(jumpSFX, false, jumpSFXMod);
             ApplyJump(jumpForce);
-        } else {
-            PlayAudio(slamSFX, false, -.2f);
+        } else if (!isSlamming) {
+            PlayAudio(slamSFX, false, slamSFXMod);
             isSlamming = true;
             anim.SetBool("Dashing", true);
         }
@@ -329,10 +345,11 @@ public class PlayerController : MonoBehaviour
                 if (raycastHit.transform.tag == "Machine"){
                     score += machineValue;
                     UpdateScore(machineValue);
-                    PlayAudio(machineSFX, true, .25f);
+                    PlayAudio(machineSFX, true, machineSFXMod);
+                    PlayAudio(machinePointsSFX, true, machinePointsSFXMod);
                     Instantiate(machineBurstPrefab, transform.position, Quaternion.identity);
                 } else {
-                    PlayAudio(breakableSFX, true, .25f);
+                    PlayAudio(breakableSFX, true, breakableSFXMod);
                     Instantiate(rockBurstPrefab, transform.position, Quaternion.identity);
                 }
                 return false;   //Don't Ground player after breaking through breakables
@@ -406,9 +423,9 @@ public class PlayerController : MonoBehaviour
     public void PlayAudio(AudioClip audioClip, bool clipAtPoint, float volumeModifier){
         if (audioClip != null){
             if (clipAtPoint){
-                AudioSource.PlayClipAtPoint(audioClip, transform.position, volume + volumeModifier);
+                AudioSource.PlayClipAtPoint(audioClip, Camera.main.transform.position, volume * volumeModifier);
             } else {
-                audioSource.volume = volume + volumeModifier;
+                audioSource.volume = volume * volumeModifier;
                 audioSource.clip = audioClip;
                 audioSource.Play();
             }
@@ -420,9 +437,9 @@ public class PlayerController : MonoBehaviour
             int rand = Random.Range(0, audioClips.Length-1);
 
             if (clipAtPoint){
-                AudioSource.PlayClipAtPoint(audioClips[rand], transform.position, volume + volumeModifier);
+                AudioSource.PlayClipAtPoint(audioClips[rand], Camera.main.transform.position, volume * volumeModifier);
             } else {
-                audioSource.volume = volume + volumeModifier;
+                audioSource.volume = volume * volumeModifier;
                 audioSource.clip = audioClips[rand];
                 audioSource.Play();
             }
@@ -488,21 +505,25 @@ public class PlayerController : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other) {
         if (!dead){
-            if (other.tag == "Worm"){
+            if (other.tag == "Worm" && !wormTrigger){
+                //Prevent multiple trigger fire bug
+                wormTrigger = true;
+
                 score += wormValue;
-                PlayAudio(collectSFX, true, .25f);
+                PlayAudio(collectSFX, true, wormSFXMod);
                 UpdateScore(wormValue);
                 Instantiate(wormBurstPrefab, other.transform.position, wormBurstPrefab.transform.rotation);
                 other.gameObject.SetActive(false);
                 saveManager.state.wormCount += 1;
             } else if (other.tag == "Hurt"){
                 Die();
-            } else if (other.tag == "Spring"){
+            } else if (other.tag == "Spring" && !springTrigger){
+                springTrigger = true;
                 Vector2 Forces = other.GetComponent<Spring>().LaunchSpring();
 
                 isSlamming = false;
                 anim.SetBool("Dashing", false);
-                PlayAudio(springSFX, true, .15f);
+                PlayAudio(springSFX, true, springSFXMod);
 
                 ApplyJump(Forces.y);
 

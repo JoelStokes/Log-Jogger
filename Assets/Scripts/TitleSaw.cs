@@ -9,10 +9,18 @@ public class TitleSaw : MonoBehaviour
 
     private Animator anim;
 
+    //SFX
+    private AudioSource audioSource;
+    private SaveManager saveManager;
+    private float sawSFXMod = .5f;
+
     void Start()
     {
         anim = GetComponent<Animator>();
         anim.SetBool("Title", true);
+
+        audioSource = GetComponent<AudioSource>();
+        saveManager = GameObject.Find("SaveManager").GetComponent<SaveManager>();
     }
 
     void Update()
@@ -21,6 +29,8 @@ public class TitleSaw : MonoBehaviour
     }
 
     void OnMouseDown(){
+        audioSource.volume = saveManager.state.sfxVolume * sawSFXMod;
+        audioSource.Play();
         anim.SetTrigger("Clicked");
     }
 }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class RespawnMenu : MonoBehaviour
 {
@@ -52,10 +53,10 @@ public class RespawnMenu : MonoBehaviour
     public void RetryLevel(){
         if (!changing){
             if (!paused){
-                CreateTransition("Level");
+                CreateTransition(SceneManager.GetActiveScene().name);
                 changing = true;
             } else {
-                CreatePauseTransition("Level");
+                CreatePauseTransition(SceneManager.GetActiveScene().name);
                 changing = true;
             }
         }

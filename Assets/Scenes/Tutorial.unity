@@ -6042,7 +6042,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isMusic: 1
   loopTime: 1.15
-  soundModifier: 1
+  soundModifier: 0.75
 --- !u!82 &881479543
 AudioSource:
   m_ObjectHideFlags: 0
