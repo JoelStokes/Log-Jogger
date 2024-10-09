@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class TitleSaw : MonoBehaviour
 {
+    private TitleController titleController;
     public float rotationSpeed;
     public GameObject Saw;
-
     private Animator anim;
 
     //SFX
@@ -21,6 +21,8 @@ public class TitleSaw : MonoBehaviour
 
         audioSource = GetComponent<AudioSource>();
         saveManager = GameObject.Find("SaveManager").GetComponent<SaveManager>();
+
+        titleController = Camera.main.GetComponent<TitleController>();
     }
 
     void Update()
@@ -32,5 +34,6 @@ public class TitleSaw : MonoBehaviour
         audioSource.volume = saveManager.state.sfxVolume * sawSFXMod;
         audioSource.Play();
         anim.SetTrigger("Clicked");
+        titleController.CodeClick(1);
     }
 }

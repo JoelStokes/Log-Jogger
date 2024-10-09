@@ -3673,7 +3673,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 300, y: 150}
+  m_AnchoredPosition: {x: 299.99997, y: 150}
   m_SizeDelta: {x: 285, y: 125.9}
   m_Pivot: {x: 1, y: 0}
 --- !u!114 &774424396
@@ -5349,7 +5349,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -300, y: 111.600006}
+  m_AnchoredPosition: {x: -299.99997, y: 111.600006}
   m_SizeDelta: {x: 285, y: 205.25}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &949598026
@@ -6972,6 +6972,9 @@ MonoBehaviour:
   backSFX: {fileID: 8300000, guid: 6bae4704eb665c742947cc3eee2a8605, type: 3}
   settingsSFX: {fileID: 8300000, guid: bb341076ed7e9884296dade1ae6ea9d4, type: 3}
   quitSFX: {fileID: 8300000, guid: 479614315c3f038408d05ddd736deac4, type: 3}
+  secretSFX: {fileID: 8300000, guid: afb6f0a5e4428114c9dede2befe80843, type: 3}
+  tutorialButtonText: {fileID: 40241239}
+  tutorialButton: {fileID: 2139490179}
 --- !u!82 &1296041073
 AudioSource:
   m_ObjectHideFlags: 0
@@ -12642,6 +12645,7 @@ GameObject:
   - component: {fileID: 1841742084}
   - component: {fileID: 1841742085}
   - component: {fileID: 1841742086}
+  - component: {fileID: 1841742087}
   m_Layer: 0
   m_Name: Title Mole
   m_TagString: Untagged
@@ -12711,6 +12715,25 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.83847225, y: 0.65386915}
   m_EdgeRadius: 0
+--- !u!114 &1841742087
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1841742083}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 795e16f852995b84aa9f749e7871c7e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Zs:
+  - {fileID: 1536754317}
+  - {fileID: 1486879807}
+  - {fileID: 53568186}
+  zAnim: {fileID: 430122319}
+  moleSFX: {fileID: 8300000, guid: cee2cc2aa4360374e88305433cc80c46, type: 3}
+  moleSFXMod: 0.5
 --- !u!1 &1844629663
 GameObject:
   m_ObjectHideFlags: 0
@@ -12833,7 +12856,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1844629663}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.110000014, y: 0.7266666, z: 0}
+  m_LocalPosition: {x: 0.11, y: 0.7266666, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class TitleMachine : MonoBehaviour
 {
+    private TitleController titleController;
     public GameObject machineBurstPrefab;
     public AudioClip machineSFX;
     public AudioClip machinePointsSFX;
@@ -15,9 +16,11 @@ public class TitleMachine : MonoBehaviour
 
     void Start(){
         volume = GameObject.Find("SaveManager").GetComponent<SaveManager>().state.sfxVolume;
+        titleController = Camera.main.GetComponent<TitleController>();
     }
 
     void OnMouseDown(){
+        titleController.CodeClick(3);
         PlayAudio();
         Instantiate(machineBurstPrefab, transform.position, Quaternion.identity);
         Destroy(gameObject);

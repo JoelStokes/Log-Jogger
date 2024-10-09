@@ -129,6 +129,9 @@ public class PlayerController : MonoBehaviour
     private float colorChangeSpeed = 1f;
     private SpriteRenderer spriteRenderer;
 
+    //100m Secret Level Attributes
+    private float speedMult100m = .002f;
+
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
@@ -200,8 +203,10 @@ public class PlayerController : MonoBehaviour
                 UpdateScore(0);
 
                 scoreCounter = 0;
-                if (sceneName != "Tutorial"){
+                if (sceneName == "Level"){
                     Time.timeScale = 1 + (speedMult * score);
+                } else if (sceneName == "100m"){
+                    Time.timeScale = 1 + (speedMult100m * score);
                 }
             }
         }
@@ -317,14 +322,14 @@ public class PlayerController : MonoBehaviour
             }
 
             //Check if new high score, if so, save
-            if (saveManager.state.highScore < score){
+            if (saveManager.state.highScore < score && sceneName != "100m"){
                 saveManager.state.highScore = score;
                 respawnMenu.NewHighScore(transform.position);
             }
 
             //Add last score to previous 10 list & delete last entry if over 10
             saveManager.state.lastScores.Insert(0, score);
-            if (saveManager.state.lastScores.Count > 10){
+            if (saveManager.state.lastScores.Count > 10 && sceneName != "100m"){
                 saveManager.state.lastScores.RemoveAt(saveManager.state.lastScores.Count - 1);
             }
 
@@ -337,7 +342,11 @@ public class PlayerController : MonoBehaviour
             //Have popup showing new value added for visual flair & clarity?
         }
 
-        ScoreText.text = "Score: " + score.ToString("D4");
+        if (sceneName != "100m"){
+            ScoreText.text = "Score: " + score.ToString("D4");
+        } else {
+            ScoreText.text = "Meters: " + score.ToString("D3");
+        }
     }
 
     private void TouchStart(){

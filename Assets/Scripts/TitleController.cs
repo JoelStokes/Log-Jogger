@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System;
+using TMPro;
+using UnityEngine.UI;
 
 public class TitleController : MonoBehaviour
 {
@@ -24,10 +27,42 @@ public class TitleController : MonoBehaviour
     public AudioClip backSFX;
     public AudioClip settingsSFX;
     public AudioClip quitSFX;
+    public AudioClip secretSFX;
     private SaveManager saveManager;
+
+    //Secret Password Handling
+    private double currentPassword;
+    private double correctPassword = 123211;    //Reversed from click order
+    private double currentDigit = 0;
+    private bool passwordSuccess = false;
+    public TextMeshProUGUI tutorialButtonText;
+    public Button tutorialButton;
+    public Image tutorialIcon;
+    public Sprite iconReplacement;
 
     void Start(){
         saveManager = GameObject.Find("SaveManager").GetComponent<SaveManager>();
+    }
+
+    void Update(){
+        if (!passwordSuccess){
+            if (currentPassword == correctPassword){
+                passwordSuccess = true;
+                PlayAudio(secretSFX);
+                tutorialButtonText.text = "100m";
+
+                ColorBlock colors = tutorialButton.colors;
+                colors.normalColor = new Vector4(1,.4f,.4f,1);
+                colors.highlightedColor = new Vector4(1,.5f,.5f,1);
+                colors.pressedColor = new Vector4(1,.3f,.3f,1);
+                colors.selectedColor = new Vector4(1,.3f,.3f,1);
+                colors.disabledColor = new Vector4(1,.1f,.1f,1);
+
+                tutorialButton.colors = colors;
+
+                //SET ICON REPLACEMENT HERE WHEN NEW ICON DRAWN!
+            } 
+        }
     }
 
     public void Play(){
@@ -39,8 +74,13 @@ public class TitleController : MonoBehaviour
 
     public void Tutorial(){
         if (!inSettings && !inQuit){
-            PlayAudio(playSFX);
-            CreateTransition("Tutorial");
+            if (passwordSuccess){
+                PlayAudio(playSFX);
+                CreateTransition("100m");
+            } else {
+                PlayAudio(playSFX);
+                CreateTransition("Tutorial");
+            }
         }
     }
 
@@ -87,15 +127,10 @@ public class TitleController : MonoBehaviour
     }
 
     public void Shop(){
-        PlayAudio(playSFX);
         if (!inSettings && !inQuit){
+            PlayAudio(playSFX);
             CreateTransition("Shop");
         }
-    }
-
-    public void Home(){
-        //Used in Shop menu to return back to Title
-        CreateTransition("Title");
     }
 
     private void CreateTransition (string scene){
@@ -107,5 +142,12 @@ public class TitleController : MonoBehaviour
         audioSource.volume = saveManager.state.sfxVolume * soundModifier;
         audioSource.clip = audioClip;
         audioSource.Play();
+    }
+
+    public void CodeClick(int number){
+        if (currentPassword < correctPassword){
+            currentPassword += (number * (Math.Pow(10,currentDigit)));
+            currentDigit++;
+        }
     }
 }
