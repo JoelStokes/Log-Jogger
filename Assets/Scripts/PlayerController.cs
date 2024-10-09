@@ -93,7 +93,9 @@ public class PlayerController : MonoBehaviour
 
     //SFX
     private float volume;
+    private int currentAudioSource = 0;
     private AudioSource audioSource;
+    public AudioSource[] rotatingAudioSource;
     public AudioClip[] jumpSFX;
     public AudioClip[] slamSFX;
     public AudioClip deathSFX;
@@ -110,7 +112,7 @@ public class PlayerController : MonoBehaviour
     private float slamSFXMod = .55f;
     private float wormSFXMod = .9f;
     private float springSFXMod = 1.2f;
-    private float breakableSFXMod = .5f;
+    private float breakableSFXMod = .45f;
     private float machineSFXMod = .5f;
     private float machinePointsSFXMod = 1.2f;
     private float deathSFXMod = 1.1f;
@@ -118,6 +120,14 @@ public class PlayerController : MonoBehaviour
     //Trigger Repeat Prevention
     private bool wormTrigger = false;
     private bool springTrigger = false;
+
+    //Special Skin Handlers
+    private bool isRGB = false;
+    private float redValue = 0;
+    private float greenValue = 0;
+    private float blueValue = 1;
+    private float colorChangeSpeed = 1f;
+    private SpriteRenderer spriteRenderer;
 
     void Start()
     {
@@ -148,6 +158,11 @@ public class PlayerController : MonoBehaviour
             prevPositions.Add(new Vector3(transform.position.x + trailXAdj, transform.position.y + trailYAdj, transform.position.z));
         }
         HandleTrail();
+
+        if (saveManager.state.currentSkin == 12){
+            isRGB = true;
+        }
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     void Update()
@@ -155,6 +170,27 @@ public class PlayerController : MonoBehaviour
         //Reset Triggers
         wormTrigger = false;
         springTrigger = false;
+
+        //Handle RGB Animation
+        if (isRGB && !dead){
+            if (blueValue >= 1 && greenValue < 1 && redValue <= 0){
+                greenValue += colorChangeSpeed * Time.deltaTime;
+            } else if (greenValue >= 1 && blueValue > 0){
+                blueValue -= colorChangeSpeed * Time.deltaTime;
+            } else if (greenValue >= 1 && redValue < 1){
+                redValue += colorChangeSpeed * Time.deltaTime;
+            } else if (redValue >= 1 && greenValue > 0){
+                greenValue -= colorChangeSpeed * Time.deltaTime;
+            } else if (redValue >= 1 && blueValue < 1) {
+                blueValue += colorChangeSpeed * Time.deltaTime;
+            } else if (blueValue >= 1 && redValue > 0){
+                redValue -= colorChangeSpeed * Time.deltaTime;
+            }
+
+            spriteRenderer.color = new Vector4(redValue, greenValue, blueValue, 1);
+            lineRenderer.startColor = new Vector4(redValue, greenValue, blueValue, .6f);
+            lineRenderer.endColor = new Vector4(redValue, greenValue, blueValue, 0);
+        }
 
         if (moving && !dead){
             scoreCounter += Time.deltaTime;
@@ -423,7 +459,14 @@ public class PlayerController : MonoBehaviour
     public void PlayAudio(AudioClip audioClip, bool clipAtPoint, float volumeModifier){
         if (audioClip != null){
             if (clipAtPoint){
-                AudioSource.PlayClipAtPoint(audioClip, Camera.main.transform.position, volume * volumeModifier);
+                currentAudioSource++;
+                if (currentAudioSource >= rotatingAudioSource.Length){
+                    currentAudioSource = 0;
+                }
+
+                rotatingAudioSource[currentAudioSource].clip = audioClip;
+                rotatingAudioSource[currentAudioSource].volume = volume * volumeModifier;
+                rotatingAudioSource[currentAudioSource].Play();
             } else {
                 audioSource.volume = volume * volumeModifier;
                 audioSource.clip = audioClip;
@@ -437,7 +480,14 @@ public class PlayerController : MonoBehaviour
             int rand = Random.Range(0, audioClips.Length-1);
 
             if (clipAtPoint){
-                AudioSource.PlayClipAtPoint(audioClips[rand], Camera.main.transform.position, volume * volumeModifier);
+                currentAudioSource++;
+                if (currentAudioSource >= rotatingAudioSource.Length){
+                    currentAudioSource = 0;
+                }
+
+                rotatingAudioSource[currentAudioSource].clip = audioClips[rand];
+                rotatingAudioSource[currentAudioSource].volume = volume * volumeModifier;
+                rotatingAudioSource[currentAudioSource].Play();
             } else {
                 audioSource.volume = volume * volumeModifier;
                 audioSource.clip = audioClips[rand];

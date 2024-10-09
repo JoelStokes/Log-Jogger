@@ -3431,6 +3431,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97a95ae7d49c0e948a7b6eed807358fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!96 &864375066 stripped
+TrailRenderer:
+  m_CorrespondingSourceObject: {fileID: 763926478414292564, guid: 11ec8cf8240efd147a7cc16ed2e50b55, type: 3}
+  m_PrefabInstance: {fileID: 1859406255}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &888329328
 GameObject:
   m_ObjectHideFlags: 0
@@ -5172,13 +5177,9 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 850303837}
     - target: {fileID: 763926477786990761, guid: 11ec8cf8240efd147a7cc16ed2e50b55, type: 3}
-      propertyPath: collectSFX.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 763926477786990761, guid: 11ec8cf8240efd147a7cc16ed2e50b55, type: 3}
-      propertyPath: collectSFX.Array.data[0]
+      propertyPath: trailRenderer
       value: 
-      objectReference: {fileID: 8300000, guid: 1c71ae6477c62794ea937e9ed32a4537, type: 3}
+      objectReference: {fileID: 864375066}
     - target: {fileID: 763926477786990770, guid: 11ec8cf8240efd147a7cc16ed2e50b55, type: 3}
       propertyPath: m_Name
       value: Mole
