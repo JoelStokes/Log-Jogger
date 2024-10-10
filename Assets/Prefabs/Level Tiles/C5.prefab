@@ -9879,6 +9879,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: SpawnerCover
       objectReference: {fileID: 0}
+    - target: {fileID: 3963590987888214824, guid: 2a9c7ccb800988b4296a239209ac1a27, type: 3}
+      propertyPath: m_Size.x
+      value: 2.3988948
+      objectReference: {fileID: 0}
+    - target: {fileID: 3963590987888214824, guid: 2a9c7ccb800988b4296a239209ac1a27, type: 3}
+      propertyPath: m_Offset.x
+      value: -0.009447336
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2a9c7ccb800988b4296a239209ac1a27, type: 3}
 --- !u!4 &2600591058048801354 stripped

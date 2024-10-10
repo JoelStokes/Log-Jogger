@@ -9,8 +9,15 @@ public class SwitchController : MonoBehaviour
     private bool pressed = false;
     private Animator anim;
 
+    //SFX
+    private float volume;
+    private AudioSource audioSource;
+    private float switchSFXMod = 1.25f;
+
     void Start(){
         anim = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
+        audioSource.volume = GameObject.Find("SaveManager").GetComponent<SaveManager>().state.sfxVolume * switchSFXMod;
     }
 
     void OnDisable(){   //Reset to default position for later use
@@ -34,6 +41,7 @@ public class SwitchController : MonoBehaviour
 
     public void Pressed(){
         if (!pressed){
+            audioSource.Play();
             anim.SetBool("Pressed", true);
 
             for (int i=0; i<SwitchBlocksGrow.Length; i++){

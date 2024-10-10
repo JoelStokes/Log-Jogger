@@ -23,6 +23,7 @@ public class SkinLoader : MonoBehaviour
     9 Naked
     10 Silver
     11 Gold
+    12 RGB Secret
     */
 
     void Start()

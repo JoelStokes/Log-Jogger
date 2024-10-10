@@ -7911,7 +7911,7 @@ Tilemap:
   - m_RefCount: 7
     m_Data: {fileID: 629542785, guid: a5bf06fc3be64c147bbf04fb7ddb1b90, type: 3}
   - m_RefCount: 1
-    m_Data: {fileID: -885636854, guid: a5bf06fc3be64c147bbf04fb7ddb1b90, type: 3}
+    m_Data: {fileID: -1400083153, guid: a5bf06fc3be64c147bbf04fb7ddb1b90, type: 3}
   - m_RefCount: 2
     m_Data: {fileID: -1721993132, guid: a5bf06fc3be64c147bbf04fb7ddb1b90, type: 3}
   - m_RefCount: 8
@@ -9917,6 +9917,10 @@ PrefabInstance:
     - target: {fileID: 8575480292385443920, guid: b3b95da7674bb5b4d9451c6bc17ad198, type: 3}
       propertyPath: m_Name
       value: Worm
+      objectReference: {fileID: 0}
+    - target: {fileID: 8575480292385443920, guid: b3b95da7674bb5b4d9451c6bc17ad198, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8575480292385443923, guid: b3b95da7674bb5b4d9451c6bc17ad198, type: 3}
       propertyPath: m_RootOrder

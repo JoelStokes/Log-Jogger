@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class RespawnMenu : MonoBehaviour
 {
@@ -14,11 +15,16 @@ public class RespawnMenu : MonoBehaviour
     private float burstLim = 1.75f;
     private bool burstFinished = false;
 
-    private float transitionX = 12;
-    private float transitionXEnd = -9;
+    private float transitionX = 8;
+    private float transitionXEnd = -5;
+    private float pauseTransitionX = 12;
+    private float pauseTransitionXEnd = -9;
+
     private bool isHighScore = false;
     private Vector3 angelPos;
     private VolumeController volumeController;
+    private bool changing = false;
+    private bool paused = false;
 
     void Start(){
         volumeController = GameObject.Find("MusicManager").GetComponent<VolumeController>();
@@ -45,15 +51,34 @@ public class RespawnMenu : MonoBehaviour
     }
 
     public void RetryLevel(){
-        CreateTransition("Level");
+        if (!changing){
+            if (!paused){
+                CreateTransition(SceneManager.GetActiveScene().name);
+                changing = true;
+            } else {
+                CreatePauseTransition(SceneManager.GetActiveScene().name);
+                changing = true;
+            }
+        }
     }
 
     public void HighScores(){
-        CreateTransition("HighScore");
+        if (!changing){
+            CreateTransition("HighScore");
+            changing = true;
+        }
     }
 
     public void MainMenu(){
-        CreateTransition("Title");
+        if (!changing){
+            if (!paused){
+                CreateTransition("Title");
+                changing = true;
+            } else {
+                CreatePauseTransition("Title");
+                changing = true;
+            }
+        }
     }
 
     public void NewHighScore(Vector3 newPos){
@@ -61,8 +86,17 @@ public class RespawnMenu : MonoBehaviour
         angelPos = newPos;
     }
 
+    public void SetPaused(){
+        paused = true;
+    }
+
     private void CreateTransition (string scene){
         GameObject TransitionObj = Instantiate(transitionPrefab, new Vector3(transform.position.x + transitionX, transform.position.y, 0), Quaternion.identity);
-        TransitionObj.GetComponent<Transition>().SetValues(scene, transform.position.x + transitionXEnd);        
+        TransitionObj.GetComponent<Transition>().SetValues(scene, transform.position.x + transitionXEnd, -25, .45f);        
+    }
+
+    private void CreatePauseTransition (string scene){
+        GameObject TransitionObj = Instantiate(transitionPrefab, new Vector3(transform.position.x + pauseTransitionX, transform.position.y, 0), Quaternion.identity);
+        TransitionObj.GetComponent<Transition>().SetValues(scene, transform.position.x + pauseTransitionXEnd, -40, .85f);
     }
 }

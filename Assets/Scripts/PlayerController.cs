@@ -89,10 +89,13 @@ public class PlayerController : MonoBehaviour
     private ChunkExit lastChunk;
     private SaveManager saveManager;
     private VolumeController volumeController;
+    private Rect pauseRegion;
 
     //SFX
     private float volume;
+    private int currentAudioSource = 0;
     private AudioSource audioSource;
+    public AudioSource[] rotatingAudioSource;
     public AudioClip[] jumpSFX;
     public AudioClip[] slamSFX;
     public AudioClip deathSFX;
@@ -101,16 +104,40 @@ public class PlayerController : MonoBehaviour
     public AudioClip[] collectSFX;
     public AudioClip[] breakableSFX;
     public AudioClip[] machineSFX;
-    public AudioClip switchGoodSFX;
-    public AudioClip switchBadSFX;
+    public AudioClip machinePointsSFX;
+    private float fadeSpeed = .75f;
+
+    //Sound Effect Modifiers
+    private float jumpSFXMod = .55f;
+    private float slamSFXMod = .55f;
+    private float wormSFXMod = .9f;
+    private float springSFXMod = 1.2f;
+    private float breakableSFXMod = .45f;
+    private float machineSFXMod = .5f;
+    private float machinePointsSFXMod = 1.2f;
+    private float deathSFXMod = 1.1f;
+
+    //Trigger Repeat Prevention
+    private bool wormTrigger = false;
+    private bool springTrigger = false;
+
+    //Special Skin Handlers
+    private bool isRGB = false;
+    private float redValue = 0;
+    private float greenValue = 0;
+    private float blueValue = 1;
+    private float colorChangeSpeed = 1f;
+    private SpriteRenderer spriteRenderer;
+
+    //100m Secret Level Attributes
+    private float speedMult100m = .002f;
 
     void Start()
     {
-        //Get SFX Audio Volume from SaveManager setting
-        volume = .5f;
         audioSource = GetComponent<AudioSource>();
         cameraController = Camera.main.gameObject.GetComponent<CameraController>();
         saveManager = GameObject.Find("SaveManager").GetComponent<SaveManager>();
+        pauseRegion = RectTransformToScreenSpace(GameObject.Find("Pause").GetComponent<RectTransform>(), Camera.main, false);
 
         rigi = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
@@ -126,6 +153,7 @@ public class PlayerController : MonoBehaviour
 
         //Used for music slowdown & stop on death
         volumeController = GameObject.Find("MusicManager").GetComponent<VolumeController>();
+        volume = saveManager.state.sfxVolume;
 
         //Set all lineRenderer values to current position
         lineRenderer.positionCount = trailLength;
@@ -133,10 +161,40 @@ public class PlayerController : MonoBehaviour
             prevPositions.Add(new Vector3(transform.position.x + trailXAdj, transform.position.y + trailYAdj, transform.position.z));
         }
         HandleTrail();
+
+        if (saveManager.state.currentSkin == 12){
+            isRGB = true;
+        }
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     void Update()
     {
+        //Reset Triggers
+        wormTrigger = false;
+        springTrigger = false;
+
+        //Handle RGB Animation
+        if (isRGB && !dead){
+            if (blueValue >= 1 && greenValue < 1 && redValue <= 0){
+                greenValue += colorChangeSpeed * Time.deltaTime;
+            } else if (greenValue >= 1 && blueValue > 0){
+                blueValue -= colorChangeSpeed * Time.deltaTime;
+            } else if (greenValue >= 1 && redValue < 1){
+                redValue += colorChangeSpeed * Time.deltaTime;
+            } else if (redValue >= 1 && greenValue > 0){
+                greenValue -= colorChangeSpeed * Time.deltaTime;
+            } else if (redValue >= 1 && blueValue < 1) {
+                blueValue += colorChangeSpeed * Time.deltaTime;
+            } else if (blueValue >= 1 && redValue > 0){
+                redValue -= colorChangeSpeed * Time.deltaTime;
+            }
+
+            spriteRenderer.color = new Vector4(redValue, greenValue, blueValue, 1);
+            lineRenderer.startColor = new Vector4(redValue, greenValue, blueValue, .6f);
+            lineRenderer.endColor = new Vector4(redValue, greenValue, blueValue, 0);
+        }
+
         if (moving && !dead){
             scoreCounter += Time.deltaTime;
             if (scoreCounter > 1){
@@ -145,8 +203,10 @@ public class PlayerController : MonoBehaviour
                 UpdateScore(0);
 
                 scoreCounter = 0;
-                if (sceneName != "Tutorial"){
+                if (sceneName == "Level"){
                     Time.timeScale = 1 + (speedMult * score);
+                } else if (sceneName == "100m"){
+                    Time.timeScale = 1 + (speedMult100m * score);
                 }
             }
         }
@@ -188,6 +248,8 @@ public class PlayerController : MonoBehaviour
 
             if (touching && !isSlamming){
                 TouchHeld();
+            } else if (!touching && !isSlamming && !isGrounded){    //Fade jump sfx
+                FadeAudio();
             }
 
             if (isSlamming){
@@ -240,7 +302,7 @@ public class PlayerController : MonoBehaviour
     private void Die(){
         if (!dead){
             Time.timeScale = 1;
-            PlayAudio(deathSFX, false, 0);
+            PlayAudio(deathSFX, false, deathSFXMod);
             dead = true;
             anim.SetTrigger("Die");
 
@@ -260,14 +322,14 @@ public class PlayerController : MonoBehaviour
             }
 
             //Check if new high score, if so, save
-            if (saveManager.state.highScore < score){
+            if (saveManager.state.highScore < score && sceneName != "100m"){
                 saveManager.state.highScore = score;
                 respawnMenu.NewHighScore(transform.position);
             }
 
             //Add last score to previous 10 list & delete last entry if over 10
             saveManager.state.lastScores.Insert(0, score);
-            if (saveManager.state.lastScores.Count > 10){
+            if (saveManager.state.lastScores.Count > 10 && sceneName != "100m"){
                 saveManager.state.lastScores.RemoveAt(saveManager.state.lastScores.Count - 1);
             }
 
@@ -280,16 +342,20 @@ public class PlayerController : MonoBehaviour
             //Have popup showing new value added for visual flair & clarity?
         }
 
-        ScoreText.text = "Score: " + score.ToString("D4");
+        if (sceneName != "100m"){
+            ScoreText.text = "Score: " + score.ToString("D4");
+        } else {
+            ScoreText.text = "Meters: " + score.ToString("D3");
+        }
     }
 
     private void TouchStart(){
         touching = true;
         if (isGrounded){
-            PlayAudio(jumpSFX, false, 0);
+            PlayAudio(jumpSFX, false, jumpSFXMod);
             ApplyJump(jumpForce);
-        } else {
-            PlayAudio(slamSFX, false, -.2f);
+        } else if (!isSlamming) {
+            PlayAudio(slamSFX, false, slamSFXMod);
             isSlamming = true;
             anim.SetBool("Dashing", true);
         }
@@ -324,10 +390,11 @@ public class PlayerController : MonoBehaviour
                 if (raycastHit.transform.tag == "Machine"){
                     score += machineValue;
                     UpdateScore(machineValue);
-                    PlayAudio(machineSFX, true, .1f);
+                    PlayAudio(machineSFX, true, machineSFXMod);
+                    PlayAudio(machinePointsSFX, true, machinePointsSFXMod);
                     Instantiate(machineBurstPrefab, transform.position, Quaternion.identity);
                 } else {
-                    PlayAudio(breakableSFX, true, .1f);
+                    PlayAudio(breakableSFX, true, breakableSFXMod);
                     Instantiate(rockBurstPrefab, transform.position, Quaternion.identity);
                 }
                 return false;   //Don't Ground player after breaking through breakables
@@ -368,7 +435,12 @@ public class PlayerController : MonoBehaviour
         if (!dead && started && !paused){
             if (context.ReadValue<UnityEngine.InputSystem.TouchPhase>() == UnityEngine.InputSystem.TouchPhase.Began){
                 if (touching == false){
-                    TouchStart();
+                    
+                    //Make sure click was not on pause button. If so, ignore touch for player.
+                    Touch touch = Input.GetTouch(0);
+                    if (!pauseRegion.Contains(touch.position)){
+                        TouchStart();
+                    }
                 }
             } else if (context.ReadValue<UnityEngine.InputSystem.TouchPhase>() == UnityEngine.InputSystem.TouchPhase.Ended){
                 touching = false;
@@ -396,9 +468,16 @@ public class PlayerController : MonoBehaviour
     public void PlayAudio(AudioClip audioClip, bool clipAtPoint, float volumeModifier){
         if (audioClip != null){
             if (clipAtPoint){
-                AudioSource.PlayClipAtPoint(audioClip, transform.position, volume + volumeModifier);
+                currentAudioSource++;
+                if (currentAudioSource >= rotatingAudioSource.Length){
+                    currentAudioSource = 0;
+                }
+
+                rotatingAudioSource[currentAudioSource].clip = audioClip;
+                rotatingAudioSource[currentAudioSource].volume = volume * volumeModifier;
+                rotatingAudioSource[currentAudioSource].Play();
             } else {
-                audioSource.volume = volume + volumeModifier;
+                audioSource.volume = volume * volumeModifier;
                 audioSource.clip = audioClip;
                 audioSource.Play();
             }
@@ -410,13 +489,24 @@ public class PlayerController : MonoBehaviour
             int rand = Random.Range(0, audioClips.Length-1);
 
             if (clipAtPoint){
-                AudioSource.PlayClipAtPoint(audioClips[rand], transform.position, volume + volumeModifier);
+                currentAudioSource++;
+                if (currentAudioSource >= rotatingAudioSource.Length){
+                    currentAudioSource = 0;
+                }
+
+                rotatingAudioSource[currentAudioSource].clip = audioClips[rand];
+                rotatingAudioSource[currentAudioSource].volume = volume * volumeModifier;
+                rotatingAudioSource[currentAudioSource].Play();
             } else {
-                audioSource.volume = volume + volumeModifier;
+                audioSource.volume = volume * volumeModifier;
                 audioSource.clip = audioClips[rand];
                 audioSource.Play();
             }
         }
+    }
+
+    public void FadeAudio(){
+        audioSource.volume = audioSource.volume - (fadeSpeed * Time.deltaTime);
     }
 
     //Used to call chunk on death to prevent despawning
@@ -449,23 +539,50 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public static Rect RectTransformToScreenSpace(RectTransform transform, Camera cam, bool cutDecimals = false)
+    {
+        var worldCorners = new Vector3[4];
+        var screenCorners = new Vector3[4];
+
+        transform.GetWorldCorners(worldCorners);
+
+        for (int i = 0; i < 4; i++)
+        {
+            screenCorners[i] = cam.WorldToScreenPoint(worldCorners[i]);
+            if (cutDecimals)
+            {
+                screenCorners[i].x = (int)screenCorners[i].x;
+                screenCorners[i].y = (int)screenCorners[i].y;
+            }
+        }
+
+        return new Rect(screenCorners[0].x,
+                        screenCorners[0].y,
+                        screenCorners[2].x - screenCorners[0].x,
+                        screenCorners[2].y - screenCorners[0].y);
+    }
+
     void OnTriggerEnter2D(Collider2D other) {
         if (!dead){
-            if (other.tag == "Worm"){
+            if (other.tag == "Worm" && !wormTrigger){
+                //Prevent multiple trigger fire bug
+                wormTrigger = true;
+
                 score += wormValue;
-                PlayAudio(collectSFX, true, 5f);
+                PlayAudio(collectSFX, true, wormSFXMod);
                 UpdateScore(wormValue);
                 Instantiate(wormBurstPrefab, other.transform.position, wormBurstPrefab.transform.rotation);
                 other.gameObject.SetActive(false);
                 saveManager.state.wormCount += 1;
             } else if (other.tag == "Hurt"){
                 Die();
-            } else if (other.tag == "Spring"){
+            } else if (other.tag == "Spring" && !springTrigger){
+                springTrigger = true;
                 Vector2 Forces = other.GetComponent<Spring>().LaunchSpring();
 
                 isSlamming = false;
                 anim.SetBool("Dashing", false);
-                PlayAudio(springSFX, true, 0);
+                PlayAudio(springSFX, true, springSFXMod);
 
                 ApplyJump(Forces.y);
 
@@ -477,7 +594,7 @@ public class PlayerController : MonoBehaviour
             } else if (other.tag == "End"){
                 saveManager.Save(); //Ensures tutorial worms saved
                 GameObject TransitionObj = Instantiate(transitionPrefab, new Vector3(transform.position.x + 10, transform.position.y, transform.position.z), Quaternion.identity);
-                TransitionObj.GetComponent<Transition>().SetValues("Title", transform.position.x - 3f);
+                TransitionObj.GetComponent<Transition>().SetValues("Title", transform.position.x - 3f, -40);
             } else if (other.tag == "Conveyor"){
                 conveyorSpeed = other.GetComponent<Conveyor>().xSpeed;
                 onConveyor = true;

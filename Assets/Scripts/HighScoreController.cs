@@ -24,6 +24,6 @@ public class HighScoreController : MonoBehaviour
 
     private void CreateTransition (string scene){
         GameObject TransitionObj = Instantiate(transitionPrefab, new Vector3(transitionX, transform.position.y, 0), Quaternion.identity);
-        TransitionObj.GetComponent<Transition>().SetValues(scene, transitionXEnd);        
+        TransitionObj.GetComponent<Transition>().SetValues(scene, transitionXEnd, -20, .4f);        
     }
 }

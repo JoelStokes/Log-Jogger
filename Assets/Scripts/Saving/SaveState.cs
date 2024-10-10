@@ -14,4 +14,5 @@ public class SaveState
 
     public float sfxVolume = 1f;
     public float musicVolume = 1f;
+    public bool secretBeaten = false;
 }
