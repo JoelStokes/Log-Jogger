@@ -6975,6 +6975,8 @@ MonoBehaviour:
   secretSFX: {fileID: 8300000, guid: afb6f0a5e4428114c9dede2befe80843, type: 3}
   tutorialButtonText: {fileID: 40241239}
   tutorialButton: {fileID: 2139490179}
+  tutorialIcon: {fileID: 57256331}
+  iconReplacement: {fileID: 21300000, guid: 9c3b62fd7e663314aa1b5aeb22dadaf1, type: 3}
 --- !u!82 &1296041073
 AudioSource:
   m_ObjectHideFlags: 0

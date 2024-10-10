@@ -14,6 +14,13 @@ public class StoreManager : MonoBehaviour
     public TextMeshProUGUI WormCount;
     
     private SaveManager saveManager;
+    private float volume;
+
+    public AudioClip PurchaseSFX;
+    public AudioClip SelectSFX;
+    public AudioClip ErrorSFX;
+    public AudioClip HomeSFX;
+    public TextMeshProUGUI RGBName;
 
     void Start()
     {
@@ -24,13 +31,24 @@ public class StoreManager : MonoBehaviour
         }
 
         SetNewWormCount();
+
+        volume = saveManager.state.sfxVolume;
     }
 
     public void SkinClicked(int index){
-        //If owned, change current skin. If not, check price vs current worm count. If enough, subtract worms & buy skin
-        if (saveManager.IsSkinOwned(index)){
+        //Handle secret skin first
+        if (index == 12){
+            if (saveManager.state.secretBeaten){
+                saveManager.state.currentSkin = index;
+                SetNewSkin();
+                AudioSource.PlayClipAtPoint(SelectSFX, Camera.main.transform.position, volume);
+            } else {
+                AudioSource.PlayClipAtPoint(ErrorSFX, Camera.main.transform.position, volume);   
+            }
+        } else if (saveManager.IsSkinOwned(index)){  //If owned, change current skin. If not, check price vs current worm count. If enough, subtract worms & buy skin
             saveManager.state.currentSkin = index;
             SetNewSkin();
+            AudioSource.PlayClipAtPoint(SelectSFX, Camera.main.transform.position, volume);
         } else {
             int cost = int.Parse(SkinButtons[index].transform.Find("Price").gameObject.GetComponent<TextMeshProUGUI>().text);
 
@@ -41,15 +59,25 @@ public class StoreManager : MonoBehaviour
 
                 saveManager.Save();
                 SetNewPurchase(index);
+                AudioSource.PlayClipAtPoint(PurchaseSFX, Camera.main.transform.position, volume);
             } else {
-                //play error noise
+                AudioSource.PlayClipAtPoint(ErrorSFX, Camera.main.transform.position, volume);
             }
         }
     }
 
     private void SetButtonDetails(int index){
         //If owned, hide lock & text, set button to white
-        if (saveManager.IsSkinOwned(index)){
+        if (index == 12){
+            if (saveManager.state.secretBeaten){
+                RGBName.text = "RGB";
+                SkinButtons[index].transform.Find("Lock").gameObject.SetActive(false);
+                SkinButtons[index].transform.Find("Price").gameObject.SetActive(false);
+                SkinButtons[index].GetComponent<Image>().color = Color.white;
+            } else {
+                RGBName.text = "???";
+            }
+        } else if (saveManager.IsSkinOwned(index)){
             SkinButtons[index].transform.Find("Lock").gameObject.SetActive(false);
             SkinButtons[index].transform.Find("Price").gameObject.SetActive(false);
 

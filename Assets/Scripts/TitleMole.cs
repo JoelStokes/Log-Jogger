@@ -39,7 +39,8 @@ public class TitleMole : MonoBehaviour
         if (zAppearing){
             if (zAppearAlpha >= 1){
                 zAppearing = false;
-                zAnim.SetTrigger("Sleep");
+                zAnim.SetBool("Awake", false);
+                zAppearAlpha = 0;
             } else {
                 zAppearAlpha += Time.deltaTime * ZAppearSpeed;
                 for(int i=0; i < 3; i++){
@@ -60,7 +61,7 @@ public class TitleMole : MonoBehaviour
         titleController.CodeClick(2);
         AudioSource.PlayClipAtPoint(moleSFX, Camera.main.transform.position, volume * moleSFXMod);
 
-        zAnim.SetTrigger("Awake");
+        zAnim.SetBool("Awake", true);
         for(int i=0; i<3; i++){
             Zs[i].color = new Vector4(1,1,1,0);
         }

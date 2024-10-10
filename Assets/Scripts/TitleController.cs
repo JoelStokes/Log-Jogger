@@ -37,7 +37,7 @@ public class TitleController : MonoBehaviour
     private bool passwordSuccess = false;
     public TextMeshProUGUI tutorialButtonText;
     public Button tutorialButton;
-    public Image tutorialIcon;
+    public SpriteRenderer tutorialIcon;
     public Sprite iconReplacement;
 
     void Start(){
@@ -59,8 +59,7 @@ public class TitleController : MonoBehaviour
                 colors.disabledColor = new Vector4(1,.1f,.1f,1);
 
                 tutorialButton.colors = colors;
-
-                //SET ICON REPLACEMENT HERE WHEN NEW ICON DRAWN!
+                tutorialIcon.sprite = iconReplacement;
             } 
         }
     }
@@ -131,6 +130,11 @@ public class TitleController : MonoBehaviour
             PlayAudio(playSFX);
             CreateTransition("Shop");
         }
+    }
+
+    public void Home(){
+        PlayAudio(backSFX);
+        CreateTransition("Title");  
     }
 
     private void CreateTransition (string scene){
