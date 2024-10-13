@@ -12862,6 +12862,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: HookedRope
       objectReference: {fileID: 0}
+    - target: {fileID: 8993507791344186541, guid: 3f058e28d44426241a66201c44e1f9a4, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3f058e28d44426241a66201c44e1f9a4, type: 3}
 --- !u!4 &1845226919256170833 stripped
