@@ -21,6 +21,7 @@ public class StoreManager : MonoBehaviour
     public AudioClip ErrorSFX;
     public AudioClip HomeSFX;
     public TextMeshProUGUI RGBName;
+    public Animator hintAnim;
 
     void Start()
     {
@@ -43,7 +44,8 @@ public class StoreManager : MonoBehaviour
                 SetNewSkin();
                 AudioSource.PlayClipAtPoint(SelectSFX, Camera.main.transform.position, volume);
             } else {
-                AudioSource.PlayClipAtPoint(ErrorSFX, Camera.main.transform.position, volume);   
+                AudioSource.PlayClipAtPoint(ErrorSFX, Camera.main.transform.position, volume);
+                hintAnim.SetBool("Open", true);
             }
         } else if (saveManager.IsSkinOwned(index)){  //If owned, change current skin. If not, check price vs current worm count. If enough, subtract worms & buy skin
             saveManager.state.currentSkin = index;
@@ -97,5 +99,9 @@ public class StoreManager : MonoBehaviour
 
     private void SetNewWormCount(){
         WormCount.text = "Worms: " + saveManager.state.wormCount.ToString();
+    }
+
+    public void CloseHint(){
+        hintAnim.SetBool("Open", false);
     }
 }
