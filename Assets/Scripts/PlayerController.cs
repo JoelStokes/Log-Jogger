@@ -328,8 +328,8 @@ public class PlayerController : MonoBehaviour
             }
 
             //Add last score to previous 10 list & delete last entry if over 10
-            saveManager.state.lastScores.Insert(0, score);
             if (saveManager.state.lastScores.Count > 10 && sceneName != "100m"){
+                saveManager.state.lastScores.Insert(0, score);
                 saveManager.state.lastScores.RemoveAt(saveManager.state.lastScores.Count - 1);
             }
 

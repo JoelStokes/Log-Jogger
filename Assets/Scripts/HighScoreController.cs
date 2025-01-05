@@ -7,7 +7,7 @@ public class HighScoreController : MonoBehaviour
 {
     public GameObject transitionPrefab;
 
-    public TextMeshProUGUI highScoreUI;
+    public TextMeshPro[] personalBestUI;
 
     private float transitionX = 12;
     private float transitionXEnd = -9;
@@ -15,7 +15,15 @@ public class HighScoreController : MonoBehaviour
     void Start(){
         SaveManager saveManager = GameObject.Find("SaveManager").GetComponent<SaveManager>();
 
-        highScoreUI.text = saveManager.state.highScore.ToString("0000");
+        for (int i=0; i<personalBestUI.Length; i++){
+            if (saveManager.state.lastScores[i] > 0){   //List pre-populated with 0s on new save setup
+                personalBestUI[i].text = saveManager.state.lastScores[i].ToString();
+            } else {
+                personalBestUI[i].text = "-";
+            }
+        }
+
+        //highScoreUI.text = saveManager.state.highScore.ToString("0000");
     }
 
     public void MainMenu(){
